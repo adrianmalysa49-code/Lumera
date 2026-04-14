@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LumeraStudio — Bespoke Web Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F0E0B; --bg2:#161410; --bg3:#1E1C16; --bg4:#252319;
+  --gold:#C49A2A; --gold2:#E0B840;
+  --text:#F0EBE0; --muted:#9A9080; --line:rgba(196,154,42,0.18);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes spinSlow{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.ani{opacity:0;}
+.ani.go{animation:fadeUp .7s ease forwards;}
+.d1{animation-delay:.1s!important;} .d2{animation-delay:.2s!important;}
+.d3{animation-delay:.3s!important;} .d4{animation-delay:.4s!important;}
+.d5{animation-delay:.5s!important;} .d6{animation-delay:.6s!important;}
+
+/* CUSTOM CURSOR (desktop only) */
+@media(hover:hover){
+  *{cursor:none!important;}
+  #cur-ring,#cur-dot{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);top:-100px;left:-100px;}
+  #cur-dot{width:7px;height:7px;background:var(--gold);}
+  #cur-ring{width:30px;height:30px;border:1px solid rgba(196,154,42,.5);transition:width .2s,height .2s,border-color .2s;}
+  #cur-ring.big{width:46px;height:46px;border-color:var(--gold);}
+}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 52px;background:rgba(15,14,11,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.logo-ring{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);transition:background .25s;}
+.logo:hover .logo-ring{background:rgba(196,154,42,.12);}
+.logo-name{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--text);font-weight:400;}
+nav{display:flex;}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;padding:10px 13px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:400;cursor:pointer;transition:color .2s,border-color .2s;}
+.tab-btn:hover{color:var(--gold2);}
+.tab-btn.active{color:var(--gold2);border-bottom-color:var(--gold);}
+.hdr-right{display:flex;align-items:center;}
+.lang-sw{display:flex;border:1px solid var(--line);overflow:hidden;margin-right:12px;}
+.lang-btn{background:none;border:none;padding:8px 11px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;font-weight:400;}
+.lang-btn.active{background:var(--gold);color:var(--bg);font-weight:600;}
+.lang-btn:hover:not(.active){color:var(--gold2);}
+.hdr-cta{background:var(--gold);color:var(--bg);border:none;padding:11px 24px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .25s;white-space:nowrap;}
+.hdr-cta:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* HAMBURGER */
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+.hbg span{display:block;width:24px;height:1.5px;background:var(--text);transition:all .3s;}
+.hbg.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hbg.open span:nth-child(2){opacity:0;}
+.hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob-overlay{display:none;position:fixed;inset:0;top:65px;background:var(--bg);z-index:190;flex-direction:column;align-items:center;justify-content:center;}
+.mob-overlay.open{display:flex;animation:fadeIn .25s;}
+.mob-tab{width:100%;max-width:300px;text-align:center;background:none;border:none;border-bottom:1px solid var(--line);padding:18px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .2s,background .2s;}
+.mob-tab:first-child{border-top:1px solid var(--line);}
+.mob-tab:hover,.mob-tab.active{color:var(--gold2);background:rgba(196,154,42,.04);}
+.mob-lang{display:flex;border:1px solid var(--line);margin-top:24px;overflow:hidden;}
+.mob-lang-btn{background:none;border:none;padding:10px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;}
+.mob-lang-btn.active{background:var(--gold);color:var(--bg);font-weight:600;}
+.mob-cta-btn{margin-top:20px;background:var(--gold);color:var(--bg);border:none;padding:14px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;cursor:pointer;}
+
+/* PAGES */
+.page{display:none;} .page.active{display:block;}
+
+/* LAYOUT */
+.wrap{max-width:1140px;margin:0 auto;padding:70px 52px;}
+.sec-label{font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold2);font-weight:400;margin-bottom:14px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;color:var(--text);line-height:1.1;margin-bottom:14px;}
+.sec-title em{font-style:italic;color:var(--gold2);}
+.sec-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:520px;margin-bottom:52px;font-weight:400;}
+
+/* ── HOME ── */
+.hero{min-height:calc(100vh - 65px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px 100px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 30%,rgba(196,154,42,.08) 0%,transparent 65%);}
+.hero-vl{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(196,154,42,.14),transparent);}
+.hero-glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);animation:pulse 6s ease-in-out infinite;}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(196,154,42,.05);top:50%;left:50%;}
+.hero-ring-1{width:680px;height:680px;animation:spinSlow 30s linear infinite;}
+.hero-ring-2{width:880px;height:880px;animation:spinSlow 50s linear infinite reverse;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(196,154,42,.28);padding:8px 20px;margin-bottom:32px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);font-weight:400;position:relative;z-index:1;animation:fadeIn .8s ease forwards;background:rgba(196,154,42,.04);}
+.hero-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7.5vw,96px);font-weight:300;line-height:1.05;color:var(--text);margin-bottom:12px;position:relative;z-index:1;animation:fadeUp .9s .15s forwards;opacity:0;}
+.hero-h1 em{font-style:italic;color:var(--gold2);}
+.hero-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.4vw,30px);font-weight:300;font-style:italic;color:var(--muted);margin-bottom:28px;position:relative;z-index:1;animation:fadeUp .9s .28s forwards;opacity:0;}
+.hero-p{font-size:16px;line-height:1.85;color:var(--muted);max-width:480px;margin:0 auto 52px;position:relative;z-index:1;animation:fadeUp .9s .4s forwards;opacity:0;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;animation:fadeUp .9s .52s forwards;opacity:0;}
+.btn-g{background:var(--gold);color:var(--bg);border:none;padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.btn-g:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,154,42,.3);}
+.btn-o{background:transparent;color:var(--text);border:1px solid rgba(240,235,224,.2);padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:all .3s;}
+.btn-o:hover{border-color:var(--gold);color:var(--gold2);background:rgba(196,154,42,.05);}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeIn 1s .9s forwards;opacity:0;}
+.hero-scroll span{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--muted);}
+.scroll-bar{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);background:var(--bg2);}
+.stat{text-align:center;padding:36px 20px;border-right:1px solid var(--line);transition:background .3s;}
+.stat:last-child{border-right:none;}
+.stat:hover{background:var(--bg3);}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--gold2);line-height:1;transition:transform .3s;}
+.stat:hover .stat-n{transform:scale(1.06);}
+.stat-l{font-size:11px;letter-spacing:.12em;color:var(--muted);margin-top:8px;font-weight:400;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-img{aspect-ratio:4/5;background:var(--bg3);position:relative;overflow:hidden;border:1px solid var(--line);}
+.about-img-inner{position:absolute;inset:0;background:linear-gradient(135deg,var(--bg3),var(--bg4));display:flex;align-items:center;justify-content:center;}
+.about-mono{font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:300;color:rgba(196,154,42,.1);animation:float 6s ease-in-out infinite;}
+.about-tag{position:absolute;bottom:28px;left:28px;background:var(--gold);color:var(--bg);font-size:10px;letter-spacing:.28em;text-transform:uppercase;padding:8px 18px;font-weight:600;}
+.about-text p{font-size:15px;line-height:1.85;color:var(--muted);font-weight:400;margin-bottom:20px;}
+.about-vals{display:flex;flex-direction:column;gap:2px;margin-top:36px;}
+.val-row{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--bg2);border-left:2px solid transparent;transition:all .25s;}
+.val-row:hover{border-left-color:var(--gold);background:var(--bg3);}
+.val-icon{font-size:16px;color:var(--gold2);width:24px;text-align:center;flex-shrink:0;margin-top:1px;}
+.val-title{font-size:13px;color:var(--text);font-weight:500;letter-spacing:.06em;}
+.val-desc{font-size:12px;color:var(--muted);margin-top:2px;font-weight:300;}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;}
+.svc{background:var(--bg2);padding:52px 44px;border-bottom:2px solid transparent;transition:all .35s;cursor:default;position:relative;overflow:hidden;}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .5s;}
+.svc:hover::before{transform:scaleX(1);}
+.svc:hover{background:var(--bg3);transform:translateY(-5px);border-bottom-color:var(--gold);box-shadow:0 16px 40px rgba(0,0,0,.3);}
+.svc-n{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:rgba(196,154,42,.11);line-height:1;margin-bottom:20px;transition:color .3s;}
+.svc:hover .svc-n{color:rgba(196,154,42,.22);}
+.svc-t{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:14px;}
+.svc-d{font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;}
+
+/* PROCESS */
+.proc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.proc{background:var(--bg2);padding:44px 36px;display:flex;gap:24px;align-items:flex-start;border-left:2px solid transparent;transition:all .3s;}
+.proc:hover{border-left-color:var(--gold);background:var(--bg3);}
+.proc-n{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--gold);opacity:.25;line-height:.85;flex-shrink:0;}
+.proc-t{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:10px;}
+.proc-d{font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;}
+
+/* PORTFOLIO */
+.port-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.port-card{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:pointer;background:var(--bg3);}
+.port-bg{position:absolute;inset:0;transition:transform .6s ease;}
+.port-card:hover .port-bg{transform:scale(1.06);}
+.pa .port-bg{background:linear-gradient(135deg,#1a1828,#0d0c18);}
+.pb .port-bg{background:linear-gradient(135deg,#1e1610,#120e08);}
+.pc .port-bg{background:linear-gradient(135deg,#101a1a,#081210);}
+.pd .port-bg{background:linear-gradient(135deg,#1a1028,#100818);}
+.pe .port-bg{background:linear-gradient(135deg,#141218,#0c0a10);}
+.pa .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(196,154,42,.025) 0,rgba(196,154,42,.025) 1px,transparent 1px,transparent 22px);}
+.pb .port-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(196,154,42,.1) 0%,transparent 55%);}
+.pc .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(196,154,42,.03) 0,rgba(196,154,42,.03) 1px,transparent 1px,transparent 28px);}
+.pd .port-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 65% 35%,rgba(255,255,255,.04) 0%,transparent 50%);}
+.pe .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(196,154,42,.018) 0,rgba(196,154,42,.018) 1px,transparent 1px,transparent 30px);}
+.pf .port-bg{background:linear-gradient(135deg,#3d1a5c 0%,#6b2fa0 45%,#9b59c4 75%,#c084e0 100%);}
+.pf .port-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 25%,rgba(255,200,230,.15) 0%,transparent 50%);}
+.krem-wrap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:32px 36px;}
+.krem-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
+.krem-left{flex:1;}
+.krem-eyebrow{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;font-family:'Jost',sans-serif;}
+.krem-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,48px);font-weight:300;color:#fff;line-height:1.1;}
+.krem-title em{font-style:italic;color:#e8b4ff;}
+.krem-card{background:rgba(255,255,255,.95);border-radius:12px;padding:18px 22px;width:195px;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.25);}
+.krem-card-title{font-size:10px;font-weight:600;color:#3d1a5c;margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase;font-family:'Jost',sans-serif;}
+.krem-row{font-size:11px;color:#555;border-bottom:1px solid #f0e8f5;padding-bottom:7px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;gap:6px;font-family:'Jost',sans-serif;}
+.krem-row:last-of-type{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.krem-price{color:#7c3aed;font-weight:500;white-space:nowrap;font-size:10px;}
+.krem-cta{margin-top:12px;background:linear-gradient(135deg,#7c3aed,#9b59c4);color:#fff;text-align:center;padding:8px;border-radius:7px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Jost',sans-serif;}
+.krem-bottom{display:flex;align-items:flex-end;justify-content:space-between;}
+.krem-info{}
+.krem-tag-txt{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px;font-family:'Jost',sans-serif;}
+.krem-name-txt{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:#fff;}
+.krem-arr{width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;transition:all .3s;}
+.port-card:hover .krem-arr{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.1);}
+@media(max-width:700px){
+  .krem-card{display:none;}
+  .krem-wrap{padding:24px 22px;}
+}
+
+.port-wide{grid-column:span 2;}
+.port-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);display:flex;align-items:flex-end;padding:28px 32px;}
+.port-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text);}
+.port-arr{position:absolute;top:24px;right:24px;width:40px;height:40px;border:1px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text);font-size:14px;opacity:0;transition:all .3s;}
+.port-card:hover .port-arr{opacity:1;border-color:var(--gold);color:var(--gold2);}
+
+/* REVIEWS / TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;}
+.testi-card{background:var(--bg2);padding:44px 40px;position:relative;border-bottom:2px solid transparent;transition:all .3s;overflow:hidden;}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(196,154,42,.25),transparent);}
+.testi-card:hover{background:var(--bg3);border-bottom-color:var(--gold);}
+.testi-q{font-family:'Cormorant Garamond',serif;font-size:72px;color:rgba(196,154,42,.12);line-height:.7;margin-bottom:14px;font-weight:300;}
+.testi-stars{color:var(--gold);font-size:12px;letter-spacing:2px;margin-bottom:16px;}
+.testi-text{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;font-weight:300;color:var(--text);line-height:1.65;margin-bottom:28px;}
+.testi-author{display:flex;align-items:center;gap:14px;}
+.testi-av{width:44px;height:44px;border-radius:50%;background:var(--bg4);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold2);flex-shrink:0;}
+.testi-name{font-size:13px;color:var(--text);font-weight:500;letter-spacing:.04em;}
+.testi-role{font-size:11px;color:var(--muted);margin-top:2px;font-weight:300;}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.p-card{background:var(--bg2);padding:52px 40px;position:relative;border-bottom:2px solid transparent;transition:all .35s;}
+.p-card:hover{background:var(--bg3);transform:translateY(-4px);border-bottom-color:var(--gold);box-shadow:0 12px 36px rgba(0,0,0,.3);}
+.p-card.feat{background:var(--bg3);border:1px solid rgba(196,154,42,.4);box-shadow:0 0 60px rgba(196,154,42,.07);}
+.p-card.feat:hover{transform:translateY(-4px);}
+.p-bdg{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--bg);font-size:9px;letter-spacing:.28em;text-transform:uppercase;padding:6px 18px;font-weight:600;white-space:nowrap;}
+.p-tier{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold2);font-weight:400;margin-bottom:20px;}
+.p-price{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--text);line-height:1;margin-bottom:6px;}
+.p-price sup{font-size:24px;vertical-align:super;}
+.p-from{font-size:12px;color:var(--muted);margin-bottom:28px;font-weight:300;}
+.p-rule{width:40px;height:1px;background:var(--gold);margin-bottom:28px;}
+.p-list{list-style:none;margin-bottom:40px;}
+.p-list li{font-size:13px;color:var(--muted);font-weight:400;line-height:2.2;display:flex;align-items:center;gap:12px;}
+.p-list li::before{content:'✦';color:var(--gold);font-size:8px;flex-shrink:0;}
+.p-btn{width:100%;padding:16px;border:1px solid var(--gold);background:transparent;color:var(--gold2);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;}
+.p-btn:hover,.p-card.feat .p-btn{background:var(--gold);color:var(--bg);}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:2px;max-width:760px;margin:0 auto;}
+.faq-item{background:var(--bg2);overflow:hidden;}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:'Jost',sans-serif;font-size:15px;font-weight:400;color:var(--text);cursor:pointer;transition:all .25s;}
+.faq-q:hover,.faq-q.open{background:var(--bg3);color:var(--gold2);}
+.faq-icon{width:22px;height:22px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:var(--gold);transition:transform .3s;}
+.faq-q.open .faq-icon{transform:rotate(45deg);border-color:var(--gold);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-a.open{max-height:220px;}
+.faq-a p{padding:18px 28px 22px;font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;border-top:1px solid var(--line);}
+
+/* CONTACT */
+.cform-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start;}
+.cinfo-ey{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;}
+.cinfo-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--text);line-height:1.15;margin-bottom:22px;}
+.cinfo-title em{font-style:italic;color:var(--gold2);}
+.cinfo-p{font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;margin-bottom:32px;}
+.ci-rows{display:flex;flex-direction:column;gap:2px;}
+.ci-row{display:flex;align-items:center;gap:16px;padding:16px 18px;background:var(--bg2);border-left:2px solid transparent;transition:all .25s;}
+.ci-row:hover{border-left-color:var(--gold);background:var(--bg3);}
+.ci-icon{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold2);font-size:13px;flex-shrink:0;}
+.ci-lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.ci-val{font-size:13px;color:var(--text);font-weight:400;}
+.cbox{background:var(--bg2);padding:48px 44px;border:1px solid var(--line);position:relative;}
+.cbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.cbox-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text);margin-bottom:32px;}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:0;}
+.fld{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.fld label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.fld input,.fld textarea,.fld select{background:var(--bg3);border:1px solid rgba(196,154,42,.16);padding:14px 18px;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:var(--text);outline:none;transition:border-color .25s,background .25s;width:100%;}
+.fld input::placeholder,.fld textarea::placeholder{color:var(--muted);}
+.fld select option{background:var(--bg3);color:var(--text);}
+.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--gold);background:rgba(196,154,42,.03);}
+.fld textarea{resize:vertical;min-height:120px;}
+.f-btn{width:100%;padding:17px;background:var(--gold);color:var(--bg);border:none;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;margin-top:6px;}
+.f-btn:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,154,42,.3);}
+.f-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+#f-ok{display:none;text-align:center;padding:60px 20px;}
+#f-ok .f-chk{font-size:52px;margin-bottom:18px;}
+#f-ok h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text);margin-bottom:12px;}
+#f-ok p{font-size:14px;color:var(--muted);}
+#f-err{display:none;margin-top:10px;font-size:13px;color:#E07070;text-align:center;}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 32px;}
+.ft-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--line);}
+.ft-brand-name{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--text);font-weight:400;margin-bottom:10px;}
+.ft-brand-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:260px;font-weight:300;}
+.ft-soc{display:flex;gap:10px;margin-top:16px;}
+.ft-soc a{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .25s;}
+.ft-soc a:hover{border-color:var(--gold);color:var(--gold2);}
+.ft-links{display:flex;gap:56px;}
+.ft-col-title{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px;font-weight:400;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col ul li a,.ft-col ul li button{font-size:13px;color:var(--muted);text-decoration:none;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:300;padding:0;transition:color .2s;text-align:left;}
+.ft-col ul li a:hover,.ft-col ul li button:hover{color:var(--gold2);}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.ft-copy{font-size:12px;color:var(--muted);letter-spacing:.06em;}
+.ft-email{font-size:11px;color:var(--gold2);letter-spacing:.14em;text-transform:uppercase;}
+
+/* COOKIE */
+#cookie{position:fixed;bottom:0;left:0;right:0;z-index:1000;background:var(--bg3);border-top:1px solid var(--line);padding:18px 52px;display:flex;align-items:center;justify-content:space-between;gap:24px;animation:fadeIn .4s ease;}
+#cookie.hidden{display:none;}
+.ck-text{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;max-width:600px;}
+.ck-btns{display:flex;gap:10px;flex-shrink:0;}
+.ck-ok{background:var(--gold);color:var(--bg);border:none;padding:10px 24px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:background .2s;}
+.ck-ok:hover{background:var(--gold2);}
+.ck-no{background:transparent;color:var(--muted);border:1px solid var(--line);padding:10px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.ck-no:hover{border-color:var(--gold);color:var(--gold2);}
+
+/* MOBILE */
+@media(max-width:900px){
+  header{padding:16px 20px;}
+  nav,.hdr-cta,.lang-sw{display:none;}
+  .hbg{display:flex;}
+  .wrap{padding:44px 20px;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .stat{border-right:none;border-bottom:1px solid var(--line);}
+  .svc-grid,.proc-grid,.price-grid,.testi-grid,.port-grid{grid-template-columns:1fr;}
+  .port-wide{grid-column:auto;}
+  .about-grid,.cform-grid{grid-template-columns:1fr;gap:36px;}
+  .about-img{aspect-ratio:3/2;}
+  .f2{grid-template-columns:1fr;}
+  footer{padding:40px 20px 28px;}
+  .ft-top{flex-direction:column;gap:32px;}
+  .ft-links{flex-wrap:wrap;gap:32px;}
+  .ft-bottom{flex-direction:column;gap:8px;text-align:center;}
+  .hero{padding:40px 20px 80px;min-height:calc(100svh - 65px);}
+  .hero-ring{display:none;}
+  #cookie{flex-direction:column;align-items:flex-start;padding:18px 20px;}
+  @media(hover:hover){*{cursor:auto!important;} #cur-ring,#cur-dot{display:none;}}
+}
+/* LANDING PAGE EXPLAINER */
+.lp-hero{background:var(--bg2);padding:60px 52px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+.lp-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.06),transparent 70%);}
+.lp-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 16px;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px;background:rgba(196,154,42,.04);}
+.lp-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:var(--text);line-height:1.08;margin-bottom:20px;}
+.lp-h1 em{font-style:italic;color:var(--gold2);}
+.lp-lead{font-size:17px;color:var(--muted);line-height:1.8;max-width:600px;font-weight:300;}
+.lp-body{max-width:1140px;margin:0 auto;padding:64px 52px;}
+.lp-section{margin-bottom:72px;}
+.lp-section-label{font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;font-weight:400;}
+.lp-section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,38px);font-weight:300;color:var(--text);margin-bottom:20px;line-height:1.15;}
+.lp-section-title em{font-style:italic;color:var(--gold2);}
+.lp-p{font-size:15px;color:var(--muted);line-height:1.85;font-weight:400;margin-bottom:16px;max-width:680px;}
+.lp-points{display:flex;flex-direction:column;gap:2px;margin-top:24px;}
+.lp-point{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--bg2);border-left:2px solid transparent;transition:all .25s;}
+.lp-point:hover{border-left-color:var(--gold);background:var(--bg3);}
+.lp-point-icon{width:32px;height:32px;border-radius:50%;background:rgba(196,154,42,.1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;}
+.lp-point-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:3px;letter-spacing:.03em;}
+.lp-point-desc{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;}
+.lp-compare{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:28px;}
+.lp-col{padding:32px 28px;}
+.lp-col-a{background:var(--bg3);border:1px solid rgba(196,154,42,.3);}
+.lp-col-b{background:var(--bg2);}
+.lp-col-title{font-size:10px;letter-spacing:.32em;text-transform:uppercase;font-weight:600;margin-bottom:20px;font-family:'Jost',sans-serif;}
+.lp-col-a .lp-col-title{color:var(--gold2);}
+.lp-col-b .lp-col-title{color:var(--muted);}
+.lp-li{font-size:13px;color:var(--muted);line-height:2.1;display:flex;align-items:center;gap:10px;font-weight:400;}
+.lp-col-a .lp-li{color:rgba(240,235,224,.8);}
+.lp-li::before{font-size:8px;flex-shrink:0;}
+.lp-col-a .lp-li::before{content:'✦';color:var(--gold);}
+.lp-col-b .lp-li::before{content:'×';color:rgba(255,100,100,.5);font-size:12px;}
+.lp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.lp-stat{background:var(--bg2);padding:28px 24px;text-align:center;border-bottom:2px solid transparent;transition:all .3s;}
+.lp-stat:hover{border-bottom-color:var(--gold);background:var(--bg3);}
+.lp-stat-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--gold2);line-height:1;}
+.lp-stat-l{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:.1em;font-weight:400;}
+.lp-cta-box{background:var(--bg3);border:1px solid var(--line);padding:52px;text-align:center;position:relative;overflow:hidden;}
+.lp-cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(196,154,42,.06),transparent 70%);}
+.lp-cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:var(--text);margin-bottom:14px;position:relative;}
+.lp-cta-title em{font-style:italic;color:var(--gold2);}
+.lp-cta-sub{font-size:15px;color:var(--muted);margin-bottom:36px;position:relative;}
+@media(max-width:900px){
+  .lp-hero{padding:40px 20px;}
+  .lp-body{padding:44px 20px;}
+  .lp-compare{grid-template-columns:1fr;}
+  .lp-stats{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur-ring"></div>
+<div id="cur-dot"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo" onclick="go('home')">
+    <div class="logo-ring">L</div>
+    <span class="logo-name">LumeraStudio</span>
+  </div>
+  <nav>
+    <button class="tab-btn active" onclick="go('home')">Home</button>
+    <button class="tab-btn" onclick="go('about')">About</button>
+    <button class="tab-btn" onclick="go('services')">Services</button>
+    <button class="tab-btn" onclick="go('landing')">Landing Page</button>
+    <button class="tab-btn" onclick="go('process')">Process</button>
+    <button class="tab-btn" onclick="go('portfolio')">Portfolio</button>
+    <button class="tab-btn" onclick="go('reviews')">Reviews</button>
+    <button class="tab-btn" onclick="go('pricing')">Pricing</button>
+    <button class="tab-btn" onclick="go('faq')">FAQ</button>
+  </nav>
+  <div class="hdr-right">
+    <div class="lang-sw">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('pl')">PL</button>
+    </div>
+    <button class="hdr-cta" onclick="go('contact')" id="hdr-cta-btn">Start a Project</button>
+  </div>
+  <button class="hbg" id="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mob-overlay" id="mob">
+  <button class="mob-tab active" onclick="go('home');closeMob()">Home</button>
+  <button class="mob-tab" onclick="go('about');closeMob()">About</button>
+  <button class="mob-tab" onclick="go('services');closeMob()">Services</button>
+  <button class="mob-tab" onclick="go('landing');closeMob()">Landing Page</button>
+  <button class="mob-tab" onclick="go('process');closeMob()">Process</button>
+  <button class="mob-tab" onclick="go('portfolio');closeMob()">Portfolio</button>
+  <button class="mob-tab" onclick="go('reviews');closeMob()">Reviews</button>
+  <button class="mob-tab" onclick="go('pricing');closeMob()">Pricing</button>
+  <button class="mob-tab" onclick="go('faq');closeMob()">FAQ</button>
+  <div class="mob-lang">
+    <button class="mob-lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="mob-lang-btn" onclick="setLang('de')">DE</button>
+    <button class="mob-lang-btn" onclick="setLang('pl')">PL</button>
+  </div>
+  <button class="mob-cta-btn" onclick="go('contact');closeMob()" id="mob-cta-btn">Start a Project</button>
+</div>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-vl" style="left:20%"></div>
+    <div class="hero-vl" style="left:50%"></div>
+    <div class="hero-vl" style="left:80%"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-ring hero-ring-1"></div>
+    <div class="hero-ring hero-ring-2"></div>
+    <div class="hero-badge"><div class="hero-dot"></div><span id="badge-txt">Available for new projects · Europe</span></div>
+    <h1 class="hero-h1" id="hero-h1">We build digital presence<br>that brings you <em>clients</em></h1>
+    <p class="hero-h2" id="hero-h2">— not just looks good.</p>
+    <p class="hero-p" id="hero-p">For brands that want to grow, stand out, and look premium online.</p>
+    <div class="hero-btns">
+      <button class="btn-g" onclick="go('contact')" id="hero-btn1">Start a Project</button>
+      <button class="btn-o" onclick="go('portfolio')" id="hero-btn2">See Our Work</button>
+    </div>
+    <div class="hero-scroll"><div class="scroll-bar"></div><span id="scroll-lbl">Scroll</span></div>
+  </section>
+  <div class="stats">
+    <div class="stat ani d1"><div class="stat-n" id="sn1">48h</div><div class="stat-l" id="sl1">First concept delivered</div></div>
+    <div class="stat ani d2"><div class="stat-n" id="sn2">100%</div><div class="stat-l" id="sl2">Custom — zero templates</div></div>
+    <div class="stat ani d3"><div class="stat-n" id="sn3">2–4w</div><div class="stat-l" id="sl3">Average delivery time</div></div>
+    <div class="stat ani d4"><div class="stat-n">EU</div><div class="stat-l" id="sl4">Clients across Europe</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<div id="page-about" class="page">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img ani">
+        <div class="about-img-inner"><div class="about-mono">L</div></div>
+        <div class="about-tag" id="about-tag">Est. 2026 · Europe</div>
+      </div>
+      <div class="about-text">
+        <p class="sec-label ani d1" id="about-lbl">Who We Are</p>
+        <h2 class="sec-title ani d2" id="about-title">A studio obsessed<br>with <em>craft</em></h2>
+        <div class="ani d3">
+          <p id="about-p1">LumeraStudio is a boutique web design studio built on one belief: every business deserves a website as good as what they do. We don't use templates, we don't cut corners, and we don't hand you off to juniors.</p>
+          <p id="about-p2">You work directly with experienced designers and developers from day one — people who genuinely care about the outcome.</p>
+        </div>
+        <div class="about-vals ani d4">
+          <div class="val-row"><div class="val-icon">◈</div><div><div class="val-title" id="val1t">Design-First Thinking</div><div class="val-desc" id="val1d">Every decision begins with what serves your user best.</div></div></div>
+          <div class="val-row"><div class="val-icon">◯</div><div><div class="val-title" id="val2t">Direct Collaboration</div><div class="val-desc" id="val2d">No middlemen. You speak to the people building your site.</div></div></div>
+          <div class="val-row"><div class="val-icon">△</div><div><div class="val-title" id="val3t">Built to Last</div><div class="val-desc" id="val3d">Clean code, fast performance, and solid foundations.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<div id="page-services" class="page">
+  <div class="wrap">
+    <p class="sec-label ani" id="svc-lbl">What We Do</p>
+    <h2 class="sec-title ani d1" id="svc-title">We build <em>landing pages</em></h2>
+    <p class="sec-sub ani d2" id="svc-sub">One focused page. One goal. More clients for your business.</p>
+    <div class="svc-grid" style="grid-template-columns:1fr;">
+      <div class="svc ani d1" onclick="go('landing')" style="cursor:pointer;grid-column:span 1;">
+        <div class="svc-n">01</div>
+        <div class="svc-t" id="svc1t">Landing Pages</div>
+        <p class="svc-d" id="svc1d">A single, focused page designed to do one thing — bring you more clients. Clear, fast, mobile-friendly and built to convert visitors into bookings. The smartest choice for most local businesses.</p>
+        <div style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-family:'Jost',sans-serif;font-weight:500;">Learn more →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ LANDING PAGE ═══════════ -->
+<div id="page-landing" class="page">
+  <div class="lp-hero ani">
+    <div style="max-width:1140px;margin:0 auto;">
+      <div class="lp-badge"><span style="width:5px;height:5px;background:var(--gold);border-radius:50%;display:inline-block;"></span> Our speciality</div>
+      <h1 class="lp-h1">What is a<br><em>landing page?</em></h1>
+      <p class="lp-lead">A simple, one-page website designed to do one thing — bring you more clients. No confusion. No unnecessary pages. Just results.</p>
+    </div>
+  </div>
+
+  <div class="lp-body">
+
+    <!-- WHY IT WORKS -->
+    <div class="lp-section ani d1">
+      <div class="lp-section-label">Why it works</div>
+      <h2 class="lp-section-title">You have <em>seconds</em> to make an impression</h2>
+      <p class="lp-p">When someone visits your website, you have only a few seconds to make a good impression. If your page is unclear, outdated, or complicated — people leave.</p>
+      <p class="lp-p">A landing page solves this by focusing entirely on your offer and making it easy for people to take action.</p>
+      <div class="lp-points">
+        <div class="lp-point">
+          <div class="lp-point-icon">👁</div>
+          <div><div class="lp-point-title">Shows your services clearly</div><div class="lp-point-desc">Visitors immediately understand what you offer and how to reach you.</div></div>
+        </div>
+        <div class="lp-point">
+          <div class="lp-point-icon">⭐</div>
+          <div><div class="lp-point-title">Builds trust with visuals and reviews</div><div class="lp-point-desc">Photos, testimonials and a professional design make people feel confident choosing you.</div></div>
+        </div>
+        <div class="lp-point">
+          <div class="lp-point-icon">📲</div>
+          <div><div class="lp-point-title">Guides visitors to contact you or book</div><div class="lp-point-desc">Every element on the page has one purpose — turning visitors into real clients.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="lp-section ani d2">
+      <div class="lp-stats">
+        <div class="lp-stat"><div class="lp-stat-n">3–5</div><div class="lp-stat-l">Days to deliver</div></div>
+        <div class="lp-stat"><div class="lp-stat-n">€999</div><div class="lp-stat-l">Starting price</div></div>
+        <div class="lp-stat"><div class="lp-stat-n">100%</div><div class="lp-stat-l">Mobile-friendly</div></div>
+      </div>
+    </div>
+
+    <!-- WHAT YOU GET -->
+    <div class="lp-section ani d2">
+      <div class="lp-section-label">What you get</div>
+      <h2 class="lp-section-title">Everything your business <em>needs</em></h2>
+      <p class="lp-p">We create landing pages that are built to perform — not just look good.</p>
+      <div class="lp-points">
+        <div class="lp-point"><div class="lp-point-icon">✦</div><div><div class="lp-point-title">Clean and modern design</div><div class="lp-point-desc">A professional look that reflects the quality of your business.</div></div></div>
+        <div class="lp-point"><div class="lp-point-icon">📱</div><div><div class="lp-point-title">Mobile-friendly</div><div class="lp-point-desc">Looks perfect on every phone, tablet and desktop.</div></div></div>
+        <div class="lp-point"><div class="lp-point-icon">⚡</div><div><div class="lp-point-title">Fast loading</div><div class="lp-point-desc">Loads in under 2 seconds — visitors don't wait, they book.</div></div></div>
+        <div class="lp-point"><div class="lp-point-icon">🎯</div><div><div class="lp-point-title">Focused on getting you bookings</div><div class="lp-point-desc">Every section is designed to guide your visitor towards contacting you.</div></div></div>
+      </div>
+    </div>
+
+    <!-- COMPARISON -->
+    <div class="lp-section ani d3">
+      <div class="lp-section-label">Landing page vs complex website</div>
+      <h2 class="lp-section-title">You don't need a big website.<br>You need <em>results.</em></h2>
+      <p class="lp-p">Many businesses think they need a large, complex website. In reality — for most local services and beauty businesses — a landing page is the smarter choice.</p>
+      <div class="lp-compare">
+        <div class="lp-col lp-col-a">
+          <div class="lp-col-title">Landing Page</div>
+          <div class="lp-li">Simple and clear</div>
+          <div class="lp-li">Fast to build (3–5 days)</div>
+          <div class="lp-li">Focused on getting clients</div>
+          <div class="lp-li">More effective for local business</div>
+          <div class="lp-li">Affordable investment</div>
+        </div>
+        <div class="lp-col lp-col-b">
+          <div class="lp-col-title">Complex Website / Web App</div>
+          <div class="lp-li">Expensive and time-consuming</div>
+          <div class="lp-li">Often unnecessary</div>
+          <div class="lp-li">Can confuse visitors</div>
+          <div class="lp-li">Takes weeks or months</div>
+          <div class="lp-li">Hard to maintain</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUR APPROACH -->
+    <div class="lp-section ani d3">
+      <div class="lp-section-label">Our approach</div>
+      <h2 class="lp-section-title">Simple process.<br><em>Real impact.</em></h2>
+      <p class="lp-p">We don't overcomplicate things. We focus on what actually brings results — a clear offer, strong visuals, and a structure that turns visitors into real clients.</p>
+      <p class="lp-p">Fast delivery. Simple process. Real impact.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="lp-cta-box ani d4">
+      <h2 class="lp-cta-title">Ready to get <em>more clients?</em></h2>
+      <p class="lp-cta-sub">Let's create a landing page that works for your business.</p>
+      <button class="btn-g" onclick="go('contact')">Get Your Website</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════ PROCESS ═══════════ -->
+<div id="page-process" class="page">
+  <div class="wrap">
+    <p class="sec-label ani" id="proc-lbl">How We Work</p>
+    <h2 class="sec-title ani d1" id="proc-title">A process built for <em>clarity</em></h2>
+    <p class="sec-sub ani d2" id="proc-sub">Transparent, collaborative, and direct. You always know exactly where your project stands.</p>
+    <div class="proc-grid">
+      <div class="proc ani d1"><div class="proc-n">I</div><div><div class="proc-t" id="proc1t">Discovery</div><p class="proc-d" id="proc1d">We start with a focused conversation about your goals, audience, and brand. A direct kickoff that gives us everything we need to begin.</p></div></div>
+      <div class="proc ani d2"><div class="proc-n">II</div><div><div class="proc-t" id="proc2t">Design</div><p class="proc-d" id="proc2d">Within 48 hours we present initial visual concepts. You give feedback, we refine — no compromises, no rushing.</p></div></div>
+      <div class="proc ani d3"><div class="proc-n">III</div><div><div class="proc-t" id="proc3t">Development</div><p class="proc-d" id="proc3d">Clean, fast, responsive code built with Next.js. Your site performs brilliantly on every device and loads in under 2 seconds.</p></div></div>
+      <div class="proc ani d4"><div class="proc-n">IV</div><div><div class="proc-t" id="proc4t">Launch & Support</div><p class="proc-d" id="proc4d">We handle deployment, testing, and go-live. After launch we remain available for updates as your business evolves.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PORTFOLIO ═══════════ -->
+<div id="page-portfolio" class="page">
+  <div class="wrap">
+    <p class="sec-label ani" id="port-lbl">Selected Work</p>
+    <h2 class="sec-title ani d1" id="port-title">Recent <em>projects</em></h2>
+    <p class="sec-sub ani d2" id="port-sub">A selection of landing pages and websites crafted for clients across Europe.</p>
+    <div class="port-grid">
+      <div class="port-card pa ani d1"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Maison Noir</div></div></div><div class="port-arr">↗</div></div>
+      <div class="port-card pb ani d2"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Amber Atelier</div></div></div><div class="port-arr">↗</div></div>
+      <div class="port-card pf port-wide ani d3" onclick="window.open('https://www.krembeauty.com/','_blank')" style="cursor:pointer">
+        <div class="port-bg"></div>
+        <div class="krem-wrap">
+          <div class="krem-top">
+            <div class="krem-left">
+              <div class="krem-eyebrow">Salon Fryzjerski &amp; Beauty · Kraków</div>
+              <div class="krem-title">Krem —<br>szczyt<br><em>Twojego stylu</em></div>
+            </div>
+            <div class="krem-card">
+              <div class="krem-card-title">Popularne zabiegi</div>
+              <div class="krem-row"><span>Strzyżenie damskie</span><span class="krem-price">od 150 zł</span></div>
+              <div class="krem-row"><span>Balayage + tonowanie</span><span class="krem-price">od 480 zł</span></div>
+              <div class="krem-row"><span>Manicure hybrydowy</span><span class="krem-price">165 zł</span></div>
+              <div class="krem-row"><span>Przedłużanie rzęs</span><span class="krem-price">od 170 zł</span></div>
+              <div class="krem-cta">UMÓW WIZYTĘ</div>
+            </div>
+          </div>
+          <div class="krem-bottom">
+            <div class="krem-info">
+              <div class="krem-tag-txt" id="port-krem-tag">Beauty Salon · Landing Page</div>
+            </div>
+            <div class="krem-arr">↗</div>
+          </div>
+        </div>
+      </div>
+      <div class="port-card pc ani d4"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Vaulte Finance</div></div></div><div class="port-arr">↗</div></div>
+      <div class="port-card pd ani d5"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Crest Advisory</div></div></div><div class="port-arr">↗</div></div>
+      <div class="port-card pe port-wide ani d6"><div class="port-bg"></div><div class="port-over"><div><div class="port-name" id="port5n">Lumera — Psychology Learning Platform</div></div></div><div class="port-arr">↗</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ REVIEWS ═══════════ -->
+<div id="page-reviews" class="page">
+  <div class="wrap">
+    <p class="sec-label ani" style="text-align:center" id="rev-lbl">Client Stories</p>
+    <h2 class="sec-title ani d1" style="text-align:center" id="rev-title">What our <em>clients</em> say</h2>
+    <p class="sec-sub ani d2" style="text-align:center;margin:0 auto 52px;" id="rev-sub">Real feedback from businesses across Europe who trusted us with their digital presence.</p>
+    <div class="testi-grid ani d3">
+      <div class="testi-card">
+        <div class="testi-q">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" id="t1">Working with LumeraStudio was completely different. They listened, understood our brand, and delivered something beyond what we imagined.</p>
+        <div class="testi-author"><div class="testi-av">S</div><div><div class="testi-name">Sophie Müller</div><div class="testi-role" id="t1r">Founder, Amber Atelier — Germany</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-q">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" id="t2">Delivered on time, looked stunning, and our conversion rate went up 40% in the first month. If you want a website that brings clients — this is the studio.</p>
+        <div class="testi-author"><div class="testi-av">L</div><div><div class="testi-name">Luca Ferretti</div><div class="testi-role" id="t2r">CEO, Vaulte Finance — Italy</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-q">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" id="t3">The attention to detail was extraordinary. Every element felt intentional. They guided us through the whole process with professionalism and genuine care.</p>
+        <div class="testi-author"><div class="testi-av">E</div><div><div class="testi-name">Emma Johansson</div><div class="testi-role" id="t3r">Creative Director — Sweden</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-q">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" id="t4">Fast communication, beautiful results. They understood our niche immediately. Our new website is something we're genuinely proud to show every potential client.</p>
+        <div class="testi-author"><div class="testi-av">R</div><div><div class="testi-name">Rafael Costa</div><div class="testi-role" id="t4r">Owner, Crest Advisory — Portugal</div></div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:52px;" class="ani d4">
+      <button class="btn-g" onclick="go('contact')" id="rev-cta">Start Your Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<div id="page-pricing" class="page">
+  <div class="wrap">
+    <p class="sec-label ani" id="pr-lbl">Investment</p>
+    <h2 class="sec-title ani d1" id="pr-title">Transparent <em>pricing</em></h2>
+    <p class="sec-sub ani d2" id="pr-sub">Fixed prices, no hidden fees. You know exactly what you are getting before we begin.</p>
+    <div class="price-grid">
+      <div class="p-card ani d1">
+        <div class="p-tier" id="pt1">Starter</div>
+        <div class="p-price"><sup>€</sup>999</div>
+        <div class="p-from" id="pf1">one-time, from</div>
+        <div class="p-rule"></div>
+        <ul class="p-list">
+          <li id="pi1a">Up to 5 pages</li>
+          <li id="pi1b">Custom design</li>
+          <li id="pi1c">Mobile responsive</li>
+          <li id="pi1d">Contact form</li>
+          <li id="pi1e">2 revision rounds</li>
+        </ul>
+        <button class="p-btn" onclick="go('contact')" id="pb1">Get Started</button>
+      </div>
+      <div class="p-card feat ani d2">
+        <div class="p-bdg" id="p-bdg">Most Popular</div>
+        <div class="p-tier" id="pt2">Studio</div>
+        <div class="p-price"><sup>€</sup>1,999</div>
+        <div class="p-from" id="pf2">one-time, from</div>
+        <div class="p-rule"></div>
+        <ul class="p-list">
+          <li id="pi2a">Up to 15 pages</li>
+          <li id="pi2b">Premium custom design</li>
+          <li id="pi2c">Animations & interactions</li>
+          <li id="pi2d">CMS integration</li>
+          <li id="pi2e">Unlimited revisions</li>
+          <li id="pi2f">1 month support</li>
+        </ul>
+        <button class="p-btn" onclick="go('contact')" id="pb2">Get Started</button>
+      </div>
+      <div class="p-card ani d3">
+        <div class="p-tier" id="pt3">Enterprise</div>
+        <div class="p-price" style="font-size:40px;padding-top:10px;" id="pp3">Custom</div>
+        <div class="p-from" id="pf3">tailored quote</div>
+        <div class="p-rule"></div>
+        <ul class="p-list">
+          <li id="pi3a">Unlimited pages</li>
+          <li id="pi3b">Custom functionality</li>
+          <li id="pi3c">Advanced integrations</li>
+          <li id="pi3d">Retainer option</li>
+          <li id="pi3e">Priority support</li>
+          <li id="pi3f">Dedicated designer</li>
+        </ul>
+        <button class="p-btn" onclick="go('contact')" id="pb3">Let's Talk</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<div id="page-faq" class="page">
+  <div class="wrap">
+    <p class="sec-label ani" style="text-align:center" id="faq-lbl">Got Questions?</p>
+    <h2 class="sec-title ani d1" style="text-align:center" id="faq-title">Frequently <em>asked</em></h2>
+    <p class="sec-sub ani d2" style="text-align:center;margin:0 auto 52px;" id="faq-sub">Everything you need to know before starting a project with us.</p>
+    <div class="faq-list ani d3">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq1">How long does a website project take?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p id="fa1">Most projects take 2–4 weeks from kickoff to launch. Simple landing pages can be done in under a week, while complex web apps may take 4–8 weeks. We'll give you a precise timeline after our discovery call.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq2">Do you work with clients outside Europe?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p id="fa2">Yes — we work with clients globally. Our core client base is in Europe, but we've collaborated with businesses in North America, the Middle East, and beyond. Time zones are never a barrier.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq3">What do you need from me to get started?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p id="fa3">Just a brief description of your business, your goals, and any websites you admire. We handle everything else — strategy, design, and development.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq4">How does payment work?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p id="fa4">We work on a 50% upfront, 50% on delivery basis. We accept bank transfer and all major cards. A detailed invoice is provided at each stage.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq5">How do I know the website will bring results?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p id="fa5">We design with conversion in mind from day one — clear messaging, fast load times, and strategic call-to-actions. We also recommend checking our Reviews tab to see what clients say about real results.</p></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:52px;" class="ani d4">
+      <button class="btn-g" onclick="go('contact')" id="faq-cta">Ask Us Anything</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div id="page-contact" class="page">
+  <div class="wrap">
+    <div class="cform-grid">
+      <div>
+        <p class="cinfo-ey ani" id="ct-lbl">Get in Touch</p>
+        <h2 class="cinfo-title ani d1" id="ct-title">Let's build something <em>remarkable</em></h2>
+        <p class="cinfo-p ani d2" id="ct-p">We work with businesses across Europe who want a website that truly reflects what they do. Tell us about your project — we'll reply within 24 hours.</p>
+        <div class="ci-rows ani d3">
+          <div class="ci-row"><div class="ci-icon">✉</div><div><div class="ci-lbl" id="ci-lbl1">Email</div><div class="ci-val">lumerastudio111@gmail.com</div></div></div>
+          <div class="ci-row"><div class="ci-icon">◎</div><div><div class="ci-lbl" id="ci-lbl2">Location</div><div class="ci-val" id="ci-loc">Europe — remote-first studio</div></div></div>
+          <div class="ci-row"><div class="ci-icon">◷</div><div><div class="ci-lbl" id="ci-lbl3">Response time</div><div class="ci-val" id="ci-resp">Within 24 hours</div></div></div>
+        </div>
+      </div>
+      <div class="cbox ani d2">
+        <div id="f-ok">
+          <div class="f-chk">✓</div>
+          <h3 id="f-ok-h">Message sent!</h3>
+          <p id="f-ok-p">We'll get back to you within 24 hours.</p>
+        </div>
+        <div id="f-form">
+          <div class="cbox-title" id="f-title">Start a Project</div>
+          <div class="f2">
+            <div class="fld"><label id="lbl-fn">First Name</label><input type="text" id="ff-fn" placeholder="Anna"></div>
+            <div class="fld"><label id="lbl-ln">Last Name</label><input type="text" id="ff-ln" placeholder="Müller"></div>
+          </div>
+          <div class="fld"><label id="lbl-em">Email Address</label><input type="email" id="ff-em" placeholder="hello@yourcompany.com"></div>
+          <div class="fld"><label id="lbl-ty">Project Type</label>
+            <select id="ff-ty">
+              <option value="" id="fopt0">Select a service...</option>
+              <option id="fopt1">Landing Page</option>
+              <option id="fopt2">E-Commerce Store</option>
+              <option id="fopt3">Brand & UI Design</option>
+              <option id="fopt4">Web Application</option>
+              <option id="fopt5">Other / Not sure yet</option>
+            </select>
+          </div>
+          <div class="fld"><label id="lbl-ms">Tell us about your project</label><textarea id="ff-ms" placeholder="Brief description of your goals, timeline, budget..."></textarea></div>
+          <button class="f-btn" id="f-send">Send Message</button>
+          <div id="f-err"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIE -->
+<div id="cookie">
+  <p class="ck-text" id="ck-txt">We use cookies to improve your experience. By continuing, you agree to our use of cookies in accordance with EU law.</p>
+  <div class="ck-btns">
+    <button class="ck-ok" id="ck-ok">Accept</button>
+    <button class="ck-no" id="ck-no">Decline</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-brand-name">LumeraStudio</div>
+      <p class="ft-brand-desc" id="ft-desc">Boutique web design studio crafting digital presence that brings clients — not just looks good.</p>
+      <div class="ft-soc">
+        <a href="https://www.instagram.com/lumerastudio2026?igsh=bTBqa2g3MTFtanNp" target="_blank" title="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="ft-links">
+      <div class="ft-col">
+        <div class="ft-col-title" id="ft-nav-lbl">Navigation</div>
+        <ul>
+          <li><button onclick="go('home')" id="ft-n1">Home</button></li>
+          <li><button onclick="go('about')" id="ft-n2">About</button></li>
+          <li><button onclick="go('services')" id="ft-n3">Services</button></li>
+          <li><button onclick="go('portfolio')" id="ft-n4">Portfolio</button></li>
+          <li><button onclick="go('pricing')" id="ft-n5">Pricing</button></li>
+          <li><button onclick="go('faq')" id="ft-n6">FAQ</button></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-title" id="ft-ct-lbl">Contact</div>
+        <ul>
+          <li>lumerastudio111@gmail.com</li>
+          <li><a href="https://www.instagram.com/lumerastudio2026?igsh=bTBqa2g3MTFtanNp" target="_blank">@lumerastudio2026</a></li>
+          <li><button onclick="go('contact')" id="ft-start">Start a Project</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy" id="ft-copy">© 2026 LumeraStudio. All rights reserved.</div>
+    <div class="ft-email">lumerastudio111@gmail.com</div>
+  </div>
+</footer>
+
+<script>
+// ─── TRANSLATIONS ───────────────────────────────────────────────
+var T = {
+  en: {
+    'hdr-cta-btn':'Start a Project','mob-cta-btn':'Start a Project',
+    'badge-txt':'Available for new projects · Europe',
+    'hero-h1':'We build digital presence<br>that brings you <em>clients</em>',
+    'hero-h2':'— not just looks good.','hero-p':'For brands that want to grow, stand out, and look premium online.',
+    'hero-btn1':'Start a Project','hero-btn2':'See Our Work','scroll-lbl':'Scroll',
+    'sl1':'First concept delivered','sl2':'Custom — zero templates','sl3':'Average delivery time','sl4':'Clients across Europe',
+    'about-lbl':'Who We Are','about-title':'A studio obsessed<br>with <em>craft</em>','about-tag':'Est. 2026 · Europe',
+    'about-p1':'LumeraStudio is a boutique web design studio built on one belief: every business deserves a website as good as what they do. We don\'t use templates, we don\'t cut corners, and we don\'t hand you off to juniors.',
+    'about-p2':'You work directly with experienced designers and developers from day one — people who genuinely care about the outcome.',
+    'val1t':'Design-First Thinking','val1d':'Every decision begins with what serves your user best.',
+    'val2t':'Direct Collaboration','val2d':'No middlemen. You speak to the people building your site.',
+    'val3t':'Built to Last','val3d':'Clean code, fast performance, and solid foundations.',
+    'svc-lbl':'What We Do','svc-title':'Built for <em>every</em> vision','svc-sub':'Every project is designed from scratch. No templates, no shortcuts — just purposeful work.',
+    'svc1t':'Landing Pages','svc1d':'Focused, fast, conversion-optimised pages that turn visitors into customers within seconds.',
+    'svc2t':'E-Commerce Stores','svc2d':'High-converting online shops with intuitive checkout flows and seamless payment integration.',
+    'svc3t':'Brand Identity & UI','svc3d':'Logos, colour systems, and complete design languages — cohesive identities built to last.',
+    'svc4t':'Web Applications','svc4d':'Complex, interactive apps built with Next.js and React. Scalable architecture with thoughtful UX.',
+    'proc-lbl':'How We Work','proc-title':'A process built for <em>clarity</em>','proc-sub':'Transparent, collaborative, and direct. You always know exactly where your project stands.',
+    'proc1t':'Discovery','proc1d':'We start with a focused conversation about your goals, audience, and brand. A direct kickoff that gives us everything we need to begin.',
+    'proc2t':'Design','proc2d':'Within 48 hours we present initial visual concepts. You give feedback, we refine — no compromises, no rushing.',
+    'proc3t':'Development','proc3d':'Clean, fast, responsive code built with Next.js. Your site performs brilliantly on every device and loads in under 2 seconds.',
+    'proc4t':'Launch & Support','proc4d':'We handle deployment, testing, and go-live. After launch we remain available for updates as your business evolves.',
+    'port-lbl':'Selected Work','port-title':'Recent <em>projects</em>','port-sub':'A selection of landing pages and websites crafted for clients across Europe.',
+    'port5n':'Lumera — Psychology Learning Platform',
+    'port-krem-tag':'Beauty Salon · Landing Page',
+    'port-krem-name':'Krem — Hair & Beauty Salon, Kraków',
+    'rev-lbl':'Client Stories','rev-title':'What our <em>clients</em> say','rev-sub':'Real feedback from businesses across Europe who trusted us with their digital presence.',
+    't1':'Working with LumeraStudio was completely different. They listened, understood our brand, and delivered something beyond what we imagined.',
+    't1r':'Founder, Amber Atelier — Germany',
+    't2':'Delivered on time, looked stunning, and our conversion rate went up 40% in the first month. If you want a website that brings clients — this is the studio.',
+    't2r':'CEO, Vaulte Finance — Italy',
+    't3':'The attention to detail was extraordinary. Every element felt intentional. They guided us through the whole process with professionalism and genuine care.',
+    't3r':'Creative Director — Sweden',
+    't4':'Fast communication, beautiful results. They understood our niche immediately. Our new website is something we\'re genuinely proud to show every potential client.',
+    't4r':'Owner, Crest Advisory — Portugal',
+    'rev-cta':'Start Your Project',
+    'pr-lbl':'Investment','pr-title':'Transparent <em>pricing</em>','pr-sub':'Fixed prices, no hidden fees. You know exactly what you are getting before we begin.',
+    'pt1':'Starter','pf1':'one-time, from','pi1a':'Up to 5 pages','pi1b':'Custom design','pi1c':'Mobile responsive','pi1d':'Contact form','pi1e':'2 revision rounds','pb1':'Get Started',
+    'p-bdg':'Most Popular','pt2':'Studio','pf2':'one-time, from','pi2a':'Up to 15 pages','pi2b':'Premium custom design','pi2c':'Animations & interactions','pi2d':'CMS integration','pi2e':'Unlimited revisions','pi2f':'1 month support','pb2':'Get Started',
+    'pt3':'Enterprise','pp3':'Custom','pf3':'tailored quote','pi3a':'Unlimited pages','pi3b':'Custom functionality','pi3c':'Advanced integrations','pi3d':'Retainer option','pi3e':'Priority support','pi3f':'Dedicated designer','pb3':'Let\'s Talk',
+    'faq-lbl':'Got Questions?','faq-title':'Frequently <em>asked</em>','faq-sub':'Everything you need to know before starting a project with us.','faq-cta':'Ask Us Anything',
+    'fq1':'How long does a website project take?','fa1':'Most projects take 2–4 weeks from kickoff to launch. Simple landing pages can be done in under a week, while complex web apps may take 4–8 weeks.',
+    'fq2':'Do you work with clients outside Europe?','fa2':'Yes — we work with clients globally. Our core client base is in Europe, but we\'ve collaborated with businesses in North America, the Middle East, and beyond.',
+    'fq3':'What do you need from me to get started?','fa3':'Just a brief description of your business, your goals, and any websites you admire. We handle everything else — strategy, design, and development.',
+    'fq4':'How does payment work?','fa4':'We work on a 50% upfront, 50% on delivery basis. We accept bank transfer and all major cards. A detailed invoice is provided at each stage.',
+    'fq5':'How do I know the website will bring results?','fa5':'We design with conversion in mind from day one — clear messaging, fast load times, and strategic call-to-actions.',
+    'ct-lbl':'Get in Touch','ct-title':'Let\'s build something <em>remarkable</em>','ct-p':'We work with businesses across Europe who want a website that truly reflects what they do. Tell us about your project — we\'ll reply within 24 hours.',
+    'ci-lbl1':'Email','ci-lbl2':'Location','ci-loc':'Europe — remote-first studio','ci-lbl3':'Response time','ci-resp':'Within 24 hours',
+    'f-title':'Start a Project','lbl-fn':'First Name','lbl-ln':'Last Name','lbl-em':'Email Address','lbl-ty':'Project Type','lbl-ms':'Tell us about your project',
+    'fopt0':'Select a service...','fopt1':'Landing Page','fopt2':'E-Commerce Store','fopt3':'Brand & UI Design','fopt4':'Web Application','fopt5':'Other / Not sure yet',
+    'f-send':'Send Message','f-ok-h':'Message sent!','f-ok-p':'We\'ll get back to you within 24 hours.',
+    'ck-txt':'We use cookies to improve your experience. By continuing, you agree to our use of cookies in accordance with EU law.','ck-ok':'Accept','ck-no':'Decline',
+    'ft-desc':'Boutique web design studio crafting digital presence that brings clients — not just looks good.',
+    'ft-nav-lbl':'Navigation','ft-n1':'Home','ft-n2':'About','ft-n3':'Services','ft-n4':'Portfolio','ft-n5':'Pricing','ft-n6':'FAQ',
+    'ft-ct-lbl':'Contact','ft-start':'Start a Project','ft-copy':'© 2026 LumeraStudio. All rights reserved.',
+    'tab-home':'Home','tab-about':'About','tab-services':'Services','tab-process':'Process','tab-portfolio':'Portfolio','tab-reviews':'Reviews','tab-pricing':'Pricing','tab-faq':'FAQ'
+  },
+  de: {
+    'hdr-cta-btn':'Projekt starten','mob-cta-btn':'Projekt starten',
+    'badge-txt':'Verfügbar für neue Projekte · Europa',
+    'hero-h1':'Wir bauen digitale Präsenz,<br>die Ihnen <em>Kunden</em> bringt',
+    'hero-h2':'— nicht nur gut aussieht.','hero-p':'Für Marken, die wachsen, herausstechen und online premium wirken wollen.',
+    'hero-btn1':'Projekt starten','hero-btn2':'Unsere Arbeiten','scroll-lbl':'Scrollen',
+    'sl1':'Erstes Konzept geliefert','sl2':'Individuell — keine Templates','sl3':'Durchschnittliche Lieferzeit','sl4':'Kunden in ganz Europa',
+    'about-lbl':'Wer wir sind','about-title':'Ein Studio mit Leidenschaft<br>für <em>Handwerk</em>','about-tag':'Gegr. 2026 · Europa',
+    'about-p1':'LumeraStudio ist ein Boutique-Webdesign-Studio, das auf einer Überzeugung aufgebaut ist: Jedes Unternehmen verdient eine Website, die so gut ist wie das, was es tut.',
+    'about-p2':'Sie arbeiten von Anfang an direkt mit erfahrenen Designern und Entwicklern zusammen.',
+    'val1t':'Design-First-Denken','val1d':'Jede Entscheidung beginnt damit, was Ihrem Nutzer am besten dient.',
+    'val2t':'Direkte Zusammenarbeit','val2d':'Keine Mittelsmänner. Sie sprechen direkt mit den Menschen, die Ihre Website erstellen.',
+    'val3t':'Gebaut für die Dauer','val3d':'Sauberer Code, schnelle Performance und solide Grundlagen.',
+    'svc-lbl':'Was wir tun','svc-title':'Für <em>jede</em> Vision','svc-sub':'Jedes Projekt wird von Grund auf neu gestaltet. Keine Templates, keine Abkürzungen.',
+    'svc1t':'Landingpages','svc1d':'Fokussierte, schnelle, conversion-optimierte Seiten, die Besucher in Kunden verwandeln.',
+    'svc2t':'Online-Shops','svc2d':'Umsatzstarke Online-Shops mit intuitiven Checkout-Prozessen.',
+    'svc3t':'Markenidentität & UI','svc3d':'Logos, Farbsysteme und vollständige Designsprachen.',
+    'svc4t':'Webanwendungen','svc4d':'Komplexe, interaktive Apps mit Next.js und React.',
+    'proc-lbl':'Wie wir arbeiten','proc-title':'Ein Prozess für <em>Klarheit</em>','proc-sub':'Transparent, kollaborativ und direkt. Sie wissen immer genau, wo Ihr Projekt steht.',
+    'proc1t':'Entdeckung','proc1d':'Wir beginnen mit einem fokussierten Gespräch über Ihre Ziele, Zielgruppe und Marke.',
+    'proc2t':'Design','proc2d':'Innerhalb von 48 Stunden präsentieren wir erste visuelle Konzepte. Sie geben Feedback, wir verfeinern.',
+    'proc3t':'Entwicklung','proc3d':'Sauberer, schneller, responsiver Code mit Next.js.',
+    'proc4t':'Launch & Support','proc4d':'Wir übernehmen Deployment, Tests und Live-Gang.',
+    'port-lbl':'Ausgewählte Projekte','port-title':'Aktuelle <em>Projekte</em>','port-sub':'Eine Auswahl von Landingpages und Websites für Kunden in ganz Europa.',
+    'port5n':'Lumera — Psychologie-Lernplattform',
+    'port-krem-tag':'Beauty-Salon · Landingpage',
+    'port-krem-name':'Krem — Friseursalon & Beauty, Krakau',
+    'rev-lbl':'Kundenstimmen','rev-title':'Was unsere <em>Kunden</em> sagen','rev-sub':'Echtes Feedback von Unternehmen aus ganz Europa.',
+    't1':'Die Zusammenarbeit mit LumeraStudio war völlig anders. Sie haben wirklich zugehört und etwas geliefert, das unsere Erwartungen übertraf.',
+    't1r':'Gründerin, Amber Atelier — Deutschland',
+    't2':'Pünktlich geliefert, beeindruckendes Design, und unsere Conversion-Rate stieg im ersten Monat um 40%.',
+    't2r':'CEO, Vaulte Finance — Italien',
+    't3':'Die Liebe zum Detail war außergewöhnlich. Jedes Element wirkte durchdacht.',
+    't3r':'Kreativdirektorin — Schweden',
+    't4':'Schnelle Kommunikation, wunderschöne Ergebnisse. Sie haben unsere Nische sofort verstanden.',
+    't4r':'Inhaber, Crest Advisory — Portugal',
+    'rev-cta':'Ihr Projekt starten',
+    'pr-lbl':'Investition','pr-title':'Transparente <em>Preise</em>','pr-sub':'Festpreise, keine versteckten Kosten.',
+    'pt1':'Starter','pf1':'einmalig, ab','pi1a':'Bis zu 5 Seiten','pi1b':'Individuelles Design','pi1c':'Mobile-freundlich','pi1d':'Kontaktformular','pi1e':'2 Überarbeitungsrunden','pb1':'Jetzt starten',
+    'p-bdg':'Beliebteste Wahl','pt2':'Studio','pf2':'einmalig, ab','pi2a':'Bis zu 15 Seiten','pi2b':'Premium-Individualdesign','pi2c':'Animationen & Interaktionen','pi2d':'CMS-Integration','pi2e':'Unbegrenzte Überarbeitungen','pi2f':'1 Monat Support','pb2':'Jetzt starten',
+    'pt3':'Enterprise','pp3':'Individuell','pf3':'individuelles Angebot','pi3a':'Unbegrenzte Seiten','pi3b':'Individuelle Funktionen','pi3c':'Erweiterte Integrationen','pi3d':'Retainer-Option','pi3e':'Prioritäts-Support','pi3f':'Dedizierter Designer','pb3':'Sprechen wir',
+    'faq-lbl':'Haben Sie Fragen?','faq-title':'Häufig <em>gefragt</em>','faq-sub':'Alles, was Sie wissen müssen, bevor Sie ein Projekt mit uns starten.','faq-cta':'Fragen Sie uns',
+    'fq1':'Wie lange dauert ein Website-Projekt?','fa1':'Die meisten Projekte dauern 2–4 Wochen vom Kick-off bis zum Launch.',
+    'fq2':'Arbeiten Sie auch mit Kunden außerhalb Europas?','fa2':'Ja — wir arbeiten mit Kunden weltweit.',
+    'fq3':'Was brauchen Sie von mir, um zu beginnen?','fa3':'Nur eine kurze Beschreibung Ihres Unternehmens und Ihrer Ziele.',
+    'fq4':'Wie funktioniert die Bezahlung?','fa4':'Wir arbeiten auf Basis von 50% im Voraus und 50% bei Lieferung.',
+    'fq5':'Woher weiß ich, dass die Website Ergebnisse bringt?','fa5':'Wir gestalten von Anfang an mit Conversion-Fokus — klare Botschaften, schnelle Ladezeiten.',
+    'ct-lbl':'Kontakt aufnehmen','ct-title':'Lassen Sie uns etwas <em>Herausragendes</em> bauen','ct-p':'Wir arbeiten mit Unternehmen in ganz Europa zusammen. Erzählen Sie uns von Ihrem Projekt — wir antworten innerhalb von 24 Stunden.',
+    'ci-lbl1':'E-Mail','ci-lbl2':'Standort','ci-loc':'Europa — Remote-First-Studio','ci-lbl3':'Antwortzeit','ci-resp':'Innerhalb von 24 Stunden',
+    'f-title':'Projekt starten','lbl-fn':'Vorname','lbl-ln':'Nachname','lbl-em':'E-Mail-Adresse','lbl-ty':'Projektart','lbl-ms':'Erzählen Sie uns von Ihrem Projekt',
+    'fopt0':'Leistung wählen...','fopt1':'Landingpage','fopt2':'Online-Shop','fopt3':'Marke & UI-Design','fopt4':'Webanwendung','fopt5':'Sonstiges / Noch unsicher',
+    'f-send':'Nachricht senden','f-ok-h':'Nachricht gesendet!','f-ok-p':'Wir melden uns innerhalb von 24 Stunden.',
+    'ck-txt':'Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Durch die weitere Nutzung stimmen Sie zu.','ck-ok':'Akzeptieren','ck-no':'Ablehnen',
+    'ft-desc':'Boutique-Webdesign-Studio, das digitale Präsenz schafft, die Kunden bringt.',
+    'ft-nav-lbl':'Navigation','ft-n1':'Start','ft-n2':'Über uns','ft-n3':'Leistungen','ft-n4':'Portfolio','ft-n5':'Preise','ft-n6':'FAQ',
+    'ft-ct-lbl':'Kontakt','ft-start':'Projekt starten','ft-copy':'© 2026 LumeraStudio. Alle Rechte vorbehalten.',
+    'tab-home':'Start','tab-about':'Über uns','tab-services':'Leistungen','tab-process':'Prozess','tab-portfolio':'Portfolio','tab-reviews':'Bewertungen','tab-pricing':'Preise','tab-faq':'FAQ'
+  },
+  pl: {
+    'hdr-cta-btn':'Rozpocznij projekt','mob-cta-btn':'Rozpocznij projekt',
+    'badge-txt':'Dostępni na nowe projekty · Europa',
+    'hero-h1':'Budujemy obecność cyfrową,<br>która przyciąga <em>klientów</em>',
+    'hero-h2':'— nie tylko dobrze wygląda.','hero-p':'Dla marek, które chcą rosnąć, wyróżniać się i wyglądać premium online.',
+    'hero-btn1':'Rozpocznij projekt','hero-btn2':'Zobacz nasze prace','scroll-lbl':'Przewiń',
+    'sl1':'Pierwszy koncept gotowy','sl2':'Indywidualnie — bez szablonów','sl3':'Średni czas realizacji','sl4':'Klienci z całej Europy',
+    'about-lbl':'Kim jesteśmy','about-title':'Studio z pasją<br>do <em>rzemiosła</em>','about-tag':'Zał. 2026 · Europa',
+    'about-p1':'LumeraStudio to butikowe studio webdesignu stworzone na jednej zasadzie: każda firma zasługuje na stronę tak dobrą jak to, co robi.',
+    'about-p2':'Od pierwszego dnia pracujesz bezpośrednio z doświadczonymi designerami i deweloperami.',
+    'val1t':'Myślenie Design-First','val1d':'Każda decyzja zaczyna się od tego, co najlepiej służy Twojemu użytkownikowi.',
+    'val2t':'Bezpośrednia współpraca','val2d':'Bez pośredników. Rozmawiasz bezpośrednio z osobami budującymi Twoją stronę.',
+    'val3t':'Zbudowane na lata','val3d':'Czysty kod, szybka wydajność i solidne fundamenty.',
+    'svc-lbl':'Co robimy','svc-title':'Dla <em>każdej</em> wizji','svc-sub':'Każdy projekt tworzony jest od zera. Bez szablonów, bez skrótów.',
+    'svc1t':'Landing Page','svc1d':'Skupione, szybkie strony zoptymalizowane pod konwersję, które zamieniają odwiedzających w klientów.',
+    'svc2t':'Sklepy internetowe','svc2d':'Sklepy o wysokiej konwersji z intuicyjnym procesem zakupu i płatności.',
+    'svc3t':'Identyfikacja marki & UI','svc3d':'Logotypy, systemy kolorów i kompletne języki wizualne.',
+    'svc4t':'Aplikacje webowe','svc4d':'Złożone, interaktywne aplikacje zbudowane na Next.js i React.',
+    'proc-lbl':'Jak pracujemy','proc-title':'Proces zbudowany na <em>przejrzystości</em>','proc-sub':'Transparentnie, wspólnie i bezpośrednio. Zawsze wiesz dokładnie, na jakim etapie jest Twój projekt.',
+    'proc1t':'Poznanie','proc1d':'Zaczynamy od skupionej rozmowy o Twoich celach, grupie docelowej i marce.',
+    'proc2t':'Projekt','proc2d':'W ciągu 48 godzin prezentujemy pierwsze koncepty wizualne. Dajesz feedback, my dopracowujemy.',
+    'proc3t':'Wdrożenie','proc3d':'Czysty, szybki, responsywny kod oparty na Next.js.',
+    'proc4t':'Start & Wsparcie','proc4d':'Zajmujemy się wdrożeniem, testami i uruchomieniem.',
+    'port-lbl':'Wybrane projekty','port-title':'Ostatnie <em>projekty</em>','port-sub':'Wybór landing page\'y i stron internetowych stworzonych dla klientów z całej Europy.',
+    'port5n':'Lumera — Platforma do nauki psychologii',
+    'port-krem-tag':'Salon Beauty · Landing Page',
+    'port-krem-name':'Krem — Salon Fryzjerski & Beauty',
+    'rev-lbl':'Opinie klientów','rev-title':'Co mówią nasi <em>klienci</em>','rev-sub':'Prawdziwe opinie od firm z całej Europy, które powierzyły nam swoją obecność w sieci.',
+    't1':'Współpraca z LumeraStudio była zupełnie inna. Naprawdę słuchali i dostarczyli coś, co przekroczyło nasze oczekiwania.',
+    't1r':'Założycielka, Amber Atelier — Niemcy',
+    't2':'Dostarczone na czas, wyglądało świetnie, a nasza konwersja wzrosła o 40% w pierwszym miesiącu.',
+    't2r':'CEO, Vaulte Finance — Włochy',
+    't3':'Dbałość o szczegóły była niezwykła. Każdy element był przemyślany.',
+    't3r':'Dyrektor kreatywna — Szwecja',
+    't4':'Szybka komunikacja, piękne wyniki. Od razu zrozumieli naszą niszę.',
+    't4r':'Właściciel, Crest Advisory — Portugalia',
+    'rev-cta':'Rozpocznij swój projekt',
+    'pr-lbl':'Inwestycja','pr-title':'Przejrzysty <em>cennik</em>','pr-sub':'Stałe ceny, zero ukrytych opłat.',
+    'pt1':'Starter','pf1':'jednorazowo, od','pi1a':'Do 5 podstron','pi1b':'Indywidualny projekt','pi1c':'Responsywność mobilna','pi1d':'Formularz kontaktowy','pi1e':'2 rundy poprawek','pb1':'Zaczynamy',
+    'p-bdg':'Najpopularniejszy','pt2':'Studio','pf2':'jednorazowo, od','pi2a':'Do 15 podstron','pi2b':'Premium design na zamówienie','pi2c':'Animacje i interakcje','pi2d':'Integracja CMS','pi2e':'Nieograniczone poprawki','pi2f':'1 miesiąc wsparcia','pb2':'Zaczynamy',
+    'pt3':'Enterprise','pp3':'Wycena','pf3':'indywidualna wycena','pi3a':'Nieograniczona liczba stron','pi3b':'Niestandardowe funkcje','pi3c':'Zaawansowane integracje','pi3d':'Opcja abonamentu','pi3e':'Wsparcie priorytetowe','pi3f':'Dedykowany designer','pb3':'Porozmawiajmy',
+    'faq-lbl':'Masz pytania?','faq-title':'Często <em>zadawane</em>','faq-sub':'Wszystko, co musisz wiedzieć przed rozpoczęciem projektu z nami.','faq-cta':'Zapytaj nas',
+    'fq1':'Jak długo trwa projekt strony internetowej?','fa1':'Większość projektów trwa 2–4 tygodnie od kick-offu do startu.',
+    'fq2':'Czy pracujecie z klientami spoza Europy?','fa2':'Tak — pracujemy z klientami na całym świecie.',
+    'fq3':'Czego potrzebujecie ode mnie, żeby zacząć?','fa3':'Wystarczy krótki opis Twojej firmy i Twoich celów.',
+    'fq4':'Jak działa płatność?','fa4':'Pracujemy na zasadzie 50% zaliczki, 50% po dostarczeniu.',
+    'fq5':'Skąd wiem, że strona przyniesie efekty?','fa5':'Projektujemy z myślą o konwersji od pierwszego dnia — jasny przekaz, szybkie ładowanie.',
+    'ct-lbl':'Skontaktuj się','ct-title':'Zbudujmy razem coś <em>wyjątkowego</em>','ct-p':'Pracujemy z firmami z całej Europy. Napisz nam o projekcie — odpiszemy w ciągu 24 godzin.',
+    'ci-lbl1':'E-mail','ci-lbl2':'Lokalizacja','ci-loc':'Europa — studio pracujące zdalnie','ci-lbl3':'Czas odpowiedzi','ci-resp':'W ciągu 24 godzin',
+    'f-title':'Rozpocznij projekt','lbl-fn':'Imię','lbl-ln':'Nazwisko','lbl-em':'Adres e-mail','lbl-ty':'Rodzaj projektu','lbl-ms':'Opowiedz nam o swoim projekcie',
+    'fopt0':'Wybierz usługę...','fopt1':'Landing Page','fopt2':'Sklep internetowy','fopt3':'Identyfikacja & UI','fopt4':'Aplikacja webowa','fopt5':'Inne / Jeszcze nie wiem',
+    'f-send':'Wyślij wiadomość','f-ok-h':'Wiadomość wysłana!','f-ok-p':'Odezwiemy się w ciągu 24 godzin.',
+    'ck-txt':'Używamy plików cookie, aby poprawić Twoje doświadczenie. Kontynuując, zgadzasz się na ich użycie zgodnie z prawem UE.','ck-ok':'Akceptuj','ck-no':'Odrzuć',
+    'ft-desc':'Butikowe studio webdesignu tworzące obecność cyfrową, która przyciąga klientów.',
+    'ft-nav-lbl':'Nawigacja','ft-n1':'Start','ft-n2':'O nas','ft-n3':'Usługi','ft-n4':'Portfolio','ft-n5':'Cennik','ft-n6':'FAQ',
+    'ft-ct-lbl':'Kontakt','ft-start':'Rozpocznij projekt','ft-copy':'© 2026 LumeraStudio. Wszelkie prawa zastrzeżone.',
+    'tab-home':'Start','tab-about':'O nas','tab-services':'Usługi','tab-process':'Proces','tab-portfolio':'Portfolio','tab-reviews':'Opinie','tab-pricing':'Cennik','tab-faq':'FAQ'
+  }
+};
+
+// nav tab labels mapping: button index -> key
+var tabKeys = ['home','about','services','landing','process','portfolio','reviews','pricing','faq'];
+var currentLang = 'en';
+
+function setLang(l) {
+  currentLang = l;
+  var dict = T[l];
+  // update all IDs
+  Object.keys(dict).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = dict[id];
+    if (val.indexOf('<') >= 0) { el.innerHTML = val; }
+    else { el.textContent = val; }
+  });
+  // update nav tabs
+  var tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(function(btn, i) {
+    var key = 'tab-' + tabKeys[i];
+    if (dict[key]) btn.textContent = dict[key];
+  });
+  // update mob tabs
+  var mobTabs = document.querySelectorAll('.mob-tab');
+  mobTabs.forEach(function(btn, i) {
+    var key = 'tab-' + tabKeys[i];
+    if (dict[key]) btn.textContent = dict[key];
+  });
+  // lang buttons
+  document.querySelectorAll('.lang-btn, .mob-lang-btn').forEach(function(b) {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase() === l);
+  });
+  document.documentElement.lang = l;
+}
+
+// ─── NAVIGATION ─────────────────────────────────────────────────
+function go(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('page-' + id).classList.add('active');
+  // sync tabs
+  var tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(function(btn, i) { btn.classList.toggle('active', tabKeys[i] === id); });
+  var mobTabs = document.querySelectorAll('.mob-tab');
+  mobTabs.forEach(function(btn, i) { btn.classList.toggle('active', tabKeys[i] === id); });
+  window.scrollTo({top:0, behavior:'smooth'});
+  setTimeout(runAni, 60);
+  if (id === 'home') setTimeout(runCounters, 500);
+}
+
+function toggleMob() {
+  document.getElementById('hbg').classList.toggle('open');
+  document.getElementById('mob').classList.toggle('open');
+}
+function closeMob() {
+  document.getElementById('hbg').classList.remove('open');
+  document.getElementById('mob').classList.remove('open');
+}
+
+// ─── ANIMATIONS ─────────────────────────────────────────────────
+function runAni() {
+  document.querySelectorAll('.page.active .ani:not(.go)').forEach(function(el){ el.classList.add('go'); });
+}
+window.addEventListener('load', function(){ setTimeout(runAni, 100); setTimeout(runCounters, 600); });
+
+// ─── COUNTERS ───────────────────────────────────────────────────
+var countersDone = false;
+function runCounters() {
+  if (countersDone) return;
+  countersDone = true;
+  animNum('sn1', 48, 'h', 40);
+  animNum('sn2', 100, '%', 40);
+}
+function animNum(id, target, suffix, steps) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var cur = 0;
+  var step = Math.ceil(target / steps);
+  var t = setInterval(function() {
+    cur = Math.min(cur + step, target);
+    el.textContent = cur + suffix;
+    if (cur >= target) clearInterval(t);
+  }, 35);
+}
+
+// ─── FAQ ────────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  var ans = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(function(b) {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
+}
+
+// ─── COOKIE ─────────────────────────────────────────────────────
+(function() {
+  try {
+    if (localStorage.getItem('ck')) document.getElementById('cookie').classList.add('hidden');
+  } catch(e) {}
+  document.getElementById('ck-ok').onclick = function() {
+    try { localStorage.setItem('ck','1'); } catch(e) {}
+    document.getElementById('cookie').classList.add('hidden');
+  };
+  document.getElementById('ck-no').onclick = function() {
+    try { localStorage.setItem('ck','0'); } catch(e) {}
+    document.getElementById('cookie').classList.add('hidden');
+  };
+})();
+
+// ─── CURSOR ─────────────────────────────────────────────────────
+(function() {
+  var ring = document.getElementById('cur-ring');
+  var dot = document.getElementById('cur-dot');
+  if (!ring) return;
+  var mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx+'px'; dot.style.top = my+'px';
+  });
+  (function loop() {
+    rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('button, a, .svc, .p-card, .testi-card, .port-card, .faq-q').forEach(function(el) {
+    el.addEventListener('mouseenter', function(){ ring.classList.add('big'); });
+    el.addEventListener('mouseleave', function(){ ring.classList.remove('big'); });
+  });
+})();
+
+// ─── CONTACT FORM ───────────────────────────────────────────────
+document.getElementById('f-send').addEventListener('click', async function() {
+  var fn = document.getElementById('ff-fn').value.trim();
+  var ln = document.getElementById('ff-ln').value.trim();
+  var em = document.getElementById('ff-em').value.trim();
+  var ty = document.getElementById('ff-ty').value;
+  var ms = document.getElementById('ff-ms').value.trim();
+  var errEl = document.getElementById('f-err');
+  errEl.style.display = 'none';
+
+  var errMsgs = { en:'Please fill in your name, email, and project description.', de:'Bitte füllen Sie Name, E-Mail und Projektbeschreibung aus.', pl:'Proszę wypełnić imię, e-mail i opis projektu.' };
+  if (!fn || !em || !ms) { errEl.textContent = errMsgs[currentLang]; errEl.style.display = 'block'; return; }
+
+  var sendMsgs = { en:'Sending...', de:'Wird gesendet...', pl:'Wysyłanie...' };
+  this.textContent = sendMsgs[currentLang];
+  this.disabled = true;
+
+  try {
+    var res = await fetch('https://formspree.io/f/xzzbrqzb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name: fn+' '+ln, email: em, service: ty||'Not specified', message: ms, lang: currentLang })
+    });
+    if (res.ok) {
+      document.getElementById('f-form').style.display = 'none';
+      document.getElementById('f-ok').style.display = 'block';
+    } else { throw new Error(); }
+  } catch(e) {
+    var fb={en:'Something went wrong. Email us at lumerastudio111@gmail.com',de:'Etwas ist schiefgelaufen.',pl:'Coś poszło nie tak. Napisz na lumerastudio111@gmail.com'};
+    errEl.textContent=fb[currentLang];errEl.style.display='block';
+    var bm={en:'Send Message',de:'Nachricht senden',pl:'Wyślij wiadomość'};
+    this.textContent=bm[currentLang];this.disabled=false;
+  }
+});
+</script>
+</body>
+</html>
