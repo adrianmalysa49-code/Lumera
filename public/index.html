@@ -93,9 +93,10 @@ nav{display:flex;}
 .hero-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
 .hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7.5vw,96px);font-weight:300;line-height:1.05;color:var(--text);margin-bottom:12px;position:relative;z-index:1;animation:fadeUp .9s .15s forwards;opacity:0;}
 .hero-h1 em{font-style:italic;color:var(--gold2);}
-.hero-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.4vw,30px);font-weight:300;font-style:italic;color:var(--muted);margin-bottom:28px;position:relative;z-index:1;animation:fadeUp .9s .28s forwards;opacity:0;}
+.hero-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.4vw,30px);font-weight:300;font-style:italic;color:var(--muted);margin-bottom:64px;position:relative;z-index:1;animation:fadeUp .9s .28s forwards;opacity:0;}
 .hero-p{font-size:16px;line-height:1.85;color:var(--muted);max-width:480px;margin:0 auto 52px;position:relative;z-index:1;animation:fadeUp .9s .4s forwards;opacity:0;}
 .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;animation:fadeUp .9s .52s forwards;opacity:0;}
+@media(max-width:900px){.hero-h2{margin-bottom:36px;}}
 .btn-g{background:var(--gold);color:var(--bg);border:none;padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
 .btn-g:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,154,42,.3);}
 .btn-o{background:transparent;color:var(--text);border:1px solid rgba(240,235,224,.2);padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:all .3s;}
@@ -450,7 +451,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     <div class="hero-ring hero-ring-1"></div>
     <div class="hero-ring hero-ring-2"></div>
     <div class="hero-badge"><div class="hero-dot"></div><span id="badge-txt">Available for new projects · Europe</span></div>
-    <h1 class="hero-h1" id="hero-h1">Landing pages for businesses<br>that bring you <em>more clients</em></h1>
+    <h1 class="hero-h1" id="hero-h1">Landing pages for beauty & local businesses<br>that bring you <em>more clients</em></h1>
     <p class="hero-h2" id="hero-h2">Get a premium landing page in 3–5 days — clear, modern, and built to turn visitors into bookings.</p>
     <div class="hero-btns">
       <button class="btn-g" onclick="go('contact')" id="hero-btn1">Get Your Clients</button>
