@@ -97,8 +97,8 @@ nav{display:flex;}
 @media(max-width:900px){.hero-h2{margin-bottom:36px;}}
 .btn-g{background:var(--gold);color:var(--bg);border:none;padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
 .btn-g:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,154,42,.3);}
-.btn-o{background:transparent;color:var(--text);border:1px solid rgba(240,235,224,.2);padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:all .3s;}
-.btn-o:hover{border-color:var(--gold);color:var(--gold2);background:rgba(196,154,42,.05);}
+.btn-o{background:transparent;color:var(--text);border:1px solid rgba(240,235,224,.35);padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:all .3s;}
+.btn-o:hover{border-color:var(--gold);color:var(--gold2);background:rgba(196,154,42,.07);}
 .hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeIn 1s .9s forwards;opacity:0;}
 .hero-scroll span{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--muted);}
 .scroll-bar{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite;}
@@ -1226,7 +1226,7 @@ document.getElementById('f-send').addEventListener('click', async function() {
   this.disabled = true;
 
   try {
-    var res = await fetch('https://formspree.io/f/xzzbrqzb', {
+    var res = await fetch('https://formspree.io/f/mrereqpn', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ name: fn+' '+ln, email: em, service: ty||'Not specified', message: ms, lang: currentLang })
