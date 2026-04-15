@@ -276,21 +276,40 @@ nav{display:flex;}
 #f-err{display:none;margin-top:10px;font-size:13px;color:#E07070;text-align:center;}
 
 /* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 32px;}
-.ft-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--line);}
-.ft-brand-name{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--text);font-weight:400;margin-bottom:10px;}
-.ft-brand-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:260px;font-weight:300;}
-.ft-soc{display:flex;gap:10px;margin-top:16px;}
-.ft-soc a{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .25s;}
-.ft-soc a:hover{border-color:var(--gold);color:var(--gold2);}
-.ft-links{display:flex;gap:56px;}
-.ft-col-title{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px;font-weight:400;}
-.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.ft-col ul li a,.ft-col ul li button{font-size:13px;color:var(--muted);text-decoration:none;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:300;padding:0;transition:color .2s;text-align:left;}
+footer{background:var(--bg2);border-top:1px solid var(--line);}
+.ft-cta{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:64px 72px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+.ft-cta::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.07),transparent 70%);pointer-events:none;}
+.ft-cta-eyebrow{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold2);margin-bottom:10px;font-weight:400;}
+.ft-cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;color:var(--text);line-height:1.12;}
+.ft-cta-title em{font-style:italic;color:var(--gold2);}
+.ft-main{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--line);}
+.ft-brand-col{padding:52px 72px 52px 72px;border-right:1px solid var(--line);}
+.ft-col{padding:52px 40px;}
+.ft-col + .ft-col{border-left:1px solid var(--line);}
+.ft-brand-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--text);letter-spacing:.06em;margin-bottom:12px;}
+.ft-brand-tagline{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:28px;max-width:280px;}
+.ft-soc{display:flex;gap:10px;}
+.ft-soc a{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .25s;}
+.ft-soc a:hover{border-color:var(--gold);color:var(--gold2);background:rgba(196,154,42,.06);}
+.ft-col-title{font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px;font-weight:500;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.ft-col ul li a,.ft-col ul li button{font-size:13px;color:var(--muted);text-decoration:none;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:300;padding:0;transition:color .2s;text-align:left;line-height:1;}
 .ft-col ul li a:hover,.ft-col ul li button:hover{color:var(--gold2);}
-.ft-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;}
-.ft-copy{font-size:12px;color:var(--muted);letter-spacing:.06em;}
-.ft-email{font-size:11px;color:var(--gold2);letter-spacing:.14em;text-transform:uppercase;}
+.ft-col ul li a.ft-email-val{font-size:12px;word-break:break-all;}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;padding:20px 72px;gap:20px;}
+.ft-copy{font-size:11px;color:rgba(240,235,224,.22);letter-spacing:.08em;}
+.ft-bottom-right{display:flex;align-items:center;gap:32px;}
+.ft-bottom-link{font-size:11px;color:rgba(240,235,224,.3);letter-spacing:.1em;text-decoration:none;transition:color .2s;}
+.ft-bottom-link:hover{color:var(--gold2);}
+@media(max-width:1000px){
+  .ft-cta{padding:44px 28px;flex-direction:column;align-items:flex-start;}
+  .ft-main{grid-template-columns:1fr 1fr;}
+  .ft-brand-col{grid-column:span 2;border-right:none;border-bottom:1px solid var(--line);padding:40px 28px;}
+  .ft-col{padding:36px 28px;}
+  .ft-col + .ft-col{border-left:none;border-top:1px solid var(--line);}
+  .ft-bottom{flex-direction:column;gap:8px;text-align:center;padding:18px 20px;}
+  .ft-bottom-right{flex-direction:column;gap:8px;}
+}
 
 /* COOKIE */
 #cookie{position:fixed;bottom:0;left:0;right:0;z-index:1000;background:var(--bg3);border-top:1px solid var(--line);padding:18px 52px;display:flex;align-items:center;justify-content:space-between;gap:24px;animation:fadeIn .4s ease;}
@@ -449,7 +468,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 
   <div class="stats">
     <div class="stat ani d1"><div class="stat-n" id="sn1">48h</div><div class="stat-l" id="sl1">First concept delivered</div></div>
     <div class="stat ani d2"><div class="stat-n" id="sn2">100%</div><div class="stat-l" id="sl2">Custom — zero templates</div></div>
-    <div class="stat ani d3"><div class="stat-n" id="sn3">2–4w</div><div class="stat-l" id="sl3">Average delivery time</div></div>
+    <div class="stat ani d3"><div class="stat-n" id="sn3">5–7d</div><div class="stat-l" id="sl3">Average delivery time</div></div>
     <div class="stat ani d4"><div class="stat-n">EU</div><div class="stat-l" id="sl4">Clients across Europe</div></div>
   </div>
 </div>
@@ -627,10 +646,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 
     <p class="sec-label ani" id="port-lbl">Selected Work</p>
     <h2 class="sec-title ani d1" id="port-title">Recent <em>projects</em></h2>
     <p class="sec-sub ani d2" id="port-sub">A selection of landing pages and websites crafted for clients across Europe.</p>
-    <div class="port-grid">
-      <div class="port-card pa ani d1"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Maison Noir</div></div></div><div class="port-arr">↗</div></div>
-      <div class="port-card pb ani d2"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Amber Atelier</div></div></div><div class="port-arr">↗</div></div>
-      <div class="port-card pf port-wide ani d3" onclick="window.open('https://www.krembeauty.com/','_blank')" style="cursor:pointer">
+    <div class="port-grid" style="grid-template-columns:1fr;">
+      <div class="port-card pf port-wide ani d1" onclick="window.open('https://www.krembeauty.com/','_blank')" style="cursor:pointer">
         <div class="port-bg"></div>
         <div class="krem-wrap">
           <div class="krem-top">
@@ -655,9 +672,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 
           </div>
         </div>
       </div>
-      <div class="port-card pc ani d4"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Vaulte Finance</div></div></div><div class="port-arr">↗</div></div>
-      <div class="port-card pd ani d5"><div class="port-bg"></div><div class="port-over"><div><div class="port-name">Crest Advisory</div></div></div><div class="port-arr">↗</div></div>
-      <div class="port-card pe port-wide ani d6"><div class="port-bg"></div><div class="port-over"><div><div class="port-name" id="port5n">Lumera — Psychology Learning Platform</div></div></div><div class="port-arr">↗</div></div>
     </div>
   </div>
 </div>
@@ -789,7 +803,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 
         <h2 class="cinfo-title ani d1" id="ct-title">Let's build something <em>remarkable</em></h2>
         <p class="cinfo-p ani d2" id="ct-p">We work with businesses across Europe who want a website that truly reflects what they do. Tell us about your project — we'll reply within 24 hours.</p>
         <div class="ci-rows ani d3">
-          <div class="ci-row"><div class="ci-icon">✉</div><div><div class="ci-lbl" id="ci-lbl1">Email</div><div class="ci-val">lumerastudio111@gmail.com</div></div></div>
+          <div class="ci-row"><div class="ci-icon">✉</div><div><div class="ci-lbl" id="ci-lbl1">Email</div><div class="ci-val"><a href="mailto:lumerastudio111@gmail.com" style="color:inherit;text-decoration:none;">lumerastudio111@gmail.com</a></div></div></div>
           <div class="ci-row"><div class="ci-icon">◎</div><div><div class="ci-lbl" id="ci-lbl2">Location</div><div class="ci-val" id="ci-loc">Europe — remote-first studio</div></div></div>
           <div class="ci-row"><div class="ci-icon">◷</div><div><div class="ci-lbl" id="ci-lbl3">Response time</div><div class="ci-val" id="ci-resp">Within 24 hours</div></div></div>
         </div>
@@ -809,12 +823,9 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 
           <div class="fld"><label id="lbl-em">Email Address</label><input type="email" id="ff-em" placeholder="hello@yourcompany.com"></div>
           <div class="fld"><label id="lbl-ty">Project Type</label>
             <select id="ff-ty">
-              <option value="" id="fopt0">Select a service...</option>
-              <option id="fopt1">Landing Page</option>
-              <option id="fopt2">E-Commerce Store</option>
-              <option id="fopt3">Brand & UI Design</option>
-              <option id="fopt4">Web Application</option>
-              <option id="fopt5">Other / Not sure yet</option>
+              <option value="" id="fopt0">Select a package...</option>
+              <option id="fopt1">Basic — €899</option>
+              <option id="fopt2">Premium — €1,399</option>
             </select>
           </div>
           <div class="fld"><label id="lbl-ms">Tell us about your project</label><textarea id="ff-ms" placeholder="Brief description of your goals, timeline, budget..."></textarea></div>
@@ -837,42 +848,75 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:52px 52px 
 
 <!-- FOOTER -->
 <footer>
-  <div class="ft-top">
+
+  <!-- CTA strip -->
+  <div class="ft-cta">
     <div>
+      <div class="ft-cta-eyebrow">Ready to start?</div>
+      <div class="ft-cta-title">Let's build your<br><em>landing page today</em></div>
+    </div>
+    <button class="btn-g" onclick="go('contact')" style="flex-shrink:0;white-space:nowrap;">Get Your Website</button>
+  </div>
+
+  <!-- Main 4-col grid -->
+  <div class="ft-main">
+
+    <!-- Brand -->
+    <div class="ft-brand-col">
       <div class="ft-brand-name">LumeraStudio</div>
-      <p class="ft-brand-desc" id="ft-desc">Boutique web design studio crafting digital presence that brings clients — not just looks good.</p>
+      <p class="ft-brand-tagline" id="ft-desc">Boutique web design studio crafting digital presence that brings clients — not just looks good.</p>
       <div class="ft-soc">
         <a href="https://www.instagram.com/lumerastudio2026?igsh=bTBqa2g3MTFtanNp" target="_blank" title="Instagram">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
         </a>
       </div>
     </div>
-    <div class="ft-links">
-      <div class="ft-col">
-        <div class="ft-col-title" id="ft-nav-lbl">Navigation</div>
-        <ul>
-          <li><button onclick="go('home')" id="ft-n1">Home</button></li>
-          <li><button onclick="go('about')" id="ft-n2">About</button></li>
-          <li><button onclick="go('services')" id="ft-n3">Services</button></li>
-          <li><button onclick="go('portfolio')" id="ft-n4">Portfolio</button></li>
-          <li><button onclick="go('pricing')" id="ft-n5">Pricing</button></li>
-          <li><button onclick="go('faq')" id="ft-n6">FAQ</button></li>
-        </ul>
-      </div>
-      <div class="ft-col">
-        <div class="ft-col-title" id="ft-ct-lbl">Contact</div>
-        <ul>
-          <li>lumerastudio111@gmail.com</li>
-          <li><a href="https://www.instagram.com/lumerastudio2026?igsh=bTBqa2g3MTFtanNp" target="_blank">@lumerastudio2026</a></li>
-          <li><button onclick="go('contact')" id="ft-start">Start a Project</button></li>
-        </ul>
-      </div>
+
+    <!-- Navigation -->
+    <div class="ft-col">
+      <div class="ft-col-title" id="ft-nav-lbl">Navigation</div>
+      <ul>
+        <li><button onclick="go('home')" id="ft-n1">Home</button></li>
+        <li><button onclick="go('about')" id="ft-n2">About</button></li>
+        <li><button onclick="go('landing')">Landing Page</button></li>
+        <li><button onclick="go('portfolio')" id="ft-n4">Portfolio</button></li>
+        <li><button onclick="go('pricing')" id="ft-n5">Pricing</button></li>
+        <li><button onclick="go('faq')" id="ft-n6">FAQ</button></li>
+      </ul>
     </div>
+
+    <!-- Contact -->
+    <div class="ft-col">
+      <div class="ft-col-title" id="ft-ct-lbl">Contact</div>
+      <ul>
+        <li><a href="mailto:lumerastudio111@gmail.com" class="ft-email-val">lumerastudio111@gmail.com</a></li>
+        <li><a href="https://www.instagram.com/lumerastudio2026?igsh=bTBqa2g3MTFtanNp" target="_blank">@lumerastudio2026</a></li>
+        <li><button onclick="go('contact')" id="ft-start">Start a Project</button></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="ft-col">
+      <div class="ft-col-title">Services</div>
+      <ul>
+        <li><button onclick="go('landing')">Landing Page</button></li>
+        <li><button onclick="go('process')">How It Works</button></li>
+        <li><button onclick="go('reviews')">Client Reviews</button></li>
+        <li><button onclick="go('contact')">Get a Quote</button></li>
+      </ul>
+    </div>
+
   </div>
+
+  <!-- Bottom bar -->
   <div class="ft-bottom">
     <div class="ft-copy" id="ft-copy">© 2026 LumeraStudio. All rights reserved.</div>
-    <div class="ft-email">lumerastudio111@gmail.com</div>
+    <div class="ft-bottom-right">
+      <a href="mailto:lumerastudio111@gmail.com" class="ft-bottom-link">lumerastudio111@gmail.com</a>
+      <span class="ft-bottom-link">Europe · Remote</span>
+    </div>
   </div>
+
 </footer>
 
 <script>
@@ -891,50 +935,44 @@ var T = {
     'val1t':'Design-First Thinking','val1d':'Every decision begins with what serves your user best.',
     'val2t':'Direct Collaboration','val2d':'No middlemen. You speak to the people building your site.',
     'val3t':'Built to Last','val3d':'Clean code, fast performance, and solid foundations.',
-    'svc-lbl':'What We Do','svc-title':'Built for <em>every</em> vision','svc-sub':'Every project is designed from scratch. No templates, no shortcuts — just purposeful work.',
-    'svc1t':'Landing Pages','svc1d':'Focused, fast, conversion-optimised pages that turn visitors into customers within seconds.',
-    'svc2t':'E-Commerce Stores','svc2d':'High-converting online shops with intuitive checkout flows and seamless payment integration.',
-    'svc3t':'Brand Identity & UI','svc3d':'Logos, colour systems, and complete design languages — cohesive identities built to last.',
-    'svc4t':'Web Applications','svc4d':'Complex, interactive apps built with Next.js and React. Scalable architecture with thoughtful UX.',
+    'svc-lbl':'What We Do','svc-title':'We build <em>landing pages</em>','svc-sub':'One focused page. One goal. More clients for your business.',
+    'svc1t':'Landing Pages','svc1d':'A single, focused page designed to do one thing — bring you more clients. Clear, fast, mobile-friendly and built to convert visitors into bookings.',
     'proc-lbl':'How We Work','proc-title':'Simple. Fast. <em>Done.</em>','proc-sub':'From first contact to live website in 3–5 days.',
     'proc1t':'Discovery','proc1d':'A quick call to understand your business and what you need. That\'s all we need to get started.',
     'proc2t':'Design & Build','proc2d':'We create your landing page — clean, modern, and focused on getting you bookings. Ready in 48 hours to 3 days.',
     'proc3t':'Launch','proc3d':'Your website goes live. Clients can find you, see your work, and book — starting from day one.',
     'proc-cta':'Start Your Project',
-    'port-lbl':'Selected Work','port-title':'Recent <em>projects</em>','port-sub':'A selection of landing pages and websites crafted for clients across Europe.',
+    'port-lbl':'Selected Work','port-title':'Recent <em>projects</em>','port-sub':'A selection of landing pages crafted for clients across Europe.',
     'port5n':'Lumera — Psychology Learning Platform',
     'port-krem-tag':'Beauty Salon · Landing Page',
     'port-krem-name':'Krem — Hair & Beauty Salon, Kraków',
-    'rev-lbl':'Client Stories','rev-title':'What our <em>clients</em> say','rev-sub':'Real feedback from businesses across Europe who trusted us with their digital presence.',
-    't1':'Working with LumeraStudio was completely different. They listened, understood our brand, and delivered something beyond what we imagined.',
-    't1r':'Founder, Amber Atelier — Germany',
-    't2':'Delivered on time, looked stunning, and our conversion rate went up 40% in the first month. If you want a website that brings clients — this is the studio.',
-    't2r':'CEO, Vaulte Finance — Italy',
-    't3':'The attention to detail was extraordinary. Every element felt intentional. They guided us through the whole process with professionalism and genuine care.',
-    't3r':'Creative Director — Sweden',
-    't4':'Fast communication, beautiful results. They understood our niche immediately. Our new website is something we\'re genuinely proud to show every potential client.',
-    't4r':'Owner, Crest Advisory — Portugal',
-    'rev-cta':'Start Your Project',
-    'pr-lbl':'Investment','pr-title':'Transparent <em>pricing</em>','pr-sub':'Fixed prices, no hidden fees. You know exactly what you are getting before we begin.',
-    'pt1':'Starter','pf1':'one-time, from','pi1a':'Up to 5 pages','pi1b':'Custom design','pi1c':'Mobile responsive','pi1d':'Contact form','pi1e':'2 revision rounds','pb1':'Get Started',
-    'p-bdg':'Most Popular','pt2':'Studio','pf2':'one-time, from','pi2a':'Up to 15 pages','pi2b':'Premium custom design','pi2c':'Animations & interactions','pi2d':'CMS integration','pi2e':'Unlimited revisions','pi2f':'1 month support','pb2':'Get Started',
-    'pt3':'Enterprise','pp3':'Custom','pf3':'tailored quote','pi3a':'Unlimited pages','pi3b':'Custom functionality','pi3c':'Advanced integrations','pi3d':'Retainer option','pi3e':'Priority support','pi3f':'Dedicated designer','pb3':'Let\'s Talk',
+    'rev-lbl':'Real result','rev-cta':'Start Your Project',
+    'pr-lbl':'Investment','pr-title':'Two packages.<br><em>One clear goal.</em>','pr-sub':'Fixed prices. No hidden fees. Delivered in 3–5 days.',
+    'pt1':'Basic','pf1':'one-time payment','pd1':'Simple landing page to get you online and start attracting clients.',
+    'pi1a':'1 high-converting landing page','pi1b':'Clean and modern design','pi1c':'Mobile optimized',
+    'pi1d':'Services + contact structure','pi1e':'Contact / booking section','pi1f':'Delivery in 3–5 days',
+    'pp1':'Perfect if you want a simple, professional online presence.','pb1':'Get Started',
+    'p-bdg':'Best Choice','pt2':'Premium','pf2':'one-time payment','pd2':'Designed to maximize bookings and bring you more clients.',
+    'pi2a':'High-converting landing page','pi2b':'Premium custom design','pi2c':'Strategic layout for results',
+    'pi2d':'Mobile optimized','pi2e':'Fast loading','pi2f':'Contact & booking integration',
+    'pi2g':'Unlimited revisions','pi2h':'Priority delivery (3–5 days)',
+    'pp2':'Best choice for most businesses.','pb2':'Get Started',
     'faq-lbl':'Got Questions?','faq-title':'Frequently <em>asked</em>','faq-sub':'Everything you need to know before starting a project with us.','faq-cta':'Ask Us Anything',
-    'fq1':'How long does a website project take?','fa1':'Most projects take 2–4 weeks from kickoff to launch. Simple landing pages can be done in under a week, while complex web apps may take 4–8 weeks.',
-    'fq2':'Do you work with clients outside Europe?','fa2':'Yes — we work with clients globally. Our core client base is in Europe, but we\'ve collaborated with businesses in North America, the Middle East, and beyond.',
-    'fq3':'What do you need from me to get started?','fa3':'Just a brief description of your business, your goals, and any websites you admire. We handle everything else — strategy, design, and development.',
-    'fq4':'How does payment work?','fa4':'We work on a 50% upfront, 50% on delivery basis. We accept bank transfer and all major cards. A detailed invoice is provided at each stage.',
-    'fq5':'How do I know the website will bring results?','fa5':'We design with conversion in mind from day one — clear messaging, fast load times, and strategic call-to-actions.',
-    'ct-lbl':'Get in Touch','ct-title':'Let\'s build something <em>remarkable</em>','ct-p':'We work with businesses across Europe who want a website that truly reflects what they do. Tell us about your project — we\'ll reply within 24 hours.',
+    'fq1':'How long does it take?','fa1':'From first contact to live website in 3–5 days.',
+    'fq2':'Do you work with clients outside Europe?','fa2':'Yes — we work with clients across Europe and beyond. Time zones are never a barrier.',
+    'fq3':'What do you need from me to get started?','fa3':'Just tell us about your business and what you want to achieve. We handle everything else.',
+    'fq4':'How does payment work?','fa4':'50% upfront, 50% when the website is ready. We accept bank transfer and all major cards.',
+    'fq5':'How do I know the website will bring results?','fa5':'We design every page with one goal — getting you more clients. Clear layout, fast loading, and a strong call to action.',
+    'ct-lbl':'Get in Touch','ct-title':'Let\'s build something <em>remarkable</em>','ct-p':'Tell us about your business and what you want to achieve. We\'ll get back to you within 24 hours.',
     'ci-lbl1':'Email','ci-lbl2':'Location','ci-loc':'Europe — remote-first studio','ci-lbl3':'Response time','ci-resp':'Within 24 hours',
     'f-title':'Start a Project','lbl-fn':'First Name','lbl-ln':'Last Name','lbl-em':'Email Address','lbl-ty':'Project Type','lbl-ms':'Tell us about your project',
-    'fopt0':'Select a service...','fopt1':'Landing Page','fopt2':'E-Commerce Store','fopt3':'Brand & UI Design','fopt4':'Web Application','fopt5':'Other / Not sure yet',
+    'fopt0':'Select a package...','fopt1':'Basic — €899','fopt2':'Premium — €1,399',
     'f-send':'Send Message','f-ok-h':'Message sent!','f-ok-p':'We\'ll get back to you within 24 hours.',
     'ck-txt':'We use cookies to improve your experience. By continuing, you agree to our use of cookies in accordance with EU law.','ck-ok':'Accept','ck-no':'Decline',
     'ft-desc':'Boutique web design studio crafting digital presence that brings clients — not just looks good.',
     'ft-nav-lbl':'Navigation','ft-n1':'Home','ft-n2':'About','ft-n3':'Services','ft-n4':'Portfolio','ft-n5':'Pricing','ft-n6':'FAQ',
     'ft-ct-lbl':'Contact','ft-start':'Start a Project','ft-copy':'© 2026 LumeraStudio. All rights reserved.',
-    'tab-home':'Home','tab-about':'About','tab-services':'Services','tab-process':'Process','tab-portfolio':'Portfolio','tab-reviews':'Reviews','tab-pricing':'Pricing','tab-faq':'FAQ'
+    'tab-home':'Home','tab-about':'About','tab-services':'Services','tab-landing':'Landing Page','tab-process':'Process','tab-portfolio':'Portfolio','tab-reviews':'Reviews','tab-pricing':'Pricing','tab-faq':'FAQ'
   },
   de: {
     'hdr-cta-btn':'Projekt starten','mob-cta-btn':'Projekt starten',
@@ -949,50 +987,44 @@ var T = {
     'val1t':'Design-First-Denken','val1d':'Jede Entscheidung beginnt damit, was Ihrem Nutzer am besten dient.',
     'val2t':'Direkte Zusammenarbeit','val2d':'Keine Mittelsmänner. Sie sprechen direkt mit den Menschen, die Ihre Website erstellen.',
     'val3t':'Gebaut für die Dauer','val3d':'Sauberer Code, schnelle Performance und solide Grundlagen.',
-    'svc-lbl':'Was wir tun','svc-title':'Für <em>jede</em> Vision','svc-sub':'Jedes Projekt wird von Grund auf neu gestaltet. Keine Templates, keine Abkürzungen.',
-    'svc1t':'Landingpages','svc1d':'Fokussierte, schnelle, conversion-optimierte Seiten, die Besucher in Kunden verwandeln.',
-    'svc2t':'Online-Shops','svc2d':'Umsatzstarke Online-Shops mit intuitiven Checkout-Prozessen.',
-    'svc3t':'Markenidentität & UI','svc3d':'Logos, Farbsysteme und vollständige Designsprachen.',
-    'svc4t':'Webanwendungen','svc4d':'Komplexe, interaktive Apps mit Next.js und React.',
+    'svc-lbl':'Was wir tun','svc-title':'Wir erstellen <em>Landingpages</em>','svc-sub':'Eine fokussierte Seite. Ein Ziel. Mehr Kunden für Ihr Unternehmen.',
+    'svc1t':'Landingpage','svc1d':'Eine einzelne, fokussierte Seite mit einem einzigen Ziel — mehr Kunden für Sie. Klar, schnell, mobilfreundlich und auf Buchungen ausgerichtet.',
     'proc-lbl':'Wie wir arbeiten','proc-title':'Einfach. Schnell. <em>Fertig.</em>','proc-sub':'Vom ersten Kontakt bis zur fertigen Website in 3–5 Tagen.',
-    'proc1t':'Erstkontakt','proc1d':'Ein kurzes Gespräch, um Ihr Business und Ihre Ziele zu verstehen. Das ist alles, was wir brauchen.',
+    'proc1t':'Erstkontakt','proc1d':'Ein kurzes Gespräch, um Ihr Business zu verstehen. Das ist alles, was wir brauchen.',
     'proc2t':'Design &amp; Umsetzung','proc2d':'Wir erstellen Ihre Landingpage — klar, modern und auf Buchungen ausgerichtet. Fertig in 48 Stunden bis 3 Tagen.',
     'proc3t':'Launch','proc3d':'Ihre Website geht live. Kunden können Sie finden, Ihre Arbeit sehen und buchen — ab dem ersten Tag.',
     'proc-cta':'Projekt starten',
-    'port-lbl':'Ausgewählte Projekte','port-title':'Aktuelle <em>Projekte</em>','port-sub':'Eine Auswahl von Landingpages und Websites für Kunden in ganz Europa.',
+    'port-lbl':'Ausgewählte Projekte','port-title':'Aktuelle <em>Projekte</em>','port-sub':'Eine Auswahl von Landingpages für Kunden in ganz Europa.',
     'port5n':'Lumera — Psychologie-Lernplattform',
     'port-krem-tag':'Beauty-Salon · Landingpage',
     'port-krem-name':'Krem — Friseursalon & Beauty, Krakau',
-    'rev-lbl':'Kundenstimmen','rev-title':'Was unsere <em>Kunden</em> sagen','rev-sub':'Echtes Feedback von Unternehmen aus ganz Europa.',
-    't1':'Die Zusammenarbeit mit LumeraStudio war völlig anders. Sie haben wirklich zugehört und etwas geliefert, das unsere Erwartungen übertraf.',
-    't1r':'Gründerin, Amber Atelier — Deutschland',
-    't2':'Pünktlich geliefert, beeindruckendes Design, und unsere Conversion-Rate stieg im ersten Monat um 40%.',
-    't2r':'CEO, Vaulte Finance — Italien',
-    't3':'Die Liebe zum Detail war außergewöhnlich. Jedes Element wirkte durchdacht.',
-    't3r':'Kreativdirektorin — Schweden',
-    't4':'Schnelle Kommunikation, wunderschöne Ergebnisse. Sie haben unsere Nische sofort verstanden.',
-    't4r':'Inhaber, Crest Advisory — Portugal',
-    'rev-cta':'Ihr Projekt starten',
-    'pr-lbl':'Investition','pr-title':'Transparente <em>Preise</em>','pr-sub':'Festpreise, keine versteckten Kosten.',
-    'pt1':'Starter','pf1':'einmalig, ab','pi1a':'Bis zu 5 Seiten','pi1b':'Individuelles Design','pi1c':'Mobile-freundlich','pi1d':'Kontaktformular','pi1e':'2 Überarbeitungsrunden','pb1':'Jetzt starten',
-    'p-bdg':'Beliebteste Wahl','pt2':'Studio','pf2':'einmalig, ab','pi2a':'Bis zu 15 Seiten','pi2b':'Premium-Individualdesign','pi2c':'Animationen & Interaktionen','pi2d':'CMS-Integration','pi2e':'Unbegrenzte Überarbeitungen','pi2f':'1 Monat Support','pb2':'Jetzt starten',
-    'pt3':'Enterprise','pp3':'Individuell','pf3':'individuelles Angebot','pi3a':'Unbegrenzte Seiten','pi3b':'Individuelle Funktionen','pi3c':'Erweiterte Integrationen','pi3d':'Retainer-Option','pi3e':'Prioritäts-Support','pi3f':'Dedizierter Designer','pb3':'Sprechen wir',
-    'faq-lbl':'Haben Sie Fragen?','faq-title':'Häufig <em>gefragt</em>','faq-sub':'Alles, was Sie wissen müssen, bevor Sie ein Projekt mit uns starten.','faq-cta':'Fragen Sie uns',
-    'fq1':'Wie lange dauert ein Website-Projekt?','fa1':'Die meisten Projekte dauern 2–4 Wochen vom Kick-off bis zum Launch.',
-    'fq2':'Arbeiten Sie auch mit Kunden außerhalb Europas?','fa2':'Ja — wir arbeiten mit Kunden weltweit.',
-    'fq3':'Was brauchen Sie von mir, um zu beginnen?','fa3':'Nur eine kurze Beschreibung Ihres Unternehmens und Ihrer Ziele.',
-    'fq4':'Wie funktioniert die Bezahlung?','fa4':'Wir arbeiten auf Basis von 50% im Voraus und 50% bei Lieferung.',
-    'fq5':'Woher weiß ich, dass die Website Ergebnisse bringt?','fa5':'Wir gestalten von Anfang an mit Conversion-Fokus — klare Botschaften, schnelle Ladezeiten.',
-    'ct-lbl':'Kontakt aufnehmen','ct-title':'Lassen Sie uns etwas <em>Herausragendes</em> bauen','ct-p':'Wir arbeiten mit Unternehmen in ganz Europa zusammen. Erzählen Sie uns von Ihrem Projekt — wir antworten innerhalb von 24 Stunden.',
+    'rev-lbl':'Echtes Ergebnis','rev-cta':'Ihr Projekt starten',
+    'pr-lbl':'Investition','pr-title':'Zwei Pakete.<br><em>Ein klares Ziel.</em>','pr-sub':'Festpreise. Keine versteckten Kosten. Lieferung in 3–5 Tagen.',
+    'pt1':'Basic','pf1':'einmalige Zahlung','pd1':'Einfache Landingpage, um online zu gehen und Kunden zu gewinnen.',
+    'pi1a':'1 hochkonvertierende Landingpage','pi1b':'Klares, modernes Design','pi1c':'Mobiloptimiert',
+    'pi1d':'Struktur: Leistungen + Kontakt','pi1e':'Kontakt- / Buchungsbereich','pi1f':'Lieferung in 3–5 Tagen',
+    'pp1':'Ideal für einen einfachen, professionellen Internetauftritt.','pb1':'Jetzt starten',
+    'p-bdg':'Beste Wahl','pt2':'Premium','pf2':'einmalige Zahlung','pd2':'Entwickelt, um Buchungen zu maximieren und mehr Kunden zu gewinnen.',
+    'pi2a':'Hochkonvertierende Landingpage','pi2b':'Premium-Individualdesign','pi2c':'Strategisches Layout für Ergebnisse',
+    'pi2d':'Mobiloptimiert','pi2e':'Schnelle Ladezeiten','pi2f':'Kontakt- & Buchungsintegration',
+    'pi2g':'Unbegrenzte Überarbeitungen','pi2h':'Prioritätslieferung (3–5 Tage)',
+    'pp2':'Die beste Wahl für die meisten Unternehmen.','pb2':'Jetzt starten',
+    'faq-lbl':'Haben Sie Fragen?','faq-title':'Häufig <em>gefragt</em>','faq-sub':'Alles, was Sie wissen müssen, bevor Sie mit uns starten.','faq-cta':'Fragen Sie uns',
+    'fq1':'Wie lange dauert es?','fa1':'Vom ersten Kontakt bis zur fertigen Website in 3–5 Tagen.',
+    'fq2':'Arbeiten Sie auch mit Kunden außerhalb Europas?','fa2':'Ja — wir arbeiten mit Kunden in ganz Europa und darüber hinaus. Zeitzonen sind nie ein Hindernis.',
+    'fq3':'Was brauchen Sie von mir?','fa3':'Erzählen Sie uns von Ihrem Unternehmen und was Sie erreichen möchten. Den Rest übernehmen wir.',
+    'fq4':'Wie funktioniert die Bezahlung?','fa4':'50% im Voraus, 50% wenn die Website fertig ist. Wir akzeptieren Überweisung und alle gängigen Karten.',
+    'fq5':'Woher weiß ich, dass die Website Ergebnisse bringt?','fa5':'Wir gestalten jede Seite mit einem Ziel — mehr Kunden für Sie. Klares Layout, schnelle Ladezeiten und ein starker Handlungsaufruf.',
+    'ct-lbl':'Kontakt aufnehmen','ct-title':'Lassen Sie uns etwas <em>Besonderes</em> bauen','ct-p':'Erzählen Sie uns von Ihrem Unternehmen. Wir melden uns innerhalb von 24 Stunden.',
     'ci-lbl1':'E-Mail','ci-lbl2':'Standort','ci-loc':'Europa — Remote-First-Studio','ci-lbl3':'Antwortzeit','ci-resp':'Innerhalb von 24 Stunden',
     'f-title':'Projekt starten','lbl-fn':'Vorname','lbl-ln':'Nachname','lbl-em':'E-Mail-Adresse','lbl-ty':'Projektart','lbl-ms':'Erzählen Sie uns von Ihrem Projekt',
-    'fopt0':'Leistung wählen...','fopt1':'Landingpage','fopt2':'Online-Shop','fopt3':'Marke & UI-Design','fopt4':'Webanwendung','fopt5':'Sonstiges / Noch unsicher',
+    'fopt0':'Paket wählen...','fopt1':'Basic — €899','fopt2':'Premium — €1.399',
     'f-send':'Nachricht senden','f-ok-h':'Nachricht gesendet!','f-ok-p':'Wir melden uns innerhalb von 24 Stunden.',
     'ck-txt':'Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Durch die weitere Nutzung stimmen Sie zu.','ck-ok':'Akzeptieren','ck-no':'Ablehnen',
     'ft-desc':'Boutique-Webdesign-Studio, das digitale Präsenz schafft, die Kunden bringt.',
     'ft-nav-lbl':'Navigation','ft-n1':'Start','ft-n2':'Über uns','ft-n3':'Leistungen','ft-n4':'Portfolio','ft-n5':'Preise','ft-n6':'FAQ',
     'ft-ct-lbl':'Kontakt','ft-start':'Projekt starten','ft-copy':'© 2026 LumeraStudio. Alle Rechte vorbehalten.',
-    'tab-home':'Start','tab-about':'Über uns','tab-services':'Leistungen','tab-process':'Prozess','tab-portfolio':'Portfolio','tab-reviews':'Bewertungen','tab-pricing':'Preise','tab-faq':'FAQ'
+    'tab-home':'Start','tab-about':'Über uns','tab-services':'Leistungen','tab-landing':'Landingpage','tab-process':'Prozess','tab-portfolio':'Portfolio','tab-reviews':'Bewertungen','tab-pricing':'Preise','tab-faq':'FAQ'
   },
   pl: {
     'hdr-cta-btn':'Rozpocznij projekt','mob-cta-btn':'Rozpocznij projekt',
@@ -1007,50 +1039,44 @@ var T = {
     'val1t':'Myślenie Design-First','val1d':'Każda decyzja zaczyna się od tego, co najlepiej służy Twojemu użytkownikowi.',
     'val2t':'Bezpośrednia współpraca','val2d':'Bez pośredników. Rozmawiasz bezpośrednio z osobami budującymi Twoją stronę.',
     'val3t':'Zbudowane na lata','val3d':'Czysty kod, szybka wydajność i solidne fundamenty.',
-    'svc-lbl':'Co robimy','svc-title':'Dla <em>każdej</em> wizji','svc-sub':'Każdy projekt tworzony jest od zera. Bez szablonów, bez skrótów.',
-    'svc1t':'Landing Page','svc1d':'Skupione, szybkie strony zoptymalizowane pod konwersję, które zamieniają odwiedzających w klientów.',
-    'svc2t':'Sklepy internetowe','svc2d':'Sklepy o wysokiej konwersji z intuicyjnym procesem zakupu i płatności.',
-    'svc3t':'Identyfikacja marki & UI','svc3d':'Logotypy, systemy kolorów i kompletne języki wizualne.',
-    'svc4t':'Aplikacje webowe','svc4d':'Złożone, interaktywne aplikacje zbudowane na Next.js i React.',
+    'svc-lbl':'Co robimy','svc-title':'Tworzymy <em>landing page\'y</em>','svc-sub':'Jedna strona. Jeden cel. Więcej klientów dla Twojej firmy.',
+    'svc1t':'Landing Page','svc1d':'Jedna, skupiona strona z jednym celem — więcej klientów dla Ciebie. Prosta, szybka, mobilna i nastawiona na rezerwacje.',
     'proc-lbl':'Jak pracujemy','proc-title':'Prosto. Szybko. <em>Gotowe.</em>','proc-sub':'Od pierwszego kontaktu do gotowej strony w 3–5 dni.',
     'proc1t':'Poznanie','proc1d':'Krótka rozmowa, żeby zrozumieć Twój biznes i czego potrzebujesz. To wszystko, czego nam trzeba.',
     'proc2t':'Projekt i realizacja','proc2d':'Tworzymy Twoją stronę — czystą, nowoczesną i nastawioną na pozyskiwanie klientów. Gotowa w 48h do 3 dni.',
     'proc3t':'Start','proc3d':'Twoja strona jest live. Klienci mogą Cię znaleźć, zobaczyć Twoją pracę i rezerwować — od pierwszego dnia.',
     'proc-cta':'Rozpocznij projekt',
-    'port-lbl':'Wybrane projekty','port-title':'Ostatnie <em>projekty</em>','port-sub':'Wybór landing page\'y i stron internetowych stworzonych dla klientów z całej Europy.',
+    'port-lbl':'Wybrane projekty','port-title':'Ostatnie <em>projekty</em>','port-sub':'Wybór landing page\'y stworzonych dla klientów z całej Europy.',
     'port5n':'Lumera — Platforma do nauki psychologii',
     'port-krem-tag':'Salon Beauty · Landing Page',
-    'port-krem-name':'Krem — Salon Fryzjerski & Beauty',
-    'rev-lbl':'Opinie klientów','rev-title':'Co mówią nasi <em>klienci</em>','rev-sub':'Prawdziwe opinie od firm z całej Europy, które powierzyły nam swoją obecność w sieci.',
-    't1':'Współpraca z LumeraStudio była zupełnie inna. Naprawdę słuchali i dostarczyli coś, co przekroczyło nasze oczekiwania.',
-    't1r':'Założycielka, Amber Atelier — Niemcy',
-    't2':'Dostarczone na czas, wyglądało świetnie, a nasza konwersja wzrosła o 40% w pierwszym miesiącu.',
-    't2r':'CEO, Vaulte Finance — Włochy',
-    't3':'Dbałość o szczegóły była niezwykła. Każdy element był przemyślany.',
-    't3r':'Dyrektor kreatywna — Szwecja',
-    't4':'Szybka komunikacja, piękne wyniki. Od razu zrozumieli naszą niszę.',
-    't4r':'Właściciel, Crest Advisory — Portugalia',
-    'rev-cta':'Rozpocznij swój projekt',
-    'pr-lbl':'Inwestycja','pr-title':'Przejrzysty <em>cennik</em>','pr-sub':'Stałe ceny, zero ukrytych opłat.',
-    'pt1':'Starter','pf1':'jednorazowo, od','pi1a':'Do 5 podstron','pi1b':'Indywidualny projekt','pi1c':'Responsywność mobilna','pi1d':'Formularz kontaktowy','pi1e':'2 rundy poprawek','pb1':'Zaczynamy',
-    'p-bdg':'Najpopularniejszy','pt2':'Studio','pf2':'jednorazowo, od','pi2a':'Do 15 podstron','pi2b':'Premium design na zamówienie','pi2c':'Animacje i interakcje','pi2d':'Integracja CMS','pi2e':'Nieograniczone poprawki','pi2f':'1 miesiąc wsparcia','pb2':'Zaczynamy',
-    'pt3':'Enterprise','pp3':'Wycena','pf3':'indywidualna wycena','pi3a':'Nieograniczona liczba stron','pi3b':'Niestandardowe funkcje','pi3c':'Zaawansowane integracje','pi3d':'Opcja abonamentu','pi3e':'Wsparcie priorytetowe','pi3f':'Dedykowany designer','pb3':'Porozmawiajmy',
+    'port-krem-name':'Krem — Salon Fryzjerski & Beauty, Kraków',
+    'rev-lbl':'Prawdziwy efekt','rev-cta':'Rozpocznij swój projekt',
+    'pr-lbl':'Inwestycja','pr-title':'Dwa pakiety.<br><em>Jeden jasny cel.</em>','pr-sub':'Stałe ceny. Zero ukrytych opłat. Realizacja w 3–5 dni.',
+    'pt1':'Basic','pf1':'jednorazowa płatność','pd1':'Prosta landing page, żeby zaistnieć w sieci i zacząć przyciągać klientów.',
+    'pi1a':'1 landing page nastawiona na konwersję','pi1b':'Czysty, nowoczesny design','pi1c':'Dostosowana do telefonu',
+    'pi1d':'Struktura: usługi + kontakt','pi1e':'Sekcja kontakt / rezerwacja','pi1f':'Realizacja w 3–5 dni',
+    'pp1':'Idealna, jeśli chcesz prostą, profesjonalną obecność w sieci.','pb1':'Zaczynamy',
+    'p-bdg':'Najlepszy wybór','pt2':'Premium','pf2':'jednorazowa płatność','pd2':'Zaprojektowana, żeby zmaksymalizować rezerwacje i przyciągnąć więcej klientów.',
+    'pi2a':'Landing page z wysoką konwersją','pi2b':'Premium design na zamówienie','pi2c':'Strategiczny układ nastawiony na efekty',
+    'pi2d':'Dostosowana do telefonu','pi2e':'Szybkie ładowanie','pi2f':'Integracja kontaktu i rezerwacji',
+    'pi2g':'Nieograniczone poprawki','pi2h':'Priorytetowa realizacja (3–5 dni)',
+    'pp2':'Najlepszy wybór dla większości firm.','pb2':'Zaczynamy',
     'faq-lbl':'Masz pytania?','faq-title':'Często <em>zadawane</em>','faq-sub':'Wszystko, co musisz wiedzieć przed rozpoczęciem projektu z nami.','faq-cta':'Zapytaj nas',
-    'fq1':'Jak długo trwa projekt strony internetowej?','fa1':'Większość projektów trwa 2–4 tygodnie od kick-offu do startu.',
-    'fq2':'Czy pracujecie z klientami spoza Europy?','fa2':'Tak — pracujemy z klientami na całym świecie.',
-    'fq3':'Czego potrzebujecie ode mnie, żeby zacząć?','fa3':'Wystarczy krótki opis Twojej firmy i Twoich celów.',
-    'fq4':'Jak działa płatność?','fa4':'Pracujemy na zasadzie 50% zaliczki, 50% po dostarczeniu.',
-    'fq5':'Skąd wiem, że strona przyniesie efekty?','fa5':'Projektujemy z myślą o konwersji od pierwszego dnia — jasny przekaz, szybkie ładowanie.',
-    'ct-lbl':'Skontaktuj się','ct-title':'Zbudujmy razem coś <em>wyjątkowego</em>','ct-p':'Pracujemy z firmami z całej Europy. Napisz nam o projekcie — odpiszemy w ciągu 24 godzin.',
+    'fq1':'Ile trwa realizacja?','fa1':'Od pierwszego kontaktu do gotowej strony w 3–5 dni.',
+    'fq2':'Czy pracujecie z klientami spoza Europy?','fa2':'Tak — pracujemy z klientami w całej Europie i poza nią. Strefy czasowe nigdy nie są przeszkodą.',
+    'fq3':'Czego ode mnie potrzebujecie?','fa3':'Powiedz nam o swojej firmie i co chcesz osiągnąć. Resztą zajmujemy się my.',
+    'fq4':'Jak działa płatność?','fa4':'50% zaliczki, 50% gdy strona jest gotowa. Przyjmujemy przelew i wszystkie popularne karty.',
+    'fq5':'Skąd wiem, że strona przyniesie efekty?','fa5':'Każdą stronę projektujemy z jednym celem — więcej klientów dla Ciebie. Jasny układ, szybkie ładowanie i wyraźne wezwanie do działania.',
+    'ct-lbl':'Skontaktuj się','ct-title':'Zbudujmy razem coś <em>wyjątkowego</em>','ct-p':'Opowiedz nam o swojej firmie i co chcesz osiągnąć. Odpiszemy w ciągu 24 godzin.',
     'ci-lbl1':'E-mail','ci-lbl2':'Lokalizacja','ci-loc':'Europa — studio pracujące zdalnie','ci-lbl3':'Czas odpowiedzi','ci-resp':'W ciągu 24 godzin',
     'f-title':'Rozpocznij projekt','lbl-fn':'Imię','lbl-ln':'Nazwisko','lbl-em':'Adres e-mail','lbl-ty':'Rodzaj projektu','lbl-ms':'Opowiedz nam o swoim projekcie',
-    'fopt0':'Wybierz usługę...','fopt1':'Landing Page','fopt2':'Sklep internetowy','fopt3':'Identyfikacja & UI','fopt4':'Aplikacja webowa','fopt5':'Inne / Jeszcze nie wiem',
+    'fopt0':'Wybierz pakiet...','fopt1':'Basic — €899','fopt2':'Premium — €1 399',
     'f-send':'Wyślij wiadomość','f-ok-h':'Wiadomość wysłana!','f-ok-p':'Odezwiemy się w ciągu 24 godzin.',
     'ck-txt':'Używamy plików cookie, aby poprawić Twoje doświadczenie. Kontynuując, zgadzasz się na ich użycie zgodnie z prawem UE.','ck-ok':'Akceptuj','ck-no':'Odrzuć',
     'ft-desc':'Butikowe studio webdesignu tworzące obecność cyfrową, która przyciąga klientów.',
     'ft-nav-lbl':'Nawigacja','ft-n1':'Start','ft-n2':'O nas','ft-n3':'Usługi','ft-n4':'Portfolio','ft-n5':'Cennik','ft-n6':'FAQ',
     'ft-ct-lbl':'Kontakt','ft-start':'Rozpocznij projekt','ft-copy':'© 2026 LumeraStudio. Wszelkie prawa zastrzeżone.',
-    'tab-home':'Start','tab-about':'O nas','tab-services':'Usługi','tab-process':'Proces','tab-portfolio':'Portfolio','tab-reviews':'Opinie','tab-pricing':'Cennik','tab-faq':'FAQ'
+    'tab-home':'Start','tab-about':'O nas','tab-services':'Usługi','tab-landing':'Landing Page','tab-process':'Proces','tab-portfolio':'Portfolio','tab-reviews':'Opinie','tab-pricing':'Cennik','tab-faq':'FAQ'
   }
 };
 
