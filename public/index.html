@@ -1191,14 +1191,15 @@ function toggleFaq(btn) {
   var mx=0, my=0, rx=0, ry=0;
   document.addEventListener('mousemove', function(e) {
     mx = e.clientX; my = e.clientY;
-    dot.style.left = mx+'px'; dot.style.top = my+'px';
   });
   document.addEventListener('mousedown', function(){ ring.classList.add('clicking'); });
   document.addEventListener('mouseup', function(){ ring.classList.remove('clicking'); });
   (function loop() {
     rx += (mx-rx)*0.28; ry += (my-ry)*0.28;
-    ring.style.left = Math.round(rx*10)/10+'px';
-    ring.style.top  = Math.round(ry*10)/10+'px';
+    var x = Math.round(rx*10)/10;
+    var y = Math.round(ry*10)/10;
+    ring.style.left = x+'px'; ring.style.top = y+'px';
+    dot.style.left  = x+'px'; dot.style.top  = y+'px';
     requestAnimationFrame(loop);
   })();
   document.querySelectorAll('button, a, .svc, .p-card, .port-card, .faq-q, .p-btn, .lp-point').forEach(function(el) {
