@@ -21,11 +21,25 @@ body::after{content:'';position:fixed;inset:0;z-index:9997;pointer-events:none;o
 .glow-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:0;}
 .glow-1{width:600px;height:600px;background:radial-gradient(circle,rgba(184,146,46,.09),transparent 70%);top:-10%;left:-10%;animation:glowDrift1 18s ease-in-out infinite;}
-.glow-2{width:500px;height:500px;background:radial-gradient(circle,rgba(120,80,180,.07),transparent 70%);top:40%;right:-8%;animation:glowDrift2 22s ease-in-out infinite;}
+.glow-2{width:500px;height:500px;background:radial-gradient(circle,rgba(120,60,20,.07),transparent 70%);top:40%;right:-8%;animation:glowDrift2 22s ease-in-out infinite;}
 .glow-3{width:400px;height:400px;background:radial-gradient(circle,rgba(184,146,46,.06),transparent 70%);bottom:-5%;left:30%;animation:glowDrift3 26s ease-in-out infinite;}
 @keyframes glowDrift1{0%,100%{transform:translate(0,0);opacity:1;}33%{transform:translate(60px,40px);opacity:.7;}66%{transform:translate(-30px,80px);opacity:.9;}}
 @keyframes glowDrift2{0%,100%{transform:translate(0,0);opacity:.8;}40%{transform:translate(-80px,-60px);opacity:.5;}70%{transform:translate(40px,-100px);opacity:1;}}
 @keyframes glowDrift3{0%,100%{transform:translate(0,0);opacity:.7;}50%{transform:translate(-60px,-40px);opacity:1;}}
+
+/* SECTION GLOWS — static per-section golden accents */
+.sec-glow{position:relative;overflow:hidden;}
+.sec-glow::before{content:'';position:absolute;pointer-events:none;border-radius:50%;filter:blur(90px);}
+/* top-right corner glow */
+.sg-tr::before{top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(196,154,42,.11),transparent 65%);}
+/* bottom-left corner glow */
+.sg-bl::before{bottom:-80px;left:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(196,154,42,.09),transparent 65%);}
+/* center soft glow */
+.sg-c::before{top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(196,154,42,.07),transparent 65%);}
+/* left accent */
+.sg-l::before{top:30%;left:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(196,154,42,.1),transparent 65%);}
+/* right accent */
+.sg-r::before{top:30%;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(196,154,42,.1),transparent 65%);}
 
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0}to{opacity:1}}
@@ -155,7 +169,7 @@ nav{display:flex;}
 /* Left orange-gold glow */
 .hero-bg::before{content:'';position:absolute;left:-15%;top:5%;width:55%;height:85%;background:radial-gradient(ellipse at center,rgba(220,120,30,.55) 0%,rgba(180,80,10,.2) 40%,transparent 70%);filter:blur(40px);border-radius:50%;}
 /* Right purple-gold glow */
-.hero-bg::after{content:'';position:absolute;right:-15%;top:5%;width:55%;height:85%;background:radial-gradient(ellipse at center,rgba(160,80,220,.5) 0%,rgba(100,40,180,.2) 40%,transparent 70%);filter:blur(40px);border-radius:50%;}
+.hero-bg::after{content:'';position:absolute;right:-15%;top:5%;width:55%;height:85%;background:radial-gradient(ellipse at center,rgba(120,70,20,.6) 0%,rgba(80,40,10,.25) 40%,transparent 70%);filter:blur(40px);border-radius:50%;}
 
 
 
@@ -167,10 +181,12 @@ nav{display:flex;}
 .hero-h1 em{color:var(--gold2);}
 .hero-h2{font-family:'Inter',sans-serif;font-size:clamp(16px,1.8vw,21px);font-weight:300;font-style:normal;color:rgba(240,235,224,.6);margin-bottom:52px;position:relative;z-index:1;animation:fadeUp .9s .28s forwards;opacity:0;letter-spacing:.01em;line-height:1.7;max-width:560px;}
 @media(max-width:900px){.hero-h2{margin-bottom:36px;font-size:15px;}}
-.btn-g{background:rgba(184,146,46,.25);color:var(--gold2);border:1px solid rgba(184,146,46,.4);padding:15px 40px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:500;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;border-radius:8px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 4px 24px rgba(184,146,46,.12);}
-.btn-g:hover{background:rgba(184,146,46,.4);border-color:rgba(184,146,46,.7);color:var(--text);transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 28px rgba(184,146,46,.2);}
-.btn-o{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid rgba(255,255,255,.12);padding:15px 40px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:400;cursor:pointer;transition:all .25s;border-radius:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.07);}
-.btn-o:hover{background:rgba(255,255,255,.09);border-color:rgba(184,146,46,.4);color:var(--text);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);}
+.btn-g{background:linear-gradient(135deg,#C49A2A 0%,#E0B840 50%,#C49A2A 100%);color:#0F0E0B;border:none;padding:15px 40px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:600;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 0 20px rgba(224,184,64,.45),0 0 40px rgba(196,154,42,.25),0 4px 20px rgba(196,154,42,.4),0 1px 0 rgba(255,255,255,.2) inset;}
+.btn-g:hover{background:linear-gradient(135deg,#D4A830 0%,#F0C845 50%,#D4A830 100%);transform:translateY(-2px);box-shadow:0 0 30px rgba(224,184,64,.7),0 0 60px rgba(196,154,42,.45),0 0 100px rgba(196,154,42,.2),0 8px 32px rgba(196,154,42,.5),0 1px 0 rgba(255,255,255,.3) inset;}
+.btn-g-muted{background:linear-gradient(135deg,#C49A2A 0%,#E0B840 50%,#C49A2A 100%);color:#0F0E0B;border:none;padding:15px 40px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;font-weight:600;cursor:pointer;transition:all .3s;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.3),0 1px 0 rgba(255,255,255,.15) inset;}
+.btn-g-muted:hover{background:linear-gradient(135deg,#D4A830 0%,#F0C845 50%,#D4A830 100%);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.2) inset;}
+.btn-o{background:rgba(255,255,255,.06);color:rgba(240,235,224,.7);border:1px solid rgba(196,154,42,.45);padding:15px 40px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:400;cursor:pointer;transition:all .3s;border-radius:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 0 12px rgba(196,154,42,.15),0 0 24px rgba(196,154,42,.08);}
+.btn-o:hover{background:rgba(196,154,42,.1);border-color:rgba(196,154,42,.8);color:var(--text);box-shadow:0 0 20px rgba(196,154,42,.35),0 0 40px rgba(196,154,42,.15);}
 .hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeIn 1s .9s forwards;opacity:0;}
 .hero-scroll span{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--muted);}
 .scroll-bar{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite;}
@@ -197,19 +213,19 @@ nav{display:flex;}
 .about-body-text{font-size:15px;line-height:1.85;color:var(--muted);font-weight:300;margin-bottom:16px;max-width:600px;}
 .about-tag-inline{display:inline-flex;align-items:center;gap:10px;margin-top:20px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:400;}
 .about-tag-inline::before{content:'';width:24px;height:1px;background:var(--gold);}
-.about-vals-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);}
-.val-block{background:var(--bg);padding:44px 36px;border-bottom:2px solid transparent;transition:all .3s;}
-.val-block:hover{background:var(--bg2);border-bottom-color:var(--gold);}
+.about-vals-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.val-block{background:rgba(255,255,255,.04);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:44px 36px;position:relative;border:1px solid rgba(255,255,255,.08);border-radius:20px;transition:all .35s;overflow:hidden;}
+.val-block::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:140px;height:100px;background:radial-gradient(ellipse at center,rgba(255,255,255,.18) 0%,rgba(255,255,255,.05) 45%,transparent 70%);filter:blur(16px);pointer-events:none;}
+.val-block::after{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.3),transparent);}
+.val-block:hover{background:rgba(255,255,255,.07);transform:translateY(-6px);border-color:rgba(196,154,42,.35);box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 40px rgba(196,154,42,.07);}
 .val-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:400;color:rgba(184,146,46,.18);line-height:1;margin-bottom:20px;transition:color .3s;}
-.val-block:hover .val-num{color:rgba(184,146,46,.4);}
+.val-block:hover .val-num{color:rgba(196,154,42,.45);}
 .val-title{font-size:14px;color:var(--text);font-weight:500;letter-spacing:.04em;margin-bottom:10px;}
 .val-desc{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;}
 @media(max-width:900px){
   .about-editorial{padding:48px 20px;}
   .about-top{grid-template-columns:1fr;gap:24px;margin-bottom:48px;padding-bottom:48px;}
   .about-vals-row{grid-template-columns:1fr;}
-  .val-block{border-bottom:none;border-left:2px solid transparent;}
-  .val-block:hover{border-left-color:var(--gold);border-bottom:none;}
 }
 
 /* SERVICES */
@@ -294,22 +310,30 @@ nav{display:flex;}
 .testi-role{font-size:11px;color:var(--muted);margin-top:2px;font-weight:300;}
 
 /* PRICING */
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
-.p-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:52px 40px;position:relative;border:1px solid rgba(184,146,46,.18);border-bottom:2px solid transparent;transition:all .35s;}
-.p-card:hover{background:rgba(255,255,255,.07);transform:translateY(-4px);border-bottom-color:var(--gold);box-shadow:0 12px 40px rgba(0,0,0,.4);}
-.p-card.feat{background:rgba(255,255,255,.07);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(184,146,46,.35);box-shadow:0 0 60px rgba(184,146,46,.1);}
-.p-card.feat:hover{transform:translateY(-4px);}
-.p-bdg{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--bg);font-size:9px;letter-spacing:.28em;text-transform:uppercase;padding:6px 18px;font-weight:600;white-space:nowrap;}
-.p-tier{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold2);font-weight:400;margin-bottom:20px;}
-.p-price{font-family:'Playfair Display',serif;font-size:64px;font-weight:300;color:var(--text);line-height:1;margin-bottom:6px;}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.p-card{background:rgba(255,255,255,.04);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:48px 36px;position:relative;border:1px solid rgba(255,255,255,.08);border-radius:20px;transition:all .35s;overflow:hidden;}
+.p-card::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:160px;height:120px;background:radial-gradient(ellipse at center,rgba(255,255,255,.22) 0%,rgba(255,255,255,.06) 40%,transparent 70%);filter:blur(18px);pointer-events:none;}
+.p-card::after{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.35),transparent);}
+.p-card:hover{background:rgba(255,255,255,.07);transform:translateY(-6px);border-color:rgba(196,154,42,.35);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 40px rgba(196,154,42,.08);}
+.p-card.feat{background:rgba(255,255,255,.06);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(196,154,42,.3);box-shadow:0 0 0 1px rgba(196,154,42,.12),0 20px 60px rgba(0,0,0,.4),0 0 60px rgba(196,154,42,.08);}
+.p-card.feat::before{background:radial-gradient(ellipse at center,rgba(196,154,42,.35) 0%,rgba(196,154,42,.1) 40%,transparent 70%);}
+.p-card.feat::after{background:linear-gradient(to right,transparent,rgba(196,154,42,.6),transparent);}
+.p-card.feat:hover{transform:translateY(-6px);}
+.p-bdg{position:absolute;top:16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#C49A2A,#E0B840);color:#0F0E0B;font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:5px 18px;font-weight:700;white-space:nowrap;border-radius:20px;box-shadow:0 0 16px rgba(196,154,42,.5);}
+.p-tier{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(240,235,224,.45);font-weight:400;margin-bottom:24px;margin-top:8px;}
+.p-card.feat .p-tier{color:var(--gold2);}
+.p-price{font-family:'Playfair Display',serif;font-size:62px;font-weight:300;color:var(--text);line-height:1;margin-bottom:6px;}
 .p-price sup{font-size:24px;vertical-align:super;}
-.p-from{font-size:12px;color:var(--muted);margin-bottom:28px;font-weight:300;}
-.p-rule{width:40px;height:1px;background:var(--gold);margin-bottom:28px;}
-.p-list{list-style:none;margin-bottom:40px;}
-.p-list li{font-size:13px;color:var(--muted);font-weight:400;line-height:2.2;display:flex;align-items:center;gap:12px;}
-.p-list li::before{content:'✦';color:var(--gold);font-size:8px;flex-shrink:0;}
-.p-btn{width:100%;padding:15px;border:none;background:var(--bg3);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:500;cursor:pointer;transition:all .25s;border-radius:4px;}
-.p-btn:hover,.p-card.feat .p-btn{background:rgba(184,146,46,.3);border-color:rgba(184,146,46,.6);color:var(--text);transform:translateY(-2px);box-shadow:0 6px 20px rgba(184,146,46,.2),inset 0 1px 0 rgba(255,255,255,.12);}
+.p-from{font-size:12px;color:rgba(240,235,224,.35);margin-bottom:24px;font-weight:300;}
+.p-rule{width:100%;height:1px;background:rgba(255,255,255,.07);margin-bottom:24px;}
+.p-card.feat .p-rule{background:rgba(196,154,42,.2);}
+.p-list{list-style:none;margin-bottom:36px;}
+.p-list li{font-size:13px;color:rgba(240,235,224,.65);font-weight:300;line-height:2.0;display:flex;align-items:center;gap:12px;}
+.p-list li::before{content:'';width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);flex-shrink:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%23D4A843' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;}
+.p-btn{width:100%;padding:15px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:rgba(240,235,224,.8);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .3s;border-radius:10px;backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);}
+.p-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);color:var(--text);transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 8px 24px rgba(0,0,0,.3);}
+.p-card.feat .p-btn{background:linear-gradient(135deg,#C49A2A,#E0B840);color:#0F0E0B;border:none;font-weight:600;box-shadow:0 0 20px rgba(196,154,42,.45),0 0 40px rgba(196,154,42,.2),inset 0 1px 0 rgba(255,255,255,.2);}
+.p-card.feat .p-btn:hover{background:linear-gradient(135deg,#D4A830,#F0C845);transform:translateY(-2px);box-shadow:0 0 30px rgba(196,154,42,.65),0 0 60px rgba(196,154,42,.3);}
 
 .price-grid-2col{grid-template-columns:repeat(2,1fr);max-width:820px;margin:0 auto;}
 @media(max-width:900px){.price-grid-2col{grid-template-columns:1fr;max-width:480px;}}
@@ -427,7 +451,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 }
 /* LANDING PAGE EXPLAINER */
 .lp-hero{background:var(--bg2);padding:60px 52px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
-.lp-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,46,.06),transparent 70%);}
+.lp-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.1),transparent 65%);filter:blur(60px);}
+.lp-hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.07),transparent 65%);filter:blur(70px);}
 .lp-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 16px;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px;background:rgba(184,146,46,.04);}
 .lp-h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:var(--text);line-height:1.08;margin-bottom:20px;}
 .lp-h1 em{color:var(--gold2);}
@@ -444,6 +469,19 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 .lp-point-icon{width:32px;height:32px;border-radius:50%;background:rgba(184,146,46,.1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;}
 .lp-point-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:3px;letter-spacing:.03em;}
 .lp-point-desc{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;}
+
+/* GLOW CARDS */
+.lp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;}
+.lp-card{background:rgba(20,17,10,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(184,146,46,.2);border-radius:16px;padding:32px 28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column;}
+.lp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(184,146,46,.5),transparent);}
+.lp-card::after{content:'';position:absolute;inset:0;border-radius:16px;background:radial-gradient(ellipse at 50% 0%,rgba(184,146,46,.07) 0%,transparent 65%);pointer-events:none;}
+.lp-card:hover{transform:translateY(-6px);border-color:rgba(184,146,46,.5);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 40px rgba(184,146,46,.08);}
+.lp-card-icon{width:48px;height:48px;border-radius:12px;background:rgba(184,146,46,.12);border:1px solid rgba(184,146,46,.25);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;position:relative;z-index:1;}
+.lp-card-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:var(--text);margin-bottom:10px;position:relative;z-index:1;}
+.lp-card-desc{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;flex:1;position:relative;z-index:1;}
+.lp-card-btn{margin-top:24px;position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;border:1px solid rgba(184,146,46,.5);background:rgba(184,146,46,.1);color:var(--gold2);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all .3s;box-shadow:0 0 12px rgba(184,146,46,.2),0 0 24px rgba(184,146,46,.1);}
+.lp-card-btn:hover{background:rgba(184,146,46,.22);border-color:rgba(184,146,46,.9);color:var(--text);box-shadow:0 0 20px rgba(184,146,46,.5),0 0 40px rgba(184,146,46,.25),0 0 60px rgba(184,146,46,.1);transform:translateY(-2px);}
+@media(max-width:900px){.lp-cards{grid-template-columns:1fr;}}
 .lp-compare{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:28px;}
 .lp-col{padding:32px 28px;}
 .lp-col-a{background:var(--bg3);border:1px solid rgba(184,146,46,.3);}
@@ -462,7 +500,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 .lp-stat-n{font-family:'Playfair Display',serif;font-size:44px;font-weight:300;color:var(--gold2);line-height:1;}
 .lp-stat-l{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:.1em;font-weight:400;}
 .lp-cta-box{background:var(--bg3);border:1px solid var(--line);padding:52px;text-align:center;position:relative;overflow:hidden;}
-.lp-cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(184,146,46,.06),transparent 70%);}
+.lp-cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(196,154,42,.1),transparent 65%);}
+.lp-cta-box::after{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.12),transparent 65%);filter:blur(50px);}
 .lp-cta-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:var(--text);margin-bottom:14px;position:relative;}
 .lp-cta-title em{color:var(--gold2);}
 .lp-cta-sub{font-size:15px;color:var(--muted);margin-bottom:36px;position:relative;}
@@ -549,7 +588,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 </div>
 
 <!-- ═══════════ ABOUT ═══════════ -->
-<div id="page-about" class="page">
+<div id="page-about" class="page sec-glow sg-r">
   <div class="about-editorial">
     <div class="about-top">
       <div class="ani">
@@ -584,7 +623,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
 <!-- ═══════════ SERVICES ═══════════ -->
 <div id="page-services" class="page">
-  <div class="wrap">
+  <div class="wrap sec-glow sg-tr">
     <p class="sec-label ani" id="svc-lbl">What We Do</p>
     <h2 class="sec-title ani d1" id="svc-title">We build <em>landing pages</em></h2>
     <p class="sec-sub ani d2" id="svc-sub">One focused page. One goal. More clients for your business.</p>
@@ -611,39 +650,117 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
   <div class="lp-body">
 
+    <!-- WHY IT WORKS — CARDS -->
     <div class="lp-section ani d1">
-      <div class="lp-section-label">Why your page isn't bringing clients</div>
-      <h2 class="lp-section-title">The real reasons<br>people <em>don't contact you</em></h2>
-
-      <div class="lp-points" style="margin-top:36px;">
-        <div class="lp-point" style="flex-direction:column;gap:4px;">
-          <div class="lp-point-title">"I only have a Facebook page"</div>
-          <div class="lp-point-desc">Facebook is not a website. People searching on Google find nothing — and book with someone else.</div>
+      <div class="lp-section-label">Why it works</div>
+      <h2 class="lp-section-title">You have <em>seconds</em> to make an impression</h2>
+      <p class="lp-p">If your page is unclear or outdated — people leave. A landing page keeps it simple and focused so visitors take action.</p>
+      <div class="lp-cards">
+        <div class="lp-card">
+          <div class="lp-card-icon">👁</div>
+          <div class="lp-card-title">Clear offer</div>
+          <div class="lp-card-desc">Visitors instantly understand what you do and how to reach you — no confusion, no searching.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Get started →</button>
         </div>
-        <div class="lp-point" style="flex-direction:column;gap:4px;">
-          <div class="lp-point-title">"My website looks broken on a phone"</div>
-          <div class="lp-point-desc">80% of clients browse on mobile. If it doesn't work on a phone, you're losing most of your visitors.</div>
+        <div class="lp-card">
+          <div class="lp-card-icon">⭐</div>
+          <div class="lp-card-title">Instant trust</div>
+          <div class="lp-card-desc">A professional design with photos and reviews makes people confident choosing you over competitors.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Get started →</button>
         </div>
-        <div class="lp-point" style="flex-direction:column;gap:4px;">
-          <div class="lp-point-title">"People visit but never write to me"</div>
-          <div class="lp-point-desc">No clear button, no clear offer — visitors leave without doing anything. A good page tells them exactly what to do next.</div>
-        </div>
-        <div class="lp-point" style="flex-direction:column;gap:4px;">
-          <div class="lp-point-title">"My page looks old and unprofessional"</div>
-          <div class="lp-point-desc">Your website is your first impression. If it looks cheap, clients assume your service is too — regardless of how good you actually are.</div>
-        </div>
-        <div class="lp-point" style="flex-direction:column;gap:4px;">
-          <div class="lp-point-title">"I don't know what to write on it"</div>
-          <div class="lp-point-desc">You don't have to. You tell us about your business — we handle the rest. Text, design, structure. Done in 3–5 days.</div>
+        <div class="lp-card">
+          <div class="lp-card-icon">📲</div>
+          <div class="lp-card-title">More bookings</div>
+          <div class="lp-card-desc">Every element guides your visitor towards one action — contacting or booking you directly.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Get started →</button>
         </div>
       </div>
+    </div>
 
-      <div style="margin-top:52px;padding-top:40px;border-top:1px solid var(--line);">
-        <p class="lp-p" style="color:var(--text);font-size:16px;max-width:560px;">If even one of these sounds like you — a landing page will change how clients find you online.</p>
-        <div style="margin-top:28px;">
-          <button class="btn-g" onclick="go('contact')">Get Your Website</button>
+    <!-- STATS -->
+    <div class="lp-section ani d2">
+      <div class="lp-stats">
+        <div class="lp-stat"><div class="lp-stat-n">3–5</div><div class="lp-stat-l">Days to deliver</div></div>
+        <div class="lp-stat"><div class="lp-stat-n">€899</div><div class="lp-stat-l">Starting price</div></div>
+        <div class="lp-stat"><div class="lp-stat-n">100%</div><div class="lp-stat-l">Mobile-friendly</div></div>
+      </div>
+    </div>
+
+    <!-- WHAT YOU GET — CARDS -->
+    <div class="lp-section ani d2">
+      <div class="lp-section-label">What you get</div>
+      <h2 class="lp-section-title">Everything your business <em>needs</em></h2>
+      <p class="lp-p">Everything your business needs to look professional and get more bookings online.</p>
+      <div class="lp-cards">
+        <div class="lp-card">
+          <div class="lp-card-icon">✦</div>
+          <div class="lp-card-title">Clean design</div>
+          <div class="lp-card-desc">A modern, premium look that reflects the quality of your work and makes the right first impression.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+        </div>
+        <div class="lp-card">
+          <div class="lp-card-icon">📱</div>
+          <div class="lp-card-title">Mobile-friendly</div>
+          <div class="lp-card-desc">Looks perfect on every phone, tablet and desktop — because 80% of your clients browse on mobile.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+        </div>
+        <div class="lp-card">
+          <div class="lp-card-icon">⚡</div>
+          <div class="lp-card-title">Fast loading</div>
+          <div class="lp-card-desc">Loads quickly on any connection — visitors don't wait, they book.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+        </div>
+        <div class="lp-card">
+          <div class="lp-card-icon">🎯</div>
+          <div class="lp-card-title">Focused on bookings</div>
+          <div class="lp-card-desc">Every section has one purpose — turning your visitor into a real client who contacts you.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+        </div>
+        <div class="lp-card">
+          <div class="lp-card-icon">🔒</div>
+          <div class="lp-card-title">Yours forever</div>
+          <div class="lp-card-desc">One-time payment. No monthly fees. Your page, your domain, full ownership.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+        </div>
+        <div class="lp-card">
+          <div class="lp-card-icon">🚀</div>
+          <div class="lp-card-title">Ready in 3–5 days</div>
+          <div class="lp-card-desc">From first call to live website in days — not weeks. Fast, simple, done.</div>
+          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
         </div>
       </div>
+    </div>
+
+    <!-- COMPARISON -->
+    <div class="lp-section ani d3">
+      <div class="lp-section-label">Landing page vs complex website</div>
+      <h2 class="lp-section-title">You don't need a big website.<br>You need <em>results.</em></h2>
+      <p class="lp-p">For most beauty salons and local businesses, a landing page is the smarter, faster choice.</p>
+      <div class="lp-compare sec-glow sg-bl">
+        <div class="lp-col lp-col-a">
+          <div class="lp-col-title">Landing Page</div>
+          <div class="lp-li">Simple and clear</div>
+          <div class="lp-li">Ready in 3–5 days</div>
+          <div class="lp-li">Focused on getting clients</div>
+          <div class="lp-li">More effective for local business</div>
+          <div class="lp-li">Affordable investment</div>
+        </div>
+        <div class="lp-col lp-col-b">
+          <div class="lp-col-title">Complex Website</div>
+          <div class="lp-li">Expensive and slow</div>
+          <div class="lp-li">Often unnecessary</div>
+          <div class="lp-li">Can confuse visitors</div>
+          <div class="lp-li">Takes weeks or months</div>
+          <div class="lp-li">Hard to maintain</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="lp-cta-box ani d4 sec-glow sg-c">
+      <h2 class="lp-cta-title">Ready to get <em>more clients?</em></h2>
+      <p class="lp-cta-sub">Let's create a landing page that works for your business.</p>
+      <button class="btn-g" onclick="go('contact')">Get Your Website</button>
     </div>
 
   </div>
@@ -651,7 +768,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
 <!-- ═══════════ PROCESS ═══════════ -->
 <div id="page-process" class="page">
-  <div class="wrap">
+  <div class="wrap sec-glow sg-bl">
     <p class="sec-label ani" id="proc-lbl">How We Work</p>
     <h2 class="sec-title ani d1" id="proc-title">Simple. Fast. <em>Done.</em></h2>
     <p class="sec-sub ani d2" id="proc-sub">From first contact to live website in 3–5 days.</p>
@@ -677,7 +794,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
 <!-- ═══════════ PORTFOLIO ═══════════ -->
 <div id="page-portfolio" class="page">
-  <div class="wrap">
+  <div class="wrap sec-glow sg-tr">
     <p class="sec-label ani" id="port-lbl">Selected Work</p>
     <h2 class="sec-title ani d1" id="port-title">Recent <em>projects</em></h2>
     <p class="sec-sub ani d2" id="port-sub">A selection of landing pages and websites crafted for clients across Europe.</p>
@@ -713,7 +830,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
 <!-- ═══════════ REVIEWS ═══════════ -->
 <div id="page-reviews" class="page">
-  <div class="wrap" style="max-width:680px;">
+  <div class="wrap sec-glow sg-c" style="max-width:680px;">
     <p class="sec-label ani" style="text-align:center;margin-bottom:48px;">Real result</p>
 
     <div class="ani d1" style="position:relative;padding:52px 52px 44px;background:var(--bg2);border:1px solid var(--line);">
@@ -754,7 +871,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         <div class="p-price"><sup>€</sup>899</div>
         <div class="p-from" id="pf1">one-time payment</div>
         <div class="p-rule"></div>
-        <p style="font-size:14px;color:var(--muted);margin-bottom:22px;line-height:1.7;" id="pd1">Simple landing page to get you online and start attracting clients.</p>
+        <p class="p-desc" id="pd1">Simple landing page to get you online and start attracting clients.</p>
         <ul class="p-list">
           <li id="pi1a">1 high-converting landing page</li>
           <li id="pi1b">Clean and modern design</li>
@@ -763,7 +880,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <li id="pi1e">Contact / booking section</li>
           <li id="pi1f">Delivery in 3–5 days</li>
         </ul>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6;" id="pp1">Perfect if you want a simple, professional online presence.</p>
+        <p class="p-tagline" id="pp1">Perfect if you want a simple, professional online presence.</p>
         <button class="p-btn" onclick="go('contact')" id="pb1">Get Your Website</button>
       </div>
       <div class="p-card feat ani d2">
@@ -772,7 +889,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         <div class="p-price"><sup>€</sup>1,399</div>
         <div class="p-from" id="pf2">one-time payment</div>
         <div class="p-rule"></div>
-        <p style="font-size:14px;color:rgba(240,235,224,.65);margin-bottom:22px;line-height:1.7;" id="pd2">Designed to maximize bookings and bring you more clients.</p>
+        <p class="p-desc" id="pd2">Designed to maximize bookings and bring you more clients.</p>
         <ul class="p-list">
           <li id="pi2a">High-converting landing page</li>
           <li id="pi2b">Premium custom design</li>
@@ -783,7 +900,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <li id="pi2g">Unlimited revisions</li>
           <li id="pi2h">Priority delivery (3–5 days)</li>
         </ul>
-        <p style="font-size:13px;color:rgba(240,235,224,.5);margin-bottom:28px;line-height:1.6;" id="pp2">Best choice for most businesses.</p>
+        <p class="p-tagline" id="pp2">Best choice for most businesses.</p>
         <button class="p-btn" onclick="go('contact')" id="pb2">Get More Clients</button>
       </div>
     </div>
@@ -792,7 +909,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
 <!-- ═══════════ FAQ ═══════════ -->
 <div id="page-faq" class="page">
-  <div class="wrap">
+  <div class="wrap sec-glow sg-l">
     <p class="sec-label ani" style="text-align:center" id="faq-lbl">Got Questions?</p>
     <h2 class="sec-title ani d1" style="text-align:center" id="faq-title">Frequently <em>asked</em></h2>
     <p class="sec-sub ani d2" style="text-align:center;margin:0 auto 52px;" id="faq-sub">Everything you need to know before getting started.</p>
@@ -885,7 +1002,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       <div class="ft-cta-eyebrow">Ready to start?</div>
       <div class="ft-cta-title">Let's build your<br><em>landing page today</em></div>
     </div>
-    <button class="btn-g" onclick="go('contact')" style="flex-shrink:0;white-space:nowrap;">Get Your Website</button>
+    <button class="btn-g-muted" onclick="go('contact')" style="flex-shrink:0;white-space:nowrap;">Get Your Website</button>
   </div>
 
   <!-- Main 4-col grid -->
