@@ -167,9 +167,9 @@ nav{display:flex;}
 .hero{min-height:calc(100vh - 65px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px 100px;position:relative;overflow:hidden;background:#0A090D;}
 .hero-bg{position:absolute;inset:0;}
 /* Left orange-gold glow */
-.hero-bg::before{content:'';position:absolute;left:-15%;top:5%;width:55%;height:85%;background:radial-gradient(ellipse at center,rgba(220,120,30,.55) 0%,rgba(180,80,10,.2) 40%,transparent 70%);filter:blur(40px);border-radius:50%;}
+.hero-bg::before{content:'';position:absolute;left:-15%;top:5%;width:55%;height:85%;background:radial-gradient(ellipse at center,rgba(220,120,30,.40) 0%,rgba(180,80,10,.15) 40%,transparent 70%);filter:blur(60px);border-radius:50%;}
 /* Right purple-gold glow */
-.hero-bg::after{content:'';position:absolute;right:-15%;top:5%;width:55%;height:85%;background:radial-gradient(ellipse at center,rgba(120,70,20,.6) 0%,rgba(80,40,10,.25) 40%,transparent 70%);filter:blur(40px);border-radius:50%;}
+.hero-bg::after{content:'';position:absolute;right:-15%;top:5%;width:55%;height:85%;background:radial-gradient(ellipse at center,rgba(120,70,20,.40) 0%,rgba(80,40,10,.15) 40%,transparent 70%);filter:blur(60px);border-radius:50%;}
 
 
 
@@ -241,7 +241,10 @@ nav{display:flex;}
 
 /* PROCESS */
 .proc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
-.proc{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(184,146,46,.12);padding:44px 36px;display:flex;gap:24px;align-items:flex-start;border-left:2px solid transparent;transition:all .3s;}
+.proc{background:rgba(255,255,255,.04);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.08);padding:52px 48px;display:flex;gap:32px;align-items:flex-start;border-left:2px solid transparent;transition:all .3s;position:relative;overflow:hidden;border-radius:20px;}
+.proc::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:160px;height:120px;background:radial-gradient(ellipse at center,rgba(255,255,255,.18) 0%,rgba(255,255,255,.05) 40%,transparent 70%);filter:blur(18px);pointer-events:none;}
+.proc::after{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.3),transparent);}
+.proc:hover{background:rgba(255,255,255,.07);transform:translateY(-4px);border-color:rgba(196,154,42,.35);box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 40px rgba(196,154,42,.07);}
 .proc:hover{border-left-color:var(--gold);background:var(--bg3);}
 .proc-n{font-family:'Playfair Display',serif;font-size:56px;font-weight:400;color:var(--gold);opacity:.25;line-height:.85;flex-shrink:0;}
 .proc-t{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:10px;}
@@ -572,7 +575,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
   <section class="hero">
     <div class="hero-bg"></div>
     <h1 class="hero-h1" id="hero-h1">Landing pages<br>that bring you <em>more clients</em></h1>
-    <p class="hero-h2" id="hero-h2">Get a premium landing page in 3–5 days — clear, modern, and built to turn visitors into bookings.</p>
+    <p class="hero-h2" id="hero-h2">Get a premium landing page in 8–10 days — clear, modern, and built to turn visitors into bookings.</p>
     <div class="hero-btns">
       <button class="btn-g" onclick="go('contact')" id="hero-btn1">Get Your Clients</button>
       <button class="btn-o" onclick="go('portfolio')" id="hero-btn2">See Our Work</button>
@@ -582,7 +585,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
   <div class="stats">
     <div class="stat ani d1"><div class="stat-n" id="sn1">48h</div><div class="stat-l" id="sl1">First concept</div></div>
     <div class="stat ani d2"><div class="stat-n" id="sn2">100%</div><div class="stat-l" id="sl2">Custom design</div></div>
-    <div class="stat ani d3"><div class="stat-n" id="sn3">3–5d</div><div class="stat-l" id="sl3">Delivery</div></div>
+    <div class="stat ani d3"><div class="stat-n" id="sn3">8–10d</div><div class="stat-l" id="sl3">Delivery</div></div>
     <div class="stat ani d4"><div class="stat-n">EU</div><div class="stat-l" id="sl4">Remote studio</div></div>
   </div>
 </div>
@@ -597,7 +600,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       <div>
         <h2 class="about-headline ani d1" id="about-title">We don't build websites.<br>We build <em>client machines.</em></h2>
         <p class="about-body-text ani d2" id="about-p1">LumeraStudio creates landing pages that do one thing — bring your business more clients. Not pretty pages that sit there doing nothing. Pages that work.</p>
-        <p class="about-body-text ani d2" id="about-p2">Delivered in 3–5 days. Built for results. No fluff, no filler — just a page that makes people want to book you.</p>
+        <p class="about-body-text ani d2" id="about-p2">Delivered in 8–10 days. Built for results. No fluff, no filler — just a page that makes people want to book you.</p>
         <div class="about-tag-inline ani d3" id="about-tag">Est. 2026 · Europe</div>
       </div>
     </div>
@@ -610,7 +613,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       <div class="val-block ani d2">
         <div class="val-num">02</div>
         <div class="val-title" id="val2t">Fast and precise</div>
-        <div class="val-desc" id="val2d">3–5 days from first call to live page. No delays, no endless back-and-forth.</div>
+        <div class="val-desc" id="val2d">8–10 days from first call to live page. No delays, no endless back-and-forth.</div>
       </div>
       <div class="val-block ani d3">
         <div class="val-num">03</div>
@@ -680,7 +683,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     <!-- STATS -->
     <div class="lp-section ani d2">
       <div class="lp-stats">
-        <div class="lp-stat"><div class="lp-stat-n">3–5</div><div class="lp-stat-l">Days to deliver</div></div>
+        <div class="lp-stat"><div class="lp-stat-n">8–10</div><div class="lp-stat-l">Days to deliver</div></div>
         <div class="lp-stat"><div class="lp-stat-n">€899</div><div class="lp-stat-l">Starting price</div></div>
         <div class="lp-stat"><div class="lp-stat-n">100%</div><div class="lp-stat-l">Mobile-friendly</div></div>
       </div>
@@ -724,7 +727,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         </div>
         <div class="lp-card">
           <div class="lp-card-icon">🚀</div>
-          <div class="lp-card-title">Ready in 3–5 days</div>
+          <div class="lp-card-title">Ready in 8–10 days</div>
           <div class="lp-card-desc">From first call to live website in days — not weeks. Fast, simple, done.</div>
           <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
         </div>
@@ -740,7 +743,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         <div class="lp-col lp-col-a">
           <div class="lp-col-title">Landing Page</div>
           <div class="lp-li">Simple and clear</div>
-          <div class="lp-li">Ready in 3–5 days</div>
+          <div class="lp-li">Ready in 8–10 days</div>
           <div class="lp-li">Focused on getting clients</div>
           <div class="lp-li">More effective for local business</div>
           <div class="lp-li">Affordable investment</div>
@@ -771,8 +774,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
   <div class="wrap sec-glow sg-bl">
     <p class="sec-label ani" id="proc-lbl">How We Work</p>
     <h2 class="sec-title ani d1" id="proc-title">Simple. Fast. <em>Done.</em></h2>
-    <p class="sec-sub ani d2" id="proc-sub">From first contact to live website in 3–5 days.</p>
-    <div class="proc-grid" style="grid-template-columns:1fr;max-width:600px;">
+    <p class="sec-sub ani d2" id="proc-sub">From first contact to live website in 8–10 days.</p>
+    <div class="proc-grid" style="grid-template-columns:1fr;max-width:820px;">
       <div class="proc ani d1"><div class="proc-n">I</div><div>
         <div class="proc-t" id="proc1t">Discovery</div>
         <p class="proc-d" id="proc1d">A quick call to understand your business and what you need. That's all we need to get started.</p>
@@ -864,7 +867,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
   <div class="wrap">
     <p class="sec-label ani" id="pr-lbl">Investment</p>
     <h2 class="sec-title ani d1" id="pr-title">Two packages.<br><em>One clear goal.</em></h2>
-    <p class="sec-sub ani d2" id="pr-sub">Fixed prices. No hidden fees. Delivered in 3–5 days.</p>
+    <p class="sec-sub ani d2" id="pr-sub">Fixed prices. No hidden fees. Delivered in 8–10 days.</p>
     <div class="price-grid price-grid-2col">
       <div class="p-card ani d1">
         <div class="p-tier" id="pt1">Basic</div>
@@ -878,7 +881,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <li id="pi1c">Mobile optimized</li>
           <li id="pi1d">Services + contact structure</li>
           <li id="pi1e">Contact / booking section</li>
-          <li id="pi1f">Delivery in 3–5 days</li>
+          <li id="pi1f">Delivery in 8–10 days</li>
         </ul>
         <p class="p-tagline" id="pp1">Perfect if you want a simple, professional online presence.</p>
         <button class="p-btn" onclick="go('contact')" id="pb1">Get Your Website</button>
@@ -898,7 +901,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <li id="pi2e">Fast loading</li>
           <li id="pi2f">Contact &amp; booking integration</li>
           <li id="pi2g">Unlimited revisions</li>
-          <li id="pi2h">Priority delivery (3–5 days)</li>
+          <li id="pi2h">Priority delivery (8–10 days)</li>
         </ul>
         <p class="p-tagline" id="pp2">Best choice for most businesses.</p>
         <button class="p-btn" onclick="go('contact')" id="pb2">Get More Clients</button>
@@ -916,7 +919,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     <div class="faq-list ani d3">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)"><span id="fq1">How long does it take?</span><span class="faq-icon">›</span></button>
-        <div class="faq-a"><p id="fa1">Most landing pages are delivered in 3–5 days. We start with a quick call, then build and present your page — fast and straightforward.</p></div>
+        <div class="faq-a"><p id="fa1">Most landing pages are delivered in 8–10 days.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)"><span id="fq2">What do you need from me?</span><span class="faq-icon">›</span></button>
@@ -1073,19 +1076,19 @@ var T = {
     'hdr-cta-btn':'Start a Project','mob-cta-btn':'Start a Project',
     'badge-txt':'Now taking new projects · 2026',
     'hero-h1':'Landing pages<br>that bring you <em>more clients</em>',
-    'hero-h2':'Get a premium landing page in 3–5 days — clear, modern, and built to turn visitors into bookings.',
+    'hero-h2':'Get a premium landing page in 8–10 days — clear, modern, and built to turn visitors into bookings.',
     'hero-p':'For brands that want to grow, stand out, and look premium online.',
     'hero-btn1':'Get Your Clients','hero-btn2':'See Our Work','scroll-lbl':'Scroll',
     'sl1':'First concept','sl2':'Custom design','sl3':'Delivery','sl4':'Remote studio',
     'about-lbl':'Who We Are','about-title':'We don\'t build websites.<br>We build <em>client machines.</em>','about-tag':'Est. 2026 · Europe',
     'about-p1':'LumeraStudio creates landing pages that do one thing — bring your business more clients. Not pretty pages that sit there doing nothing. Pages that work.',
-    'about-p2':'Delivered in 3–5 days. Built for results. No fluff, no filler — just a page that makes people want to book you.',
+    'about-p2':'Delivered in 8–10 days. Built for results. No fluff, no filler — just a page that makes people want to book you.',
     'val1t':'Obsessed with results','val1d':'Every decision is made to get you more bookings. Not to win design awards.',
-    'val2t':'Fast and precise','val2d':'3–5 days from first call to live page. No delays, no endless back-and-forth.',
+    'val2t':'Fast and precise','val2d':'8–10 days from first call to live page. No delays, no endless back-and-forth.',
     'val3t':'Zero templates','val3d':'Every page is built specifically for your business. Nothing recycled, nothing generic.',
     'svc-lbl':'What We Do','svc-title':'We build <em>landing pages</em>','svc-sub':'One focused page. One goal. More clients for your business.',
     'svc1t':'Landing Pages','svc1d':'A single, focused page designed to do one thing — bring you more clients. Clear, fast, mobile-friendly and built to convert visitors into bookings.',
-    'proc-lbl':'How We Work','proc-title':'Simple. Fast. <em>Done.</em>','proc-sub':'From first contact to live website in 3–5 days.',
+    'proc-lbl':'How We Work','proc-title':'Simple. Fast. <em>Done.</em>','proc-sub':'From first contact to live website in 8–10 days.',
     'proc1t':'Discovery','proc1d':'A quick call to understand your business and what you need. That\'s all we need to get started.',
     'proc2t':'Design & Build','proc2d':'We create your landing page — clean, modern, and focused on getting you bookings. Ready in 48 hours to 3 days.',
     'proc3t':'Launch','proc3d':'Your website goes live. Clients can find you, see your work, and book — starting from day one.',
@@ -1095,18 +1098,18 @@ var T = {
     'port-krem-tag':'Beauty Salon · Landing Page',
     'port-krem-name':'Krem — Hair & Beauty Salon, Kraków',
     'rev-lbl':'Real result','rev-cta':'Start Your Project',
-    'pr-lbl':'Investment','pr-title':'Two packages.<br><em>One clear goal.</em>','pr-sub':'Fixed prices. No hidden fees. Delivered in 3–5 days.',
+    'pr-lbl':'Investment','pr-title':'Two packages.<br><em>One clear goal.</em>','pr-sub':'Fixed prices. No hidden fees. Delivered in 8–10 days.',
     'pt1':'Basic','pf1':'one-time payment','pd1':'Simple landing page to get you online and start attracting clients.',
     'pi1a':'1 high-converting landing page','pi1b':'Clean and modern design','pi1c':'Mobile optimized',
-    'pi1d':'Services + contact structure','pi1e':'Contact / booking section','pi1f':'Delivery in 3–5 days',
+    'pi1d':'Services + contact structure','pi1e':'Contact / booking section','pi1f':'Delivery in 8–10 days',
     'pp1':'Perfect if you want a simple, professional online presence.','pb1':'Get Your Website',
     'p-bdg':'Best Choice','pt2':'Premium','pf2':'one-time payment','pd2':'Designed to maximize bookings and bring you more clients.',
     'pi2a':'High-converting landing page','pi2b':'Premium custom design','pi2c':'Strategic layout for results',
     'pi2d':'Mobile optimized','pi2e':'Fast loading','pi2f':'Contact & booking integration',
-    'pi2g':'Unlimited revisions','pi2h':'Priority delivery (3–5 days)',
+    'pi2g':'Unlimited revisions','pi2h':'Priority delivery (8–10 days)',
     'pp2':'Best choice for most businesses.','pb2':'Get More Clients',
     'faq-lbl':'Got Questions?','faq-title':'Frequently <em>asked</em>','faq-sub':'Everything you need to know before getting started.','faq-cta':'Ask Us Anything',
-    'fq1':'How long does it take?','fa1':'Most landing pages are delivered in 3–5 days. We start with a quick call, then build and present your page — fast and straightforward.',
+    'fq1':'How long does it take?','fa1':'Most landing pages are delivered in 8–10 days.',
     'fq2':'What do you need from me?','fa2':'Just tell us about your business — what you offer, who your clients are, and any photos or text you have. We take care of everything else.',
     'fq3':'How does payment work?','fa3':'20% upfront, 80% when your page is ready. We accept bank transfer and all major cards.',
     'fq4':'Is a landing page enough for my business?','fa4':'For most beauty salons and local services — yes. A single, clear page focused on your offer converts better than a large website with too many pages.',
@@ -1126,19 +1129,19 @@ var T = {
     'hdr-cta-btn':'Projekt starten','mob-cta-btn':'Projekt starten',
     'badge-txt':'Jetzt neue Projekte · 2026',
     'hero-h1':'Landingpages,<br>die Ihnen <em>mehr Kunden</em> bringen',
-    'hero-h2':'Ihre premium Landingpage in 3–5 Tagen — klar, modern und darauf ausgerichtet, Besucher in Buchungen zu verwandeln.',
+    'hero-h2':'Ihre premium Landingpage in 8–10 Tagen — klar, modern und darauf ausgerichtet, Besucher in Buchungen zu verwandeln.',
     'hero-p':'Für Marken, die wachsen, herausstechen und online premium wirken wollen.',
     'hero-btn1':'Kunden gewinnen','hero-btn2':'Unsere Arbeiten','scroll-lbl':'Scrollen',
     'sl1':'Erster Konzept','sl2':'Individuelles Design','sl3':'Lieferung','sl4':'Remote-Studio',
     'about-lbl':'Wer wir sind','about-title':'Wir bauen keine Websites.<br>Wir bauen <em>Kundenmaschinen.</em>','about-tag':'Gegr. 2026 · Europa',
     'about-p1':'LumeraStudio erstellt Landingpages, die eines tun — Ihrem Unternehmen mehr Kunden bringen. Keine hübschen Seiten, die nichts bewirken. Seiten, die funktionieren.',
-    'about-p2':'Geliefert in 3–5 Tagen. Auf Ergebnisse ausgerichtet. Kein Schnickschnack — nur eine Seite, die Menschen dazu bringt, Sie zu buchen.',
+    'about-p2':'Geliefert in 8–10 Tagen. Auf Ergebnisse ausgerichtet. Kein Schnickschnack — nur eine Seite, die Menschen dazu bringt, Sie zu buchen.',
     'val1t':'Ergebnisse im Fokus','val1d':'Jede Entscheidung zielt darauf ab, Ihnen mehr Buchungen zu bringen. Nicht auf Designpreise.',
-    'val2t':'Schnell und präzise','val2d':'3–5 Tage vom ersten Gespräch bis zur fertigen Seite. Keine Verzögerungen.',
+    'val2t':'Schnell und präzise','val2d':'8–10 Tage vom ersten Gespräch bis zur fertigen Seite. Keine Verzögerungen.',
     'val3t':'Null Templates','val3d':'Jede Seite wird speziell für Ihr Unternehmen gebaut. Nichts wiederverwendet, nichts generisch.',
     'svc-lbl':'Was wir tun','svc-title':'Wir erstellen <em>Landingpages</em>','svc-sub':'Eine fokussierte Seite. Ein Ziel. Mehr Kunden für Ihr Unternehmen.',
     'svc1t':'Landingpage','svc1d':'Eine einzelne, fokussierte Seite mit einem einzigen Ziel — mehr Kunden für Sie. Klar, schnell, mobilfreundlich und auf Buchungen ausgerichtet.',
-    'proc-lbl':'Wie wir arbeiten','proc-title':'Einfach. Schnell. <em>Fertig.</em>','proc-sub':'Vom ersten Kontakt bis zur fertigen Website in 3–5 Tagen.',
+    'proc-lbl':'Wie wir arbeiten','proc-title':'Einfach. Schnell. <em>Fertig.</em>','proc-sub':'Vom ersten Kontakt bis zur fertigen Website in 8–10 Tagen.',
     'proc1t':'Erstkontakt','proc1d':'Ein kurzes Gespräch, um Ihr Business zu verstehen. Das ist alles, was wir brauchen.',
     'proc2t':'Design &amp; Umsetzung','proc2d':'Wir erstellen Ihre Landingpage — klar, modern und auf Buchungen ausgerichtet. Fertig in 48 Stunden bis 3 Tagen.',
     'proc3t':'Launch','proc3d':'Ihre Website geht live. Kunden können Sie finden, Ihre Arbeit sehen und buchen — ab dem ersten Tag.',
@@ -1148,18 +1151,18 @@ var T = {
     'port-krem-tag':'Beauty-Salon · Landingpage',
     'port-krem-name':'Krem — Friseursalon & Beauty, Krakau',
     'rev-lbl':'Echtes Ergebnis','rev-cta':'Ihr Projekt starten',
-    'pr-lbl':'Investition','pr-title':'Zwei Pakete.<br><em>Ein klares Ziel.</em>','pr-sub':'Festpreise. Keine versteckten Kosten. Lieferung in 3–5 Tagen.',
+    'pr-lbl':'Investition','pr-title':'Zwei Pakete.<br><em>Ein klares Ziel.</em>','pr-sub':'Festpreise. Keine versteckten Kosten. Lieferung in 8–10 Tagen.',
     'pt1':'Basic','pf1':'einmalige Zahlung','pd1':'Einfache Landingpage, um online zu gehen und Kunden zu gewinnen.',
     'pi1a':'1 hochkonvertierende Landingpage','pi1b':'Klares, modernes Design','pi1c':'Mobiloptimiert',
-    'pi1d':'Struktur: Leistungen + Kontakt','pi1e':'Kontakt- / Buchungsbereich','pi1f':'Lieferung in 3–5 Tagen',
+    'pi1d':'Struktur: Leistungen + Kontakt','pi1e':'Kontakt- / Buchungsbereich','pi1f':'Lieferung in 8–10 Tagen',
     'pp1':'Ideal für einen einfachen, professionellen Internetauftritt.','pb1':'Website erhalten',
     'p-bdg':'Beste Wahl','pt2':'Premium','pf2':'einmalige Zahlung','pd2':'Entwickelt, um Buchungen zu maximieren und mehr Kunden zu gewinnen.',
     'pi2a':'Hochkonvertierende Landingpage','pi2b':'Premium-Individualdesign','pi2c':'Strategisches Layout für Ergebnisse',
     'pi2d':'Mobiloptimiert','pi2e':'Schnelle Ladezeiten','pi2f':'Kontakt- & Buchungsintegration',
-    'pi2g':'Unbegrenzte Überarbeitungen','pi2h':'Prioritätslieferung (3–5 Tage)',
+    'pi2g':'Unbegrenzte Überarbeitungen','pi2h':'Prioritätslieferung (8–10 Tage)',
     'pp2':'Die beste Wahl für die meisten Unternehmen.','pb2':'Mehr Kunden gewinnen',
     'faq-lbl':'Haben Sie Fragen?','faq-title':'Häufig <em>gefragt</em>','faq-sub':'Alles, was Sie wissen müssen, bevor Sie starten.','faq-cta':'Fragen Sie uns',
-    'fq1':'Wie lange dauert es?','fa1':'Die meisten Landingpages werden in 3–5 Tagen geliefert. Wir starten mit einem kurzen Gespräch, dann erstellen und präsentieren wir Ihre Seite.',
+    'fq1':'Wie lange dauert es?','fa1':'Die meisten Landingpages werden in 8–10 Tagen geliefert.',
     'fq2':'Was brauchen Sie von mir?','fa2':'Erzählen Sie uns von Ihrem Unternehmen — was Sie anbieten, wer Ihre Kunden sind, und Fotos oder Texte, die Sie haben. Den Rest übernehmen wir.',
     'fq3':'Wie funktioniert die Bezahlung?','fa3':'20% im Voraus, 80% wenn Ihre Seite fertig ist. Wir akzeptieren Überweisung und alle gängigen Karten.',
     'fq4':'Reicht eine Landingpage für mein Unternehmen?','fa4':'Für die meisten Beauty-Salons und lokalen Dienstleistungen — ja. Eine klare Seite mit Ihrem Angebot konvertiert besser als eine große Website.',
@@ -1179,19 +1182,19 @@ var T = {
     'hdr-cta-btn':'Rozpocznij projekt','mob-cta-btn':'Rozpocznij projekt',
     'badge-txt':'Przyjmujemy nowe projekty · 2026',
     'hero-h1':'Landing page\'y,<br>które przyciągają <em>więcej klientów</em>',
-    'hero-h2':'Otrzymaj premium landing page w 3–5 dni — przejrzystą, nowoczesną i nastawioną na zamianę odwiedzających w rezerwacje.',
+    'hero-h2':'Otrzymaj premium landing page w 8–10 dni — przejrzystą, nowoczesną i nastawioną na zamianę odwiedzających w rezerwacje.',
     'hero-p':'Dla marek, które chcą rosnąć, wyróżniać się i wyglądać premium online.',
     'hero-btn1':'Zdobądź klientów','hero-btn2':'Zobacz nasze prace','scroll-lbl':'Przewiń',
     'sl1':'Pierwszy koncept','sl2':'Indywidualny design','sl3':'Realizacja','sl4':'Studio zdalne',
     'about-lbl':'Kim jesteśmy','about-title':'Pomagamy firmom<br>zdobywać <em>więcej klientów</em>','about-tag':'Zał. 2026 · Europa',
     'about-p1':'LumeraStudio tworzy landing page\'y dla salonów beauty i lokalnych firm w całej Europie. Skupiamy się na jednym — prostej, pięknej stronie, która przynosi Ci prawdziwe rezerwacje.',
-    'about-p2':'Bez skomplikowanych procesów. Bez zbędnych dodatków. Tylko przejrzysta strona, dostarczona w 3–5 dni, która sprawia że Twoja firma wygląda profesjonalnie i zamienia odwiedzających w klientów.',
+    'about-p2':'Bez skomplikowanych procesów. Bez zbędnych dodatków. Tylko przejrzysta strona, dostarczona w 8–10 dni, która sprawia że Twoja firma wygląda profesjonalnie i zamienia odwiedzających w klientów.',
     'val1t':'Wyniki przede wszystkim','val1d':'Każda strona jest zaprojektowana tak, żeby przynosić Ci więcej rezerwacji — nie tylko ładnie wyglądać.',
-    'val2t':'Prosto i szybko','val2d':'Od pierwszej rozmowy do gotowej strony w 3–5 dni. Bez skomplikowanego procesu.',
+    'val2t':'Prosto i szybko','val2d':'Od pierwszej rozmowy do gotowej strony w 8–10 dni. Bez skomplikowanego procesu.',
     'val3t':'100% indywidualnie','val3d':'Bez szablonów. Każda strona tworzona specjalnie dla Twojej firmy.',
     'svc-lbl':'Co robimy','svc-title':'Tworzymy <em>landing page\'y</em>','svc-sub':'Jedna strona. Jeden cel. Więcej klientów dla Twojej firmy.',
     'svc1t':'Landing Page','svc1d':'Jedna, skupiona strona z jednym celem — więcej klientów dla Ciebie. Prosta, szybka, mobilna i nastawiona na rezerwacje.',
-    'proc-lbl':'Jak pracujemy','proc-title':'Prosto. Szybko. <em>Gotowe.</em>','proc-sub':'Od pierwszego kontaktu do gotowej strony w 3–5 dni.',
+    'proc-lbl':'Jak pracujemy','proc-title':'Prosto. Szybko. <em>Gotowe.</em>','proc-sub':'Od pierwszego kontaktu do gotowej strony w 8–10 dni.',
     'proc1t':'Poznanie','proc1d':'Krótka rozmowa, żeby zrozumieć Twój biznes i czego potrzebujesz. To wszystko, czego nam trzeba.',
     'proc2t':'Projekt i realizacja','proc2d':'Tworzymy Twoją stronę — czystą, nowoczesną i nastawioną na pozyskiwanie klientów. Gotowa w 48h do 3 dni.',
     'proc3t':'Start','proc3d':'Twoja strona jest live. Klienci mogą Cię znaleźć, zobaczyć Twoją pracę i rezerwować — od pierwszego dnia.',
@@ -1201,18 +1204,18 @@ var T = {
     'port-krem-tag':'Salon Beauty · Landing Page',
     'port-krem-name':'Krem — Salon Fryzjerski & Beauty, Kraków',
     'rev-lbl':'Prawdziwy efekt','rev-cta':'Rozpocznij swój projekt',
-    'pr-lbl':'Inwestycja','pr-title':'Dwa pakiety.<br><em>Jeden jasny cel.</em>','pr-sub':'Stałe ceny. Zero ukrytych opłat. Realizacja w 3–5 dni.',
+    'pr-lbl':'Inwestycja','pr-title':'Dwa pakiety.<br><em>Jeden jasny cel.</em>','pr-sub':'Stałe ceny. Zero ukrytych opłat. Realizacja w 8–10 dni.',
     'pt1':'Basic','pf1':'jednorazowa płatność','pd1':'Prosta landing page, żeby zaistnieć w sieci i zacząć przyciągać klientów.',
     'pi1a':'1 landing page nastawiona na konwersję','pi1b':'Czysty, nowoczesny design','pi1c':'Dostosowana do telefonu',
-    'pi1d':'Struktura: usługi + kontakt','pi1e':'Sekcja kontakt / rezerwacja','pi1f':'Realizacja w 3–5 dni',
+    'pi1d':'Struktura: usługi + kontakt','pi1e':'Sekcja kontakt / rezerwacja','pi1f':'Realizacja w 8–10 dni',
     'pp1':'Idealna, jeśli chcesz prostą, profesjonalną obecność w sieci.','pb1':'Zdobądź stronę',
     'p-bdg':'Najlepszy wybór','pt2':'Premium','pf2':'jednorazowa płatność','pd2':'Zaprojektowana, żeby zmaksymalizować rezerwacje i przyciągnąć więcej klientów.',
     'pi2a':'Landing page z wysoką konwersją','pi2b':'Premium design na zamówienie','pi2c':'Strategiczny układ nastawiony na efekty',
     'pi2d':'Dostosowana do telefonu','pi2e':'Szybkie ładowanie','pi2f':'Integracja kontaktu i rezerwacji',
-    'pi2g':'Nieograniczone poprawki','pi2h':'Priorytetowa realizacja (3–5 dni)',
+    'pi2g':'Nieograniczone poprawki','pi2h':'Priorytetowa realizacja (8–10 dni)',
     'pp2':'Najlepszy wybór dla większości firm.','pb2':'Zdobądź więcej klientów',
     'faq-lbl':'Masz pytania?','faq-title':'Często <em>zadawane</em>','faq-sub':'Wszystko, co musisz wiedzieć przed startem.','faq-cta':'Zapytaj nas',
-    'fq1':'Ile trwa realizacja?','fa1':'Większość landing page\'y dostarczamy w 3–5 dni. Zaczynamy od krótkiej rozmowy, potem budujemy i prezentujemy Twoją stronę.',
+    'fq1':'Ile trwa realizacja?','fa1':'Większość landing page\'y dostarczamy w 8–10 dni.',
     'fq2':'Czego ode mnie potrzebujecie?','fa2':'Powiedz nam o swojej firmie — co oferujesz, kim są Twoi klienci i ewentualne zdjęcia lub teksty. Resztą zajmujemy się my.',
     'fq3':'Jak działa płatność?','fa3':'20% zaliczki, 80% gdy Twoja strona jest gotowa. Przyjmujemy przelew i wszystkie popularne karty.',
     'fq4':'Czy landing page wystarczy dla mojej firmy?','fa4':'Dla większości salonów beauty i lokalnych usług — tak. Jedna przejrzysta strona z Twoją ofertą konwertuje lepiej niż duża strona z wieloma podstronami.',
