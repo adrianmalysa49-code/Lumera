@@ -4,55 +4,123 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LumeraStudio — Bespoke Web Design</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0F0E0B; --bg2:#161410; --bg3:#1E1C16; --bg4:#252319;
-  --gold:#C49A2A; --gold2:#E0B840;
-  --text:#F0EBE0; --muted:#9A9080; --line:rgba(196,154,42,0.18);
+  --bg:#0A090D; --bg2:#0F0E13; --bg3:#141219; --bg4:#19161F;
+  --gold:#B8922E; --gold2:#D4A843;
+  --text:#EEF0F2; --muted:#8A9099; --line:rgba(184,146,46,0.18);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+em{font-style:normal;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:180px 180px;}
+
+/* GLOW SPOTS */
+.glow-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:0;}
+.glow-1{width:600px;height:600px;background:radial-gradient(circle,rgba(184,146,46,.09),transparent 70%);top:-10%;left:-10%;animation:glowDrift1 18s ease-in-out infinite;}
+.glow-2{width:500px;height:500px;background:radial-gradient(circle,rgba(120,80,180,.07),transparent 70%);top:40%;right:-8%;animation:glowDrift2 22s ease-in-out infinite;}
+.glow-3{width:400px;height:400px;background:radial-gradient(circle,rgba(184,146,46,.06),transparent 70%);bottom:-5%;left:30%;animation:glowDrift3 26s ease-in-out infinite;}
+@keyframes glowDrift1{0%,100%{transform:translate(0,0);opacity:1;}33%{transform:translate(60px,40px);opacity:.7;}66%{transform:translate(-30px,80px);opacity:.9;}}
+@keyframes glowDrift2{0%,100%{transform:translate(0,0);opacity:.8;}40%{transform:translate(-80px,-60px);opacity:.5;}70%{transform:translate(40px,-100px);opacity:1;}}
+@keyframes glowDrift3{0%,100%{transform:translate(0,0);opacity:.7;}50%{transform:translate(-60px,-40px);opacity:1;}}
 
 /* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0}to{opacity:1}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:translateX(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes spinSlow{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.ani{opacity:0;}
-.ani.go{animation:fadeUp .7s ease forwards;}
-.d1{animation-delay:.1s!important;} .d2{animation-delay:.2s!important;}
-.d3{animation-delay:.3s!important;} .d4{animation-delay:.4s!important;}
-.d5{animation-delay:.5s!important;} .d6{animation-delay:.6s!important;}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+
+/* scroll reveal */
+.ani{}
+
+
+
+
+.d1{animation-delay:.15s!important;} .d2{animation-delay:.3s!important;}
+.d3{animation-delay:.45s!important;} .d4{animation-delay:.6s!important;}
+.d5{animation-delay:.75s!important;} .d6{animation-delay:.9s!important;}
+
+/* page transition */
+.page{display:none;}
+.page.active{display:block;animation:pageFade .4s ease forwards;}
+@keyframes pageFade{from{opacity:0}to{opacity:1}}
+
+/* button shimmer */
+.btn-g::before{
+  content:'';position:absolute;top:0;left:0;width:40%;height:100%;
+  background:linear-gradient(to right,transparent,rgba(255,255,255,.18),transparent);
+  transform:skewX(-20deg) translateX(-200%);
+  transition:transform 0s;
+}
+.btn-g:hover::before{transform:skewX(-20deg) translateX(400%);transition:transform .7s cubic-bezier(.16,1,.3,1);}
+
+/* card hover lifts */
+
+
+
+
+
+
+/* stat number bounce on hover */
+
+
+/* FAQ smooth open */
+.faq-a{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.16,1,.3,1);}
+.faq-a.open{max-height:240px;}
+.faq-q{transition:color .2s,background .2s;}
+
+/* link underline sweep */
+.ft-col ul li a,.ft-col ul li button{position:relative;}
+.ft-col ul li a::after,.ft-col ul li button::after{
+  content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
+  background:var(--gold);transition:width .25s ease;
+}
+.ft-col ul li a:hover::after,.ft-col ul li button:hover::after{width:100%;}
+
+/* process step slide */
+.proc{transition:all .3s cubic-bezier(.16,1,.3,1);}
+
+/* portfolio card zoom */
+.port-card{overflow:hidden;}
+.port-card .port-bg{transition:transform .9s cubic-bezier(.16,1,.3,1);}
+.port-card:hover .port-bg{transform:scale(1.08);}
+.krem-showcase .port-bg{transition:transform .7s cubic-bezier(.16,1,.3,1);}
+
+/* ci-row hover */
+.ci-row{transition:all .25s cubic-bezier(.16,1,.3,1);}
+
+
+/* heading em color pulse on page load */
+
 
 /* CUSTOM CURSOR (desktop only) */
-@media(hover:hover){
-  *{cursor:none!important;}
-  #cur-ring,#cur-dot{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;top:-100px;left:-100px;}
-  #cur-dot{width:5px;height:5px;background:var(--gold2);transform:translate(-50%,-50%);transition:opacity .2s;}
-  #cur-ring{width:24px;height:24px;border:1px solid rgba(196,154,42,.6);transform:translate(-50%,-50%);transition:width .25s cubic-bezier(.25,.46,.45,.94),height .25s cubic-bezier(.25,.46,.45,.94),border-color .25s,opacity .25s;}
-  #cur-ring.big{width:40px;height:40px;border-color:var(--gold2);border-width:1px;}
-  #cur-ring.clicking{width:18px;height:18px;border-color:var(--gold);opacity:.8;}
-}
+
 
 /* HEADER */
-header{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 52px;background:rgba(15,14,11,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);}
+header{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 52px;background:linear-gradient(to bottom,rgba(14,15,17,.85) 0%,rgba(14,15,17,0) 100%);backdrop-filter:blur(12px);border-bottom:none;}
 .logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
-.logo-ring{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);transition:background .25s;}
-.logo:hover .logo-ring{background:rgba(196,154,42,.12);}
+.logo-ring{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;color:var(--text);transition:background .25s;}
+.logo:hover .logo-ring{background:rgba(184,146,46,.12);}
 .logo-name{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--text);font-weight:400;}
 nav{display:flex;}
-.tab-btn{background:none;border:none;border-bottom:2px solid transparent;padding:10px 13px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:400;cursor:pointer;transition:color .2s,border-color .2s;}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;padding:10px 13px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);font-weight:400;cursor:pointer;transition:color .2s,border-color .2s;}
 .tab-btn:hover{color:var(--gold2);}
 .tab-btn.active{color:var(--gold2);border-bottom-color:var(--gold);}
 .hdr-right{display:flex;align-items:center;}
 .lang-sw{display:flex;border:1px solid var(--line);overflow:hidden;margin-right:12px;}
-.lang-btn{background:none;border:none;padding:8px 11px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;font-weight:400;}
+.lang-btn{background:none;border:none;padding:8px 11px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;font-weight:400;}
 .lang-btn.active{background:var(--gold);color:var(--bg);font-weight:600;}
 .lang-btn:hover:not(.active){color:var(--gold2);}
-.hdr-cta{background:var(--gold);color:var(--bg);border:none;padding:11px 24px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .25s;white-space:nowrap;}
+.hdr-cta{background:var(--gold);color:var(--bg);border:none;padding:10px 22px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:500;cursor:pointer;transition:all .25s;white-space:nowrap;border-radius:4px;}
 .hdr-cta:hover{background:var(--gold2);transform:translateY(-1px);}
 
 /* HAMBURGER */
@@ -63,86 +131,100 @@ nav{display:flex;}
 .hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 .mob-overlay{display:none;position:fixed;inset:0;top:65px;background:var(--bg);z-index:190;flex-direction:column;align-items:center;justify-content:center;}
 .mob-overlay.open{display:flex;animation:fadeIn .25s;}
-.mob-tab{width:100%;max-width:300px;text-align:center;background:none;border:none;border-bottom:1px solid var(--line);padding:18px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .2s,background .2s;}
+.mob-tab{width:100%;max-width:300px;text-align:center;background:none;border:none;border-bottom:1px solid var(--line);padding:18px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .2s,background .2s;}
 .mob-tab:first-child{border-top:1px solid var(--line);}
-.mob-tab:hover,.mob-tab.active{color:var(--gold2);background:rgba(196,154,42,.04);}
+.mob-tab:hover,.mob-tab.active{color:var(--gold2);background:rgba(184,146,46,.04);}
 .mob-lang{display:flex;border:1px solid var(--line);margin-top:24px;overflow:hidden;}
-.mob-lang-btn{background:none;border:none;padding:10px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;}
+.mob-lang-btn{background:none;border:none;padding:10px 18px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;}
 .mob-lang-btn.active{background:var(--gold);color:var(--bg);font-weight:600;}
-.mob-cta-btn{margin-top:20px;background:var(--gold);color:var(--bg);border:none;padding:14px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;cursor:pointer;}
+.mob-cta-btn{margin-top:20px;background:var(--gold);color:var(--bg);border:none;padding:14px 48px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:500;cursor:pointer;border-radius:4px;}
 
 /* PAGES */
 .page{display:none;} .page.active{display:block;}
 
 /* LAYOUT */
-.wrap{max-width:1140px;margin:0 auto;padding:70px 52px;}
+.wrap{max-width:1140px;margin:0 auto;padding:80px 52px;}
 .sec-label{font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold2);font-weight:400;margin-bottom:14px;}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;color:var(--text);line-height:1.1;margin-bottom:14px;}
-.sec-title em{font-style:italic;color:var(--gold2);}
-.sec-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:520px;margin-bottom:52px;font-weight:400;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:400;color:var(--text);line-height:1.1;margin-bottom:14px;}
+.sec-title em{color:var(--gold2);}
+.sec-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:520px;margin-bottom:60px;font-weight:400;}
 
 /* ── HOME ── */
 .hero{min-height:calc(100vh - 65px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px 100px;position:relative;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 30%,rgba(196,154,42,.08) 0%,transparent 65%);}
-.hero-vl{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(196,154,42,.14),transparent);}
-.hero-glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);animation:pulse 6s ease-in-out infinite;}
-.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(196,154,42,.05);top:50%;left:50%;}
-.hero-ring-1{width:680px;height:680px;animation:spinSlow 30s linear infinite;}
-.hero-ring-2{width:880px;height:880px;animation:spinSlow 50s linear infinite reverse;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(196,154,42,.28);padding:8px 20px;margin-bottom:32px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);font-weight:400;position:relative;z-index:1;animation:fadeIn .8s ease forwards;background:rgba(196,154,42,.04);}
-.hero-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
-.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7.5vw,96px);font-weight:300;line-height:1.05;color:var(--text);margin-bottom:12px;position:relative;z-index:1;animation:fadeUp .9s .15s forwards;opacity:0;}
-.hero-h1 em{font-style:italic;color:var(--gold2);}
-.hero-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.4vw,30px);font-weight:300;font-style:italic;color:var(--muted);margin-bottom:100px;position:relative;z-index:1;animation:fadeUp .9s .28s forwards;opacity:0;}
-@media(max-width:900px){.hero-h2{margin-bottom:36px;}}
-.btn-g{background:var(--gold);color:var(--bg);border:none;padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
-.btn-g:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,154,42,.3);}
-.btn-o{background:transparent;color:var(--text);border:1px solid rgba(240,235,224,.35);padding:16px 48px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:all .3s;}
-.btn-o:hover{border-color:var(--gold);color:var(--gold2);background:rgba(196,154,42,.07);}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 30%,rgba(184,146,46,.08) 0%,transparent 65%);}
+
+
+
+
+
+.hero-badge{display:inline-flex;align-items:center;gap:14px;margin-bottom:32px;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:var(--muted);font-weight:400;position:relative;z-index:1;animation:fadeIn .8s ease forwards;}
+.hero-dot{width:20px;height:1px;background:var(--gold);flex-shrink:0;}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(48px,7.5vw,96px);font-weight:400;line-height:1.05;color:var(--text);margin-bottom:12px;position:relative;z-index:1;animation:fadeUp .9s .15s forwards;opacity:0;}
+.hero-h1 em{color:var(--gold2);}
+.hero-h2{font-family:'Inter',sans-serif;font-size:clamp(15px,1.8vw,20px);font-weight:300;font-style:normal;color:var(--muted);margin-bottom:100px;position:relative;z-index:1;animation:fadeUp .9s .28s forwards;opacity:0;letter-spacing:.01em;line-height:1.7;}
+@media(max-width:900px){.hero-h2{margin-bottom:36px;font-size:15px;}}
+.btn-g{background:var(--gold);color:var(--bg);border:none;padding:15px 40px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:500;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;border-radius:4px;}
+.btn-g:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(184,146,46,.25);}
+.btn-o{background:transparent;color:var(--muted);border:1px solid rgba(240,235,224,.18);padding:15px 40px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:400;cursor:pointer;transition:all .25s;border-radius:4px;}
+.btn-o:hover{border-color:var(--gold);color:var(--text);}
 .hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeIn 1s .9s forwards;opacity:0;}
 .hero-scroll span{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--muted);}
 .scroll-bar{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite;}
+
+/* HERO layout simple */
+.hero{min-height:calc(100vh - 65px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px 100px;position:relative;overflow:hidden;}
+@media(max-width:900px){.hero{padding:40px 20px 80px;min-height:calc(100svh - 65px);}}
 
 /* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);background:var(--bg2);}
 .stat{text-align:center;padding:36px 20px;border-right:1px solid var(--line);transition:background .3s;}
 .stat:last-child{border-right:none;}
 .stat:hover{background:var(--bg3);}
-.stat-n{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--gold2);line-height:1;transition:transform .3s;}
+.stat-n{font-family:'Playfair Display',serif;font-size:48px;font-weight:400;color:var(--gold2);line-height:1;transition:transform .3s;}
 .stat:hover .stat-n{transform:scale(1.06);}
 .stat-l{font-size:11px;letter-spacing:.12em;color:var(--muted);margin-top:8px;font-weight:400;}
 
 /* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.about-img{aspect-ratio:4/5;background:var(--bg3);position:relative;overflow:hidden;border:1px solid var(--line);}
-.about-img-inner{position:absolute;inset:0;background:linear-gradient(135deg,var(--bg3),var(--bg4));display:flex;align-items:center;justify-content:center;}
-.about-mono{font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:300;color:rgba(196,154,42,.1);animation:float 6s ease-in-out infinite;}
-.about-tag{position:absolute;bottom:28px;left:28px;background:var(--gold);color:var(--bg);font-size:10px;letter-spacing:.28em;text-transform:uppercase;padding:8px 18px;font-weight:600;}
-.about-text p{font-size:15px;line-height:1.85;color:var(--muted);font-weight:400;margin-bottom:20px;}
-.about-vals{display:flex;flex-direction:column;gap:2px;margin-top:36px;}
-.val-row{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--bg2);border-left:2px solid transparent;transition:all .25s;}
-.val-row:hover{border-left-color:var(--gold);background:var(--bg3);}
-.val-icon{font-size:16px;color:var(--gold2);width:24px;text-align:center;flex-shrink:0;margin-top:1px;}
-.val-title{font-size:13px;color:var(--text);font-weight:500;letter-spacing:.06em;}
-.val-desc{font-size:12px;color:var(--muted);margin-top:2px;font-weight:300;}
+.about-editorial{max-width:1140px;margin:0 auto;padding:80px 52px;}
+.about-top{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;margin-bottom:80px;padding-bottom:80px;border-bottom:1px solid var(--line);}
+.about-side-label{font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold2);font-weight:400;padding-top:8px;}
+.about-headline{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,56px);font-weight:400;color:var(--text);line-height:1.1;margin-bottom:32px;}
+.about-headline em{color:var(--gold2);}
+.about-body-text{font-size:15px;line-height:1.85;color:var(--muted);font-weight:300;margin-bottom:16px;max-width:600px;}
+.about-tag-inline{display:inline-flex;align-items:center;gap:10px;margin-top:20px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:400;}
+.about-tag-inline::before{content:'';width:24px;height:1px;background:var(--gold);}
+.about-vals-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);}
+.val-block{background:var(--bg);padding:44px 36px;border-bottom:2px solid transparent;transition:all .3s;}
+.val-block:hover{background:var(--bg2);border-bottom-color:var(--gold);}
+.val-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:400;color:rgba(184,146,46,.18);line-height:1;margin-bottom:20px;transition:color .3s;}
+.val-block:hover .val-num{color:rgba(184,146,46,.4);}
+.val-title{font-size:14px;color:var(--text);font-weight:500;letter-spacing:.04em;margin-bottom:10px;}
+.val-desc{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;}
+@media(max-width:900px){
+  .about-editorial{padding:48px 20px;}
+  .about-top{grid-template-columns:1fr;gap:24px;margin-bottom:48px;padding-bottom:48px;}
+  .about-vals-row{grid-template-columns:1fr;}
+  .val-block{border-bottom:none;border-left:2px solid transparent;}
+  .val-block:hover{border-left-color:var(--gold);border-bottom:none;}
+}
 
 /* SERVICES */
 .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;}
-.svc{background:var(--bg2);padding:52px 44px;border-bottom:2px solid transparent;transition:all .35s;cursor:default;position:relative;overflow:hidden;}
+.svc{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(184,146,46,.15);padding:52px 44px;border-bottom:2px solid transparent;transition:all .35s;cursor:default;position:relative;overflow:hidden;}
 .svc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .5s;}
 .svc:hover::before{transform:scaleX(1);}
 .svc:hover{background:var(--bg3);transform:translateY(-5px);border-bottom-color:var(--gold);box-shadow:0 16px 40px rgba(0,0,0,.3);}
-.svc-n{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:rgba(196,154,42,.11);line-height:1;margin-bottom:20px;transition:color .3s;}
-.svc:hover .svc-n{color:rgba(196,154,42,.22);}
-.svc-t{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:14px;}
+.svc-n{font-family:'Playfair Display',serif;font-size:52px;font-weight:400;color:rgba(184,146,46,.11);line-height:1;margin-bottom:20px;transition:color .3s;}
+.svc:hover .svc-n{color:rgba(184,146,46,.22);}
+.svc-t{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:14px;}
 .svc-d{font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;}
 
 /* PROCESS */
 .proc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
-.proc{background:var(--bg2);padding:44px 36px;display:flex;gap:24px;align-items:flex-start;border-left:2px solid transparent;transition:all .3s;}
+.proc{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(184,146,46,.12);padding:44px 36px;display:flex;gap:24px;align-items:flex-start;border-left:2px solid transparent;transition:all .3s;}
 .proc:hover{border-left-color:var(--gold);background:var(--bg3);}
-.proc-n{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--gold);opacity:.25;line-height:.85;flex-shrink:0;}
-.proc-t{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:10px;}
+.proc-n{font-family:'Playfair Display',serif;font-size:56px;font-weight:400;color:var(--gold);opacity:.25;line-height:.85;flex-shrink:0;}
+.proc-t{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:10px;}
 .proc-d{font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;}
 
 /* PORTFOLIO */
@@ -156,11 +238,11 @@ nav{display:flex;}
 .pc .port-bg{background:linear-gradient(135deg,#101a1a,#081210);}
 .pd .port-bg{background:linear-gradient(135deg,#1a1028,#100818);}
 .pe .port-bg{background:linear-gradient(135deg,#141218,#0c0a10);}
-.pa .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(196,154,42,.025) 0,rgba(196,154,42,.025) 1px,transparent 1px,transparent 22px);}
-.pb .port-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(196,154,42,.1) 0%,transparent 55%);}
-.pc .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(196,154,42,.03) 0,rgba(196,154,42,.03) 1px,transparent 1px,transparent 28px);}
+.pa .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(184,146,46,.025) 0,rgba(184,146,46,.025) 1px,transparent 1px,transparent 22px);}
+.pb .port-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(184,146,46,.1) 0%,transparent 55%);}
+.pc .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(184,146,46,.03) 0,rgba(184,146,46,.03) 1px,transparent 1px,transparent 28px);}
 .pd .port-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 65% 35%,rgba(255,255,255,.04) 0%,transparent 50%);}
-.pe .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(196,154,42,.018) 0,rgba(196,154,42,.018) 1px,transparent 1px,transparent 30px);}
+.pe .port-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(184,146,46,.018) 0,rgba(184,146,46,.018) 1px,transparent 1px,transparent 30px);}
 .pf .port-bg{background:linear-gradient(135deg,#3d1a5c 0%,#6b2fa0 45%,#9b59c4 75%,#c084e0 100%);}
 .pf .port-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 25%,rgba(255,200,230,.15) 0%,transparent 50%);}
 .krem-wrap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:28px 36px;}
@@ -168,19 +250,19 @@ nav{display:flex;}
 .krem-card{width:180px;padding:16px 20px;}}
 .krem-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
 .krem-left{flex:1;}
-.krem-eyebrow{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;font-family:'Jost',sans-serif;}
-.krem-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,48px);font-weight:300;color:#fff;line-height:1.1;}
-.krem-title em{font-style:italic;color:#e8b4ff;}
+.krem-eyebrow{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;font-family:'Inter',sans-serif;}
+.krem-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,48px);font-weight:300;color:#fff;line-height:1.1;}
+.krem-title em{color:#e8b4ff;}
 .krem-card{background:rgba(255,255,255,.95);border-radius:12px;padding:18px 22px;width:195px;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.25);}
-.krem-card-title{font-size:10px;font-weight:600;color:#3d1a5c;margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase;font-family:'Jost',sans-serif;}
-.krem-row{font-size:11px;color:#555;border-bottom:1px solid #f0e8f5;padding-bottom:7px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;gap:6px;font-family:'Jost',sans-serif;}
+.krem-card-title{font-size:10px;font-weight:600;color:#3d1a5c;margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase;font-family:'Inter',sans-serif;}
+.krem-row{font-size:11px;color:#555;border-bottom:1px solid #f0e8f5;padding-bottom:7px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;gap:6px;font-family:'Inter',sans-serif;}
 .krem-row:last-of-type{border-bottom:none;padding-bottom:0;margin-bottom:0;}
 .krem-price{color:#7c3aed;font-weight:500;white-space:nowrap;font-size:10px;}
-.krem-cta{margin-top:12px;background:linear-gradient(135deg,#7c3aed,#9b59c4);color:#fff;text-align:center;padding:8px;border-radius:7px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Jost',sans-serif;}
+.krem-cta{margin-top:12px;background:linear-gradient(135deg,#7c3aed,#9b59c4);color:#fff;text-align:center;padding:8px;border-radius:7px;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Inter',sans-serif;}
 .krem-bottom{display:flex;align-items:flex-end;justify-content:space-between;}
 .krem-info{}
-.krem-tag-txt{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px;font-family:'Jost',sans-serif;}
-.krem-name-txt{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:#fff;}
+.krem-tag-txt{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px;font-family:'Inter',sans-serif;}
+.krem-name-txt{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#fff;}
 .krem-arr{width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;transition:all .3s;}
 .port-card:hover .krem-arr{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.1);}
 @media(max-width:700px){
@@ -190,51 +272,51 @@ nav{display:flex;}
 
 .port-wide{grid-column:span 2;}
 .port-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);display:flex;align-items:flex-end;padding:28px 32px;}
-.port-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text);}
+.port-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--text);}
 .port-arr{position:absolute;top:24px;right:24px;width:40px;height:40px;border:1px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text);font-size:14px;opacity:0;transition:all .3s;}
 .port-card:hover .port-arr{opacity:1;border-color:var(--gold);color:var(--gold2);}
 
 /* REVIEWS / TESTIMONIALS */
 .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;}
 .testi-card{background:var(--bg2);padding:44px 40px;position:relative;border-bottom:2px solid transparent;transition:all .3s;overflow:hidden;}
-.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(196,154,42,.25),transparent);}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(184,146,46,.25),transparent);}
 .testi-card:hover{background:var(--bg3);border-bottom-color:var(--gold);}
-.testi-q{font-family:'Cormorant Garamond',serif;font-size:72px;color:rgba(196,154,42,.12);line-height:.7;margin-bottom:14px;font-weight:300;}
+.testi-q{font-family:'Playfair Display',serif;font-size:72px;color:rgba(184,146,46,.12);line-height:.7;margin-bottom:14px;font-weight:400;}
 .testi-stars{color:var(--gold);font-size:12px;letter-spacing:2px;margin-bottom:16px;}
-.testi-text{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;font-weight:300;color:var(--text);line-height:1.65;margin-bottom:28px;}
+.testi-text{font-family:'Playfair Display',serif;font-size:19px;font-weight:300;color:var(--text);line-height:1.65;margin-bottom:28px;}
 .testi-author{display:flex;align-items:center;gap:14px;}
-.testi-av{width:44px;height:44px;border-radius:50%;background:var(--bg4);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold2);flex-shrink:0;}
+.testi-av{width:44px;height:44px;border-radius:50%;background:var(--bg4);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;color:var(--gold2);flex-shrink:0;}
 .testi-name{font-size:13px;color:var(--text);font-weight:500;letter-spacing:.04em;}
 .testi-role{font-size:11px;color:var(--muted);margin-top:2px;font-weight:300;}
 
 /* PRICING */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
-.p-card{background:var(--bg2);padding:52px 40px;position:relative;border-bottom:2px solid transparent;transition:all .35s;}
-.p-card:hover{background:var(--bg3);transform:translateY(-4px);border-bottom-color:var(--gold);box-shadow:0 12px 36px rgba(0,0,0,.3);}
-.p-card.feat{background:var(--bg3);border:1px solid rgba(196,154,42,.4);box-shadow:0 0 60px rgba(196,154,42,.07);}
+.p-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:52px 40px;position:relative;border:1px solid rgba(184,146,46,.18);border-bottom:2px solid transparent;transition:all .35s;}
+.p-card:hover{background:rgba(255,255,255,.07);transform:translateY(-4px);border-bottom-color:var(--gold);box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.p-card.feat{background:rgba(255,255,255,.07);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(184,146,46,.35);box-shadow:0 0 60px rgba(184,146,46,.1);}
 .p-card.feat:hover{transform:translateY(-4px);}
 .p-bdg{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--bg);font-size:9px;letter-spacing:.28em;text-transform:uppercase;padding:6px 18px;font-weight:600;white-space:nowrap;}
 .p-tier{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold2);font-weight:400;margin-bottom:20px;}
-.p-price{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--text);line-height:1;margin-bottom:6px;}
+.p-price{font-family:'Playfair Display',serif;font-size:64px;font-weight:300;color:var(--text);line-height:1;margin-bottom:6px;}
 .p-price sup{font-size:24px;vertical-align:super;}
 .p-from{font-size:12px;color:var(--muted);margin-bottom:28px;font-weight:300;}
 .p-rule{width:40px;height:1px;background:var(--gold);margin-bottom:28px;}
 .p-list{list-style:none;margin-bottom:40px;}
 .p-list li{font-size:13px;color:var(--muted);font-weight:400;line-height:2.2;display:flex;align-items:center;gap:12px;}
 .p-list li::before{content:'✦';color:var(--gold);font-size:8px;flex-shrink:0;}
-.p-btn{width:100%;padding:16px;border:1px solid var(--gold);background:transparent;color:var(--gold2);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .3s;}
-.p-btn:hover,.p-card.feat .p-btn{background:var(--gold);color:var(--bg);}
+.p-btn{width:100%;padding:15px;border:none;background:var(--bg3);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.01em;text-transform:none;font-weight:500;cursor:pointer;transition:all .25s;border-radius:4px;}
+.p-btn:hover,.p-card.feat .p-btn{background:rgba(184,146,46,.3);border-color:rgba(184,146,46,.6);color:var(--text);transform:translateY(-2px);box-shadow:0 6px 20px rgba(184,146,46,.2),inset 0 1px 0 rgba(255,255,255,.12);}
 
 .price-grid-2col{grid-template-columns:repeat(2,1fr);max-width:820px;margin:0 auto;}
 @media(max-width:900px){.price-grid-2col{grid-template-columns:1fr;max-width:480px;}}
 
 /* FAQ */
 .faq-list{display:flex;flex-direction:column;gap:2px;max-width:760px;margin:0 auto;}
-.faq-item{background:var(--bg2);overflow:hidden;}
-.faq-q{width:100%;text-align:left;background:none;border:none;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:'Jost',sans-serif;font-size:15px;font-weight:400;color:var(--text);cursor:pointer;transition:all .25s;}
+.faq-item{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(184,146,46,.15);overflow:hidden;}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:'Inter',sans-serif;font-size:15px;font-weight:400;color:var(--text);cursor:pointer;transition:all .25s;}
 .faq-q:hover,.faq-q.open{background:var(--bg3);color:var(--gold2);}
-.faq-icon{width:22px;height:22px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:var(--gold);transition:transform .3s;}
-.faq-q.open .faq-icon{transform:rotate(45deg);border-color:var(--gold);}
+.faq-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:var(--muted);transition:transform .3s,color .3s;line-height:1;}
+.faq-q.open .faq-icon{transform:rotate(180deg);color:var(--gold);}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
 .faq-a.open{max-height:220px;}
 .faq-a p{padding:18px 28px 22px;font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;border-top:1px solid var(--line);}
@@ -242,54 +324,54 @@ nav{display:flex;}
 /* CONTACT */
 .cform-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start;}
 .cinfo-ey{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;}
-.cinfo-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--text);line-height:1.15;margin-bottom:22px;}
-.cinfo-title em{font-style:italic;color:var(--gold2);}
+.cinfo-title{font-family:'Playfair Display',serif;font-size:38px;font-weight:300;color:var(--text);line-height:1.15;margin-bottom:22px;}
+.cinfo-title em{color:var(--gold2);}
 .cinfo-p{font-size:14px;line-height:1.8;color:var(--muted);font-weight:400;margin-bottom:32px;}
 .ci-rows{display:flex;flex-direction:column;gap:2px;}
-.ci-row{display:flex;align-items:center;gap:16px;padding:16px 18px;background:var(--bg2);border-left:2px solid transparent;transition:all .25s;}
+.ci-row{display:flex;align-items:center;gap:16px;padding:16px 18px;background:rgba(255,255,255,.04);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(184,146,46,.12);border-left:2px solid transparent;transition:all .25s;}
 .ci-row:hover{border-left-color:var(--gold);background:var(--bg3);}
 .ci-icon{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold2);font-size:13px;flex-shrink:0;}
 .ci-lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
 .ci-val{font-size:13px;color:var(--text);font-weight:400;}
 .cbox{background:var(--bg2);padding:48px 44px;border:1px solid var(--line);position:relative;}
 .cbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
-.cbox-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text);margin-bottom:32px;}
+.cbox-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:300;color:var(--text);margin-bottom:32px;}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:0;}
 .fld{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
 .fld label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:500;}
-.fld input,.fld textarea,.fld select{background:var(--bg3);border:1px solid rgba(196,154,42,.16);padding:14px 18px;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:var(--text);outline:none;transition:border-color .25s,background .25s;width:100%;}
+.fld input,.fld textarea,.fld select{background:var(--bg3);border:1px solid rgba(184,146,46,.16);padding:14px 18px;font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:var(--text);outline:none;transition:border-color .25s,background .25s;width:100%;}
 .fld input::placeholder,.fld textarea::placeholder{color:var(--muted);}
 .fld select option{background:var(--bg3);color:var(--text);}
-.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--gold);background:rgba(196,154,42,.03);}
+.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--gold);background:rgba(184,146,46,.03);}
 .fld textarea{resize:vertical;min-height:120px;}
-.f-btn{width:100%;padding:17px;background:var(--gold);color:var(--bg);border:none;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;margin-top:6px;}
-.f-btn:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,154,42,.3);}
+.f-btn{width:100%;padding:17px;background:rgba(184,146,46,.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--gold2);border:1px solid rgba(184,146,46,.45);font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;margin-top:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);}
+.f-btn:hover{background:rgba(184,146,46,.4);border-color:rgba(184,146,46,.7);color:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,146,46,.2),inset 0 1px 0 rgba(255,255,255,.15);}
 .f-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
 #f-ok{display:none;text-align:center;padding:60px 20px;}
 #f-ok .f-chk{font-size:52px;margin-bottom:18px;}
-#f-ok h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--text);margin-bottom:12px;}
+#f-ok h3{font-family:'Playfair Display',serif;font-size:30px;font-weight:300;color:var(--text);margin-bottom:12px;}
 #f-ok p{font-size:14px;color:var(--muted);}
 #f-err{display:none;margin-top:10px;font-size:13px;color:#E07070;text-align:center;}
 
 /* FOOTER */
 footer{background:var(--bg2);border-top:1px solid var(--line);}
 .ft-cta{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:64px 72px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
-.ft-cta::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.07),transparent 70%);pointer-events:none;}
+.ft-cta::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,46,.07),transparent 70%);pointer-events:none;}
 .ft-cta-eyebrow{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold2);margin-bottom:10px;font-weight:400;}
-.ft-cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;color:var(--text);line-height:1.12;}
-.ft-cta-title em{font-style:italic;color:var(--gold2);}
+.ft-cta-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:300;color:var(--text);line-height:1.12;}
+.ft-cta-title em{color:var(--gold2);}
 .ft-main{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--line);}
 .ft-brand-col{padding:52px 72px 52px 72px;border-right:1px solid var(--line);}
 .ft-col{padding:52px 40px;}
 .ft-col + .ft-col{border-left:1px solid var(--line);}
-.ft-brand-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--text);letter-spacing:.06em;margin-bottom:12px;}
+.ft-brand-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:300;color:var(--text);letter-spacing:.06em;margin-bottom:12px;}
 .ft-brand-tagline{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:28px;max-width:280px;}
 .ft-soc{display:flex;gap:10px;}
 .ft-soc a{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .25s;}
-.ft-soc a:hover{border-color:var(--gold);color:var(--gold2);background:rgba(196,154,42,.06);}
+.ft-soc a:hover{border-color:var(--gold);color:var(--gold2);background:rgba(184,146,46,.06);}
 .ft-col-title{font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px;font-weight:500;}
 .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
-.ft-col ul li a,.ft-col ul li button{font-size:13px;color:var(--muted);text-decoration:none;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:300;padding:0;transition:color .2s;text-align:left;line-height:1;}
+.ft-col ul li a,.ft-col ul li button{font-size:13px;color:var(--muted);text-decoration:none;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-weight:300;padding:0;transition:color .2s;text-align:left;line-height:1;}
 .ft-col ul li a:hover,.ft-col ul li button:hover{color:var(--gold2);}
 .ft-col ul li a.ft-email-val{font-size:12px;word-break:break-all;}
 .ft-bottom{display:flex;align-items:center;justify-content:space-between;padding:20px 72px;gap:20px;}
@@ -312,9 +394,9 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 #cookie.hidden{display:none;}
 .ck-text{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;max-width:600px;}
 .ck-btns{display:flex;gap:10px;flex-shrink:0;}
-.ck-ok{background:var(--gold);color:var(--bg);border:none;padding:10px 24px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:background .2s;}
+.ck-ok{background:var(--gold);color:var(--bg);border:none;padding:10px 24px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:background .2s;}
 .ck-ok:hover{background:var(--gold2);}
-.ck-no{background:transparent;color:var(--muted);border:1px solid var(--line);padding:10px 18px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.ck-no{background:transparent;color:var(--muted);border:1px solid var(--line);padding:10px 18px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
 .ck-no:hover{border-color:var(--gold);color:var(--gold2);}
 
 /* MOBILE */
@@ -322,7 +404,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
   header{padding:16px 20px;}
   nav,.hdr-cta,.lang-sw{display:none;}
   .hbg{display:flex;}
-  .wrap{padding:44px 20px;}
+  .wrap{padding:48px 20px;}
   .stats{grid-template-columns:repeat(2,1fr);}
   .stat{border-right:none;border-bottom:1px solid var(--line);}
   .svc-grid,.proc-grid,.price-grid,.testi-grid,.port-grid{grid-template-columns:1fr;}
@@ -337,32 +419,31 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
   .hero{padding:40px 20px 80px;min-height:calc(100svh - 65px);}
   .hero-ring{display:none;}
   #cookie{flex-direction:column;align-items:flex-start;padding:18px 20px;}
-  @media(hover:hover){*{cursor:auto!important;} #cur-ring,#cur-dot{display:none;}}
 }
 /* LANDING PAGE EXPLAINER */
 .lp-hero{background:var(--bg2);padding:60px 52px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
-.lp-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,42,.06),transparent 70%);}
-.lp-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 16px;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px;background:rgba(196,154,42,.04);}
-.lp-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:var(--text);line-height:1.08;margin-bottom:20px;}
-.lp-h1 em{font-style:italic;color:var(--gold2);}
+.lp-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,46,.06),transparent 70%);}
+.lp-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 16px;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px;background:rgba(184,146,46,.04);}
+.lp-h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:var(--text);line-height:1.08;margin-bottom:20px;}
+.lp-h1 em{color:var(--gold2);}
 .lp-lead{font-size:17px;color:var(--muted);line-height:1.8;max-width:600px;font-weight:300;}
 .lp-body{max-width:1140px;margin:0 auto;padding:64px 52px;}
 .lp-section{margin-bottom:72px;}
 .lp-section-label{font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;font-weight:400;}
-.lp-section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,38px);font-weight:300;color:var(--text);margin-bottom:20px;line-height:1.15;}
-.lp-section-title em{font-style:italic;color:var(--gold2);}
+.lp-section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,38px);font-weight:300;color:var(--text);margin-bottom:20px;line-height:1.15;}
+.lp-section-title em{color:var(--gold2);}
 .lp-p{font-size:15px;color:var(--muted);line-height:1.85;font-weight:400;margin-bottom:16px;max-width:680px;}
 .lp-points{display:flex;flex-direction:column;gap:2px;margin-top:24px;}
-.lp-point{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:var(--bg2);border-left:2px solid transparent;transition:all .25s;}
+.lp-point{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;background:rgba(255,255,255,.04);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(184,146,46,.12);border-left:2px solid transparent;transition:all .25s;}
 .lp-point:hover{border-left-color:var(--gold);background:var(--bg3);}
-.lp-point-icon{width:32px;height:32px;border-radius:50%;background:rgba(196,154,42,.1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;}
+.lp-point-icon{width:32px;height:32px;border-radius:50%;background:rgba(184,146,46,.1);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;}
 .lp-point-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:3px;letter-spacing:.03em;}
 .lp-point-desc{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300;}
 .lp-compare{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:28px;}
 .lp-col{padding:32px 28px;}
-.lp-col-a{background:var(--bg3);border:1px solid rgba(196,154,42,.3);}
+.lp-col-a{background:var(--bg3);border:1px solid rgba(184,146,46,.3);}
 .lp-col-b{background:var(--bg2);}
-.lp-col-title{font-size:10px;letter-spacing:.32em;text-transform:uppercase;font-weight:600;margin-bottom:20px;font-family:'Jost',sans-serif;}
+.lp-col-title{font-size:10px;letter-spacing:.32em;text-transform:uppercase;font-weight:600;margin-bottom:20px;font-family:'Inter',sans-serif;}
 .lp-col-a .lp-col-title{color:var(--gold2);}
 .lp-col-b .lp-col-title{color:var(--muted);}
 .lp-li{font-size:13px;color:var(--muted);line-height:2.1;display:flex;align-items:center;gap:10px;font-weight:400;}
@@ -373,12 +454,12 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 .lp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
 .lp-stat{background:var(--bg2);padding:28px 24px;text-align:center;border-bottom:2px solid transparent;transition:all .3s;}
 .lp-stat:hover{border-bottom-color:var(--gold);background:var(--bg3);}
-.lp-stat-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--gold2);line-height:1;}
+.lp-stat-n{font-family:'Playfair Display',serif;font-size:44px;font-weight:300;color:var(--gold2);line-height:1;}
 .lp-stat-l{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:.1em;font-weight:400;}
 .lp-cta-box{background:var(--bg3);border:1px solid var(--line);padding:52px;text-align:center;position:relative;overflow:hidden;}
-.lp-cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(196,154,42,.06),transparent 70%);}
-.lp-cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:var(--text);margin-bottom:14px;position:relative;}
-.lp-cta-title em{font-style:italic;color:var(--gold2);}
+.lp-cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(184,146,46,.06),transparent 70%);}
+.lp-cta-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:var(--text);margin-bottom:14px;position:relative;}
+.lp-cta-title em{color:var(--gold2);}
 .lp-cta-sub{font-size:15px;color:var(--muted);margin-bottom:36px;position:relative;}
 @media(max-width:900px){
   .lp-hero{padding:40px 20px;}
@@ -389,10 +470,13 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 </style>
 </head>
 <body>
+<div class="glow-wrap">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+</div>
 
 <!-- CURSOR -->
-<div id="cur-ring"></div>
-<div id="cur-dot"></div>
 
 <!-- HEADER -->
 <header>
@@ -404,7 +488,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     <button class="tab-btn active" onclick="go('home')">Home</button>
     <button class="tab-btn" onclick="go('about')">About</button>
     <button class="tab-btn" onclick="go('services')">Services</button>
-    <button class="tab-btn" onclick="go('landing')">Landing Page</button>
     <button class="tab-btn" onclick="go('process')">Process</button>
     <button class="tab-btn" onclick="go('portfolio')">Portfolio</button>
     <button class="tab-btn" onclick="go('reviews')">Reviews</button>
@@ -427,7 +510,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
   <button class="mob-tab active" onclick="go('home');closeMob()">Home</button>
   <button class="mob-tab" onclick="go('about');closeMob()">About</button>
   <button class="mob-tab" onclick="go('services');closeMob()">Services</button>
-  <button class="mob-tab" onclick="go('landing');closeMob()">Landing Page</button>
   <button class="mob-tab" onclick="go('process');closeMob()">Process</button>
   <button class="mob-tab" onclick="go('portfolio');closeMob()">Portfolio</button>
   <button class="mob-tab" onclick="go('reviews');closeMob()">Reviews</button>
@@ -445,13 +527,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 <div id="page-home" class="page active">
   <section class="hero">
     <div class="hero-bg"></div>
-    <div class="hero-vl" style="left:20%"></div>
-    <div class="hero-vl" style="left:50%"></div>
-    <div class="hero-vl" style="left:80%"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-ring hero-ring-1"></div>
-    <div class="hero-ring hero-ring-2"></div>
-    <div class="hero-badge"><div class="hero-dot"></div><span id="badge-txt">Available for new projects · Europe</span></div>
     <h1 class="hero-h1" id="hero-h1">Landing pages<br>that bring you <em>more clients</em></h1>
     <p class="hero-h2" id="hero-h2">Get a premium landing page in 3–5 days — clear, modern, and built to turn visitors into bookings.</p>
     <div class="hero-btns">
@@ -470,24 +545,33 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
 <!-- ═══════════ ABOUT ═══════════ -->
 <div id="page-about" class="page">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-img ani">
-        <div class="about-img-inner"><div class="about-mono">L</div></div>
-        <div class="about-tag" id="about-tag">Est. 2026 · Europe</div>
+  <div class="about-editorial">
+    <div class="about-top">
+      <div class="ani">
+        <p class="about-side-label" id="about-lbl">Who We Are</p>
       </div>
-      <div class="about-text">
-        <p class="sec-label ani d1" id="about-lbl">Who We Are</p>
-        <h2 class="sec-title ani d2" id="about-title">We help businesses<br>get <em>more clients</em></h2>
-        <div class="ani d3">
-          <p id="about-p1">LumeraStudio builds landing pages for beauty salons and local businesses across Europe. We focus on one thing — a simple, beautiful page that brings you real bookings.</p>
-          <p id="about-p2">No complex processes. No unnecessary extras. Just a clear page, delivered in 3–5 days, that makes your business look premium and turns visitors into clients.</p>
-        </div>
-        <div class="about-vals ani d4">
-          <div class="val-row"><div class="val-icon">◈</div><div><div class="val-title" id="val1t">Results First</div><div class="val-desc" id="val1d">Every page is designed to bring you more bookings — not just look nice.</div></div></div>
-          <div class="val-row"><div class="val-icon">◯</div><div><div class="val-title" id="val2t">Simple & Fast</div><div class="val-desc" id="val2d">From first call to live website in 3–5 days. No complicated process.</div></div></div>
-          <div class="val-row"><div class="val-icon">△</div><div><div class="val-title" id="val3t">100% Custom</div><div class="val-desc" id="val3d">No templates. Every page is made specifically for your business.</div></div></div>
-        </div>
+      <div>
+        <h2 class="about-headline ani d1" id="about-title">We don't build websites.<br>We build <em>client machines.</em></h2>
+        <p class="about-body-text ani d2" id="about-p1">LumeraStudio creates landing pages that do one thing — bring your business more clients. Not pretty pages that sit there doing nothing. Pages that work.</p>
+        <p class="about-body-text ani d2" id="about-p2">Delivered in 3–5 days. Built for results. No fluff, no filler — just a page that makes people want to book you.</p>
+        <div class="about-tag-inline ani d3" id="about-tag">Est. 2026 · Europe</div>
+      </div>
+    </div>
+    <div class="about-vals-row">
+      <div class="val-block ani d1">
+        <div class="val-num">01</div>
+        <div class="val-title" id="val1t">Obsessed with results</div>
+        <div class="val-desc" id="val1d">Every decision is made to get you more bookings. Not to win design awards.</div>
+      </div>
+      <div class="val-block ani d2">
+        <div class="val-num">02</div>
+        <div class="val-title" id="val2t">Fast and precise</div>
+        <div class="val-desc" id="val2d">3–5 days from first call to live page. No delays, no endless back-and-forth.</div>
+      </div>
+      <div class="val-block ani d3">
+        <div class="val-num">03</div>
+        <div class="val-title" id="val3t">Zero templates</div>
+        <div class="val-desc" id="val3d">Every page is built specifically for your business. Nothing recycled, nothing generic.</div>
       </div>
     </div>
   </div>
@@ -504,7 +588,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         <div class="svc-n">01</div>
         <div class="svc-t" id="svc1t">Landing Pages</div>
         <p class="svc-d" id="svc1d">A single, focused page designed to do one thing — bring you more clients. Clear, fast, mobile-friendly and built to convert visitors into bookings. The smartest choice for most local businesses.</p>
-        <div style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-family:'Jost',sans-serif;font-weight:500;">Learn more →</div>
+        <div style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-family:'Inter',sans-serif;font-weight:500;">Learn more →</div>
       </div>
     </div>
   </div>
@@ -522,87 +606,39 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
   <div class="lp-body">
 
-    <!-- WHY IT WORKS -->
     <div class="lp-section ani d1">
-      <div class="lp-section-label">Why it works</div>
-      <h2 class="lp-section-title">You have <em>seconds</em> to make an impression</h2>
-      <p class="lp-p">If your page is unclear or outdated — people leave. A landing page keeps it simple and focused so visitors take action.</p>
-      <div class="lp-points">
-        <div class="lp-point">
-          <div class="lp-point-icon">👁</div>
-          <div><div class="lp-point-title">Clear offer</div><div class="lp-point-desc">Visitors instantly understand what you do and how to reach you.</div></div>
-        </div>
-        <div class="lp-point">
-          <div class="lp-point-icon">⭐</div>
-          <div><div class="lp-point-title">Instant trust</div><div class="lp-point-desc">A professional design with photos and reviews makes people confident choosing you.</div></div>
-        </div>
-        <div class="lp-point">
-          <div class="lp-point-icon">📲</div>
-          <div><div class="lp-point-title">More bookings</div><div class="lp-point-desc">Every element guides your visitor towards one action — contacting or booking you.</div></div>
-        </div>
-      </div>
-    </div>
+      <div class="lp-section-label">Why your page isn't bringing clients</div>
+      <h2 class="lp-section-title">The real reasons<br>people <em>don't contact you</em></h2>
 
-    <!-- STATS -->
-    <div class="lp-section ani d2">
-      <div class="lp-stats">
-        <div class="lp-stat"><div class="lp-stat-n">3–5</div><div class="lp-stat-l">Days to deliver</div></div>
-        <div class="lp-stat"><div class="lp-stat-n">€899</div><div class="lp-stat-l">Starting price</div></div>
-        <div class="lp-stat"><div class="lp-stat-n">100%</div><div class="lp-stat-l">Mobile-friendly</div></div>
-      </div>
-    </div>
-
-    <!-- WHAT YOU GET -->
-    <div class="lp-section ani d2">
-      <div class="lp-section-label">What you get</div>
-      <h2 class="lp-section-title">Everything your business <em>needs</em></h2>
-      <p class="lp-p">Everything your business needs to look professional and get more bookings online.</p>
-      <div class="lp-points">
-        <div class="lp-point"><div class="lp-point-icon">✦</div><div><div class="lp-point-title">Clean and modern design</div><div class="lp-point-desc">A professional look that reflects the quality of your business.</div></div></div>
-        <div class="lp-point"><div class="lp-point-icon">📱</div><div><div class="lp-point-title">Mobile-friendly</div><div class="lp-point-desc">Looks perfect on every phone, tablet and desktop.</div></div></div>
-        <div class="lp-point"><div class="lp-point-icon">⚡</div><div><div class="lp-point-title">Fast loading</div><div class="lp-point-desc">Loads quickly — visitors don't wait, they book.</div></div></div>
-        <div class="lp-point"><div class="lp-point-icon">🎯</div><div><div class="lp-point-title">Focused on bookings</div><div class="lp-point-desc">Every section guides your visitor towards one action — contacting you.</div></div></div>
-      </div>
-    </div>
-
-    <!-- COMPARISON -->
-    <div class="lp-section ani d3">
-      <div class="lp-section-label">Landing page vs complex website</div>
-      <h2 class="lp-section-title">You don't need a big website.<br>You need <em>results.</em></h2>
-      <p class="lp-p">Many businesses think they need a large, complex website. In reality — for most local services and beauty businesses — a landing page is the smarter choice.</p>
-      <div class="lp-compare">
-        <div class="lp-col lp-col-a">
-          <div class="lp-col-title">Landing Page</div>
-          <div class="lp-li">Simple and clear</div>
-          <div class="lp-li">Fast to build (3–5 days)</div>
-          <div class="lp-li">Focused on getting clients</div>
-          <div class="lp-li">More effective for local business</div>
-          <div class="lp-li">Affordable investment</div>
+      <div class="lp-points" style="margin-top:36px;">
+        <div class="lp-point" style="flex-direction:column;gap:4px;">
+          <div class="lp-point-title">"I only have a Facebook page"</div>
+          <div class="lp-point-desc">Facebook is not a website. People searching on Google find nothing — and book with someone else.</div>
         </div>
-        <div class="lp-col lp-col-b">
-          <div class="lp-col-title">Complex Website / Web App</div>
-          <div class="lp-li">Expensive and time-consuming</div>
-          <div class="lp-li">Often unnecessary</div>
-          <div class="lp-li">Can confuse visitors</div>
-          <div class="lp-li">Takes weeks or months</div>
-          <div class="lp-li">Hard to maintain</div>
+        <div class="lp-point" style="flex-direction:column;gap:4px;">
+          <div class="lp-point-title">"My website looks broken on a phone"</div>
+          <div class="lp-point-desc">80% of clients browse on mobile. If it doesn't work on a phone, you're losing most of your visitors.</div>
+        </div>
+        <div class="lp-point" style="flex-direction:column;gap:4px;">
+          <div class="lp-point-title">"People visit but never write to me"</div>
+          <div class="lp-point-desc">No clear button, no clear offer — visitors leave without doing anything. A good page tells them exactly what to do next.</div>
+        </div>
+        <div class="lp-point" style="flex-direction:column;gap:4px;">
+          <div class="lp-point-title">"My page looks old and unprofessional"</div>
+          <div class="lp-point-desc">Your website is your first impression. If it looks cheap, clients assume your service is too — regardless of how good you actually are.</div>
+        </div>
+        <div class="lp-point" style="flex-direction:column;gap:4px;">
+          <div class="lp-point-title">"I don't know what to write on it"</div>
+          <div class="lp-point-desc">You don't have to. You tell us about your business — we handle the rest. Text, design, structure. Done in 3–5 days.</div>
         </div>
       </div>
-    </div>
 
-    <!-- OUR APPROACH -->
-    <div class="lp-section ani d3">
-      <div class="lp-section-label">Our approach</div>
-      <h2 class="lp-section-title">Simple process.<br><em>Real impact.</em></h2>
-      <p class="lp-p">We don't overcomplicate things. We focus on what actually brings results — a clear offer, strong visuals, and a structure that turns visitors into real clients.</p>
-      <p class="lp-p">Fast delivery. Simple process. Real impact.</p>
-    </div>
-
-    <!-- CTA -->
-    <div class="lp-cta-box ani d4">
-      <h2 class="lp-cta-title">Ready to get <em>more clients?</em></h2>
-      <p class="lp-cta-sub">Let's create a landing page that works for your business.</p>
-      <button class="btn-g" onclick="go('contact')">Get Your Website</button>
+      <div style="margin-top:52px;padding-top:40px;border-top:1px solid var(--line);">
+        <p class="lp-p" style="color:var(--text);font-size:16px;max-width:560px;">If even one of these sounds like you — a landing page will change how clients find you online.</p>
+        <div style="margin-top:28px;">
+          <button class="btn-g" onclick="go('contact')">Get Your Website</button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -683,11 +719,11 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       <div style="color:var(--gold);font-size:14px;letter-spacing:4px;margin-bottom:28px;">★★★★★</div>
 
       <!-- quote -->
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.8vw,26px);font-weight:300;font-style:italic;color:var(--text);line-height:1.65;margin-bottom:36px;">"Fast, simple, and very professional. After launching the new website, more clients started reaching out to book appointments."</p>
+      <p style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,26px);font-weight:300;color:var(--text);line-height:1.65;margin-bottom:36px;">"Fast, simple, and very professional. After launching the new website, more clients started reaching out to book appointments."</p>
 
       <!-- author -->
       <div style="display:flex;align-items:center;gap:16px;border-top:1px solid var(--line);padding-top:28px;">
-        <div style="width:42px;height:42px;border-radius:50%;background:rgba(196,154,42,.12);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold2);flex-shrink:0;">N</div>
+        <div style="width:42px;height:42px;border-radius:50%;background:rgba(184,146,46,.12);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;color:var(--gold2);flex-shrink:0;">N</div>
         <div>
           <div style="font-size:14px;color:var(--text);font-weight:500;letter-spacing:.04em;">Nataliya</div>
           <div style="font-size:12px;color:var(--muted);margin-top:3px;font-weight:300;">Beauty Salon · Kraków</div>
@@ -695,11 +731,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       </div>
     </div>
 
-    <div style="text-align:center;margin-top:48px;" class="ani d2">
-      <button class="btn-g" onclick="go('contact')" id="rev-cta">Start Your Project</button>
-    </div>
-  </div>
-</div>
     <div style="text-align:center;margin-top:48px;" class="ani d2">
       <button class="btn-g" onclick="go('contact')" id="rev-cta">Start Your Project</button>
     </div>
@@ -727,7 +758,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <li id="pi1e">Contact / booking section</li>
           <li id="pi1f">Delivery in 3–5 days</li>
         </ul>
-        <p style="font-size:13px;color:var(--muted);font-style:italic;margin-bottom:28px;line-height:1.6;" id="pp1">Perfect if you want a simple, professional online presence.</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6;" id="pp1">Perfect if you want a simple, professional online presence.</p>
         <button class="p-btn" onclick="go('contact')" id="pb1">Get Your Website</button>
       </div>
       <div class="p-card feat ani d2">
@@ -747,7 +778,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <li id="pi2g">Unlimited revisions</li>
           <li id="pi2h">Priority delivery (3–5 days)</li>
         </ul>
-        <p style="font-size:13px;color:rgba(240,235,224,.5);font-style:italic;margin-bottom:28px;line-height:1.6;" id="pp2">Best choice for most businesses.</p>
+        <p style="font-size:13px;color:rgba(240,235,224,.5);margin-bottom:28px;line-height:1.6;" id="pp2">Best choice for most businesses.</p>
         <button class="p-btn" onclick="go('contact')" id="pb2">Get More Clients</button>
       </div>
     </div>
@@ -762,23 +793,23 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     <p class="sec-sub ani d2" style="text-align:center;margin:0 auto 52px;" id="faq-sub">Everything you need to know before getting started.</p>
     <div class="faq-list ani d3">
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq1">How long does it take?</span><span class="faq-icon">+</span></button>
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq1">How long does it take?</span><span class="faq-icon">›</span></button>
         <div class="faq-a"><p id="fa1">Most landing pages are delivered in 3–5 days. We start with a quick call, then build and present your page — fast and straightforward.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq2">What do you need from me?</span><span class="faq-icon">+</span></button>
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq2">What do you need from me?</span><span class="faq-icon">›</span></button>
         <div class="faq-a"><p id="fa2">Just tell us about your business — what you offer, who your clients are, and any photos or text you have. We take care of everything else.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq3">How does payment work?</span><span class="faq-icon">+</span></button>
-        <div class="faq-a"><p id="fa3">50% upfront, 50% when your page is ready. We accept bank transfer and all major cards.</p></div>
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq3">How does payment work?</span><span class="faq-icon">›</span></button>
+        <div class="faq-a"><p id="fa3">20% upfront, 80% when your page is ready. We accept bank transfer and all major cards.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq4">Is a landing page enough for my business?</span><span class="faq-icon">+</span></button>
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq4">Is a landing page enough for my business?</span><span class="faq-icon">›</span></button>
         <div class="faq-a"><p id="fa4">For most beauty salons and local services — yes. A single, clear page focused on your offer converts better than a large website with too many pages.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq5">Will it bring me more clients?</span><span class="faq-icon">+</span></button>
+        <button class="faq-q" onclick="toggleFaq(this)"><span id="fq5">Will it bring me more clients?</span><span class="faq-icon">›</span></button>
         <div class="faq-a"><p id="fa5">Every page we build is designed to convert — clear services, strong visuals, and a direct call to action. Like Nataliya from Kraków, who started getting more bookings right after launch.</p></div>
       </div>
     </div>
@@ -797,9 +828,9 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         <h2 class="cinfo-title ani d1" id="ct-title">Let's build something <em>remarkable</em></h2>
         <p class="cinfo-p ani d2" id="ct-p">We work with businesses across Europe who want a website that truly reflects what they do. Tell us about your project — we'll reply within 24 hours.</p>
         <div class="ci-rows ani d3">
-          <div class="ci-row"><div class="ci-icon">✉</div><div><div class="ci-lbl" id="ci-lbl1">Email</div><div class="ci-val"><a href="mailto:lumerastudio111@gmail.com" style="color:inherit;text-decoration:none;">lumerastudio111@gmail.com</a></div></div></div>
-          <div class="ci-row"><div class="ci-icon">◎</div><div><div class="ci-lbl" id="ci-lbl2">Location</div><div class="ci-val" id="ci-loc">Europe — remote-first studio</div></div></div>
-          <div class="ci-row"><div class="ci-icon">◷</div><div><div class="ci-lbl" id="ci-lbl3">Response time</div><div class="ci-val" id="ci-resp">Within 24 hours</div></div></div>
+          <div class="ci-row"><div class="ci-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div><div><div class="ci-lbl" id="ci-lbl1">Email</div><div class="ci-val"><a href="mailto:lumerastudio111@gmail.com" style="color:inherit;text-decoration:none;">lumerastudio111@gmail.com</a></div></div></div>
+          <div class="ci-row"><div class="ci-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div><div><div class="ci-lbl" id="ci-lbl2">Location</div><div class="ci-val" id="ci-loc">Europe — remote-first studio</div></div></div>
+          <div class="ci-row"><div class="ci-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><div class="ci-lbl" id="ci-lbl3">Response time</div><div class="ci-val" id="ci-resp">Within 24 hours</div></div></div>
         </div>
       </div>
       <div class="cbox ani d2">
@@ -918,18 +949,18 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 var T = {
   en: {
     'hdr-cta-btn':'Start a Project','mob-cta-btn':'Start a Project',
-    'badge-txt':'Available for new projects · Europe',
+    'badge-txt':'Now taking new projects · 2026',
     'hero-h1':'Landing pages<br>that bring you <em>more clients</em>',
     'hero-h2':'Get a premium landing page in 3–5 days — clear, modern, and built to turn visitors into bookings.',
     'hero-p':'For brands that want to grow, stand out, and look premium online.',
     'hero-btn1':'Get Your Clients','hero-btn2':'See Our Work','scroll-lbl':'Scroll',
     'sl1':'First concept','sl2':'Custom design','sl3':'Delivery','sl4':'Remote studio',
-    'about-lbl':'Who We Are','about-title':'We help businesses<br>get <em>more clients</em>','about-tag':'Est. 2026 · Europe',
-    'about-p1':'LumeraStudio builds landing pages for beauty salons and local businesses across Europe. We focus on one thing — a simple, beautiful page that brings you real bookings.',
-    'about-p2':'No complex processes. No unnecessary extras. Just a clear page, delivered in 3–5 days, that makes your business look premium and turns visitors into clients.',
-    'val1t':'Results First','val1d':'Every page is designed to bring you more bookings — not just look nice.',
-    'val2t':'Simple & Fast','val2d':'From first call to live website in 3–5 days. No complicated process.',
-    'val3t':'100% Custom','val3d':'No templates. Every page is made specifically for your business.',
+    'about-lbl':'Who We Are','about-title':'We don\'t build websites.<br>We build <em>client machines.</em>','about-tag':'Est. 2026 · Europe',
+    'about-p1':'LumeraStudio creates landing pages that do one thing — bring your business more clients. Not pretty pages that sit there doing nothing. Pages that work.',
+    'about-p2':'Delivered in 3–5 days. Built for results. No fluff, no filler — just a page that makes people want to book you.',
+    'val1t':'Obsessed with results','val1d':'Every decision is made to get you more bookings. Not to win design awards.',
+    'val2t':'Fast and precise','val2d':'3–5 days from first call to live page. No delays, no endless back-and-forth.',
+    'val3t':'Zero templates','val3d':'Every page is built specifically for your business. Nothing recycled, nothing generic.',
     'svc-lbl':'What We Do','svc-title':'We build <em>landing pages</em>','svc-sub':'One focused page. One goal. More clients for your business.',
     'svc1t':'Landing Pages','svc1d':'A single, focused page designed to do one thing — bring you more clients. Clear, fast, mobile-friendly and built to convert visitors into bookings.',
     'proc-lbl':'How We Work','proc-title':'Simple. Fast. <em>Done.</em>','proc-sub':'From first contact to live website in 3–5 days.',
@@ -955,7 +986,7 @@ var T = {
     'faq-lbl':'Got Questions?','faq-title':'Frequently <em>asked</em>','faq-sub':'Everything you need to know before getting started.','faq-cta':'Ask Us Anything',
     'fq1':'How long does it take?','fa1':'Most landing pages are delivered in 3–5 days. We start with a quick call, then build and present your page — fast and straightforward.',
     'fq2':'What do you need from me?','fa2':'Just tell us about your business — what you offer, who your clients are, and any photos or text you have. We take care of everything else.',
-    'fq3':'How does payment work?','fa3':'50% upfront, 50% when your page is ready. We accept bank transfer and all major cards.',
+    'fq3':'How does payment work?','fa3':'20% upfront, 80% when your page is ready. We accept bank transfer and all major cards.',
     'fq4':'Is a landing page enough for my business?','fa4':'For most beauty salons and local services — yes. A single, clear page focused on your offer converts better than a large website with too many pages.',
     'fq5':'Will it bring me more clients?','fa5':'Every page we build is designed to convert — clear services, strong visuals, and a direct call to action.',
     'ct-lbl':'Get in Touch','ct-title':'Let\'s build something <em>remarkable</em>','ct-p':'Tell us about your business and what you want to achieve. We\'ll get back to you within 24 hours.',
@@ -971,18 +1002,18 @@ var T = {
   },
   de: {
     'hdr-cta-btn':'Projekt starten','mob-cta-btn':'Projekt starten',
-    'badge-txt':'Verfügbar für neue Projekte · Europa',
+    'badge-txt':'Jetzt neue Projekte · 2026',
     'hero-h1':'Landingpages,<br>die Ihnen <em>mehr Kunden</em> bringen',
     'hero-h2':'Ihre premium Landingpage in 3–5 Tagen — klar, modern und darauf ausgerichtet, Besucher in Buchungen zu verwandeln.',
     'hero-p':'Für Marken, die wachsen, herausstechen und online premium wirken wollen.',
     'hero-btn1':'Kunden gewinnen','hero-btn2':'Unsere Arbeiten','scroll-lbl':'Scrollen',
     'sl1':'Erster Konzept','sl2':'Individuelles Design','sl3':'Lieferung','sl4':'Remote-Studio',
-    'about-lbl':'Wer wir sind','about-title':'Wir helfen Unternehmen,<br><em>mehr Kunden</em> zu gewinnen','about-tag':'Gegr. 2026 · Europa',
-    'about-p1':'LumeraStudio erstellt Landingpages für Beauty-Salons und lokale Unternehmen in ganz Europa. Wir konzentrieren uns auf eine Sache — eine einfache, schöne Seite, die Ihnen echte Buchungen bringt.',
-    'about-p2':'Keine komplizierten Prozesse. Keine unnötigen Extras. Nur eine klare Seite, in 3–5 Tagen geliefert, die Ihr Unternehmen professionell wirken lässt.',
-    'val1t':'Ergebnisse zuerst','val1d':'Jede Seite ist darauf ausgerichtet, Ihnen mehr Buchungen zu bringen — nicht nur gut auszusehen.',
-    'val2t':'Einfach & schnell','val2d':'Vom ersten Gespräch bis zur fertigen Website in 3–5 Tagen.',
-    'val3t':'100% individuell','val3d':'Keine Templates. Jede Seite wird speziell für Ihr Unternehmen erstellt.',
+    'about-lbl':'Wer wir sind','about-title':'Wir bauen keine Websites.<br>Wir bauen <em>Kundenmaschinen.</em>','about-tag':'Gegr. 2026 · Europa',
+    'about-p1':'LumeraStudio erstellt Landingpages, die eines tun — Ihrem Unternehmen mehr Kunden bringen. Keine hübschen Seiten, die nichts bewirken. Seiten, die funktionieren.',
+    'about-p2':'Geliefert in 3–5 Tagen. Auf Ergebnisse ausgerichtet. Kein Schnickschnack — nur eine Seite, die Menschen dazu bringt, Sie zu buchen.',
+    'val1t':'Ergebnisse im Fokus','val1d':'Jede Entscheidung zielt darauf ab, Ihnen mehr Buchungen zu bringen. Nicht auf Designpreise.',
+    'val2t':'Schnell und präzise','val2d':'3–5 Tage vom ersten Gespräch bis zur fertigen Seite. Keine Verzögerungen.',
+    'val3t':'Null Templates','val3d':'Jede Seite wird speziell für Ihr Unternehmen gebaut. Nichts wiederverwendet, nichts generisch.',
     'svc-lbl':'Was wir tun','svc-title':'Wir erstellen <em>Landingpages</em>','svc-sub':'Eine fokussierte Seite. Ein Ziel. Mehr Kunden für Ihr Unternehmen.',
     'svc1t':'Landingpage','svc1d':'Eine einzelne, fokussierte Seite mit einem einzigen Ziel — mehr Kunden für Sie. Klar, schnell, mobilfreundlich und auf Buchungen ausgerichtet.',
     'proc-lbl':'Wie wir arbeiten','proc-title':'Einfach. Schnell. <em>Fertig.</em>','proc-sub':'Vom ersten Kontakt bis zur fertigen Website in 3–5 Tagen.',
@@ -1008,7 +1039,7 @@ var T = {
     'faq-lbl':'Haben Sie Fragen?','faq-title':'Häufig <em>gefragt</em>','faq-sub':'Alles, was Sie wissen müssen, bevor Sie starten.','faq-cta':'Fragen Sie uns',
     'fq1':'Wie lange dauert es?','fa1':'Die meisten Landingpages werden in 3–5 Tagen geliefert. Wir starten mit einem kurzen Gespräch, dann erstellen und präsentieren wir Ihre Seite.',
     'fq2':'Was brauchen Sie von mir?','fa2':'Erzählen Sie uns von Ihrem Unternehmen — was Sie anbieten, wer Ihre Kunden sind, und Fotos oder Texte, die Sie haben. Den Rest übernehmen wir.',
-    'fq3':'Wie funktioniert die Bezahlung?','fa3':'50% im Voraus, 50% wenn Ihre Seite fertig ist. Wir akzeptieren Überweisung und alle gängigen Karten.',
+    'fq3':'Wie funktioniert die Bezahlung?','fa3':'20% im Voraus, 80% wenn Ihre Seite fertig ist. Wir akzeptieren Überweisung und alle gängigen Karten.',
     'fq4':'Reicht eine Landingpage für mein Unternehmen?','fa4':'Für die meisten Beauty-Salons und lokalen Dienstleistungen — ja. Eine klare Seite mit Ihrem Angebot konvertiert besser als eine große Website.',
     'fq5':'Bringt sie mir mehr Kunden?','fa5':'Jede Seite, die wir erstellen, ist auf Konversion ausgerichtet — klare Leistungen, starke Bilder und ein direkter Handlungsaufruf.',
     'ct-lbl':'Kontakt aufnehmen','ct-title':'Lassen Sie uns etwas <em>Besonderes</em> bauen','ct-p':'Erzählen Sie uns von Ihrem Unternehmen. Wir melden uns innerhalb von 24 Stunden.',
@@ -1024,7 +1055,7 @@ var T = {
   },
   pl: {
     'hdr-cta-btn':'Rozpocznij projekt','mob-cta-btn':'Rozpocznij projekt',
-    'badge-txt':'Dostępni na nowe projekty · Europa',
+    'badge-txt':'Przyjmujemy nowe projekty · 2026',
     'hero-h1':'Landing page\'y,<br>które przyciągają <em>więcej klientów</em>',
     'hero-h2':'Otrzymaj premium landing page w 3–5 dni — przejrzystą, nowoczesną i nastawioną na zamianę odwiedzających w rezerwacje.',
     'hero-p':'Dla marek, które chcą rosnąć, wyróżniać się i wyglądać premium online.',
@@ -1061,7 +1092,7 @@ var T = {
     'faq-lbl':'Masz pytania?','faq-title':'Często <em>zadawane</em>','faq-sub':'Wszystko, co musisz wiedzieć przed startem.','faq-cta':'Zapytaj nas',
     'fq1':'Ile trwa realizacja?','fa1':'Większość landing page\'y dostarczamy w 3–5 dni. Zaczynamy od krótkiej rozmowy, potem budujemy i prezentujemy Twoją stronę.',
     'fq2':'Czego ode mnie potrzebujecie?','fa2':'Powiedz nam o swojej firmie — co oferujesz, kim są Twoi klienci i ewentualne zdjęcia lub teksty. Resztą zajmujemy się my.',
-    'fq3':'Jak działa płatność?','fa3':'50% zaliczki, 50% gdy Twoja strona jest gotowa. Przyjmujemy przelew i wszystkie popularne karty.',
+    'fq3':'Jak działa płatność?','fa3':'20% zaliczki, 80% gdy Twoja strona jest gotowa. Przyjmujemy przelew i wszystkie popularne karty.',
     'fq4':'Czy landing page wystarczy dla mojej firmy?','fa4':'Dla większości salonów beauty i lokalnych usług — tak. Jedna przejrzysta strona z Twoją ofertą konwertuje lepiej niż duża strona z wieloma podstronami.',
     'fq5':'Czy przyniesie mi więcej klientów?','fa5':'Każdą stronę projektujemy z myślą o konwersji — jasne usługi, mocne zdjęcia i bezpośrednie wezwanie do działania.',
     'ct-lbl':'Skontaktuj się','ct-title':'Zbudujmy razem coś <em>wyjątkowego</em>','ct-p':'Opowiedz nam o swojej firmie i co chcesz osiągnąć. Odpiszemy w ciągu 24 godzin.',
@@ -1078,7 +1109,7 @@ var T = {
 };
 
 // nav tab labels mapping: button index -> key
-var tabKeys = ['home','about','services','landing','process','portfolio','reviews','pricing','faq'];
+var tabKeys = ['home','about','services','process','portfolio','reviews','pricing','faq'];
 var currentLang = 'en';
 
 function setLang(l) {
@@ -1114,15 +1145,14 @@ function setLang(l) {
 // ─── NAVIGATION ─────────────────────────────────────────────────
 function go(id) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-  document.getElementById('page-' + id).classList.add('active');
-  // sync tabs
+  var next = document.getElementById('page-' + id);
+  next.classList.add('active');
   var tabs = document.querySelectorAll('.tab-btn');
   tabs.forEach(function(btn, i) { btn.classList.toggle('active', tabKeys[i] === id); });
   var mobTabs = document.querySelectorAll('.mob-tab');
   mobTabs.forEach(function(btn, i) { btn.classList.toggle('active', tabKeys[i] === id); });
-  window.scrollTo({top:0, behavior:'smooth'});
-  setTimeout(runAni, 60);
-  if (id === 'home') setTimeout(runCounters, 500);
+  window.scrollTo({top:0, behavior:'instant'});
+  if (id === 'home') setTimeout(runCounters, 600);
 }
 
 function toggleMob() {
@@ -1134,11 +1164,39 @@ function closeMob() {
   document.getElementById('mob').classList.remove('open');
 }
 
-// ─── ANIMATIONS ─────────────────────────────────────────────────
+// ─── SCROLL REVEAL ───────────────────────────────────────────────
 function runAni() {
-  document.querySelectorAll('.page.active .ani:not(.go)').forEach(function(el){ el.classList.add('go'); });
+  // assign directional classes based on position
+  var active = document.querySelector('.page.active');
+  if (!active) return;
+  active.querySelectorAll('.ani:not(.go)').forEach(function(el, i) {
+    // stagger via observer
+    var delay = parseFloat(getComputedStyle(el).animationDelay) || 0;
+    setTimeout(function(){ el.classList.add('go'); }, 0);
+  });
 }
-window.addEventListener('load', function(){ setTimeout(runAni, 100); setTimeout(runCounters, 600); });
+
+// IntersectionObserver for scroll-triggered reveals within a page
+var scrollObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('go');
+      scrollObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+function attachScrollObserver() {
+  document.querySelectorAll('.page.active .ani').forEach(function(el) {
+    scrollObs.observe(el);
+  });
+}
+
+window.addEventListener('load', function(){
+  setTimeout(runAni, 100);
+  setTimeout(attachScrollObserver, 200);
+  setTimeout(runCounters, 600);
+});
 
 // ─── COUNTERS ───────────────────────────────────────────────────
 var countersDone = false;
@@ -1184,31 +1242,6 @@ function toggleFaq(btn) {
     try { localStorage.setItem('ck','0'); } catch(e) {}
     document.getElementById('cookie').classList.add('hidden');
   };
-})();
-
-// ─── CURSOR ─────────────────────────────────────────────────────
-(function() {
-  var ring = document.getElementById('cur-ring');
-  var dot = document.getElementById('cur-dot');
-  if (!ring) return;
-  var mx=0, my=0, rx=0, ry=0;
-  document.addEventListener('mousemove', function(e) {
-    mx = e.clientX; my = e.clientY;
-  });
-  document.addEventListener('mousedown', function(){ ring.classList.add('clicking'); });
-  document.addEventListener('mouseup', function(){ ring.classList.remove('clicking'); });
-  (function loop() {
-    rx += (mx-rx)*0.28; ry += (my-ry)*0.28;
-    var x = Math.round(rx*10)/10;
-    var y = Math.round(ry*10)/10;
-    ring.style.left = x+'px'; ring.style.top = y+'px';
-    dot.style.left  = x+'px'; dot.style.top  = y+'px';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('button, a, .svc, .p-card, .port-card, .faq-q, .p-btn, .lp-point').forEach(function(el) {
-    el.addEventListener('mouseenter', function(){ ring.classList.add('big'); });
-    el.addEventListener('mouseleave', function(){ ring.classList.remove('big'); });
-  });
 })();
 
 // ─── CONTACT FORM ───────────────────────────────────────────────
