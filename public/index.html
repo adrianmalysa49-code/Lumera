@@ -225,7 +225,7 @@ nav{display:flex;}
 @media(max-width:900px){
   .about-editorial{padding:48px 20px;}
   .about-top{grid-template-columns:1fr;gap:24px;margin-bottom:48px;padding-bottom:48px;}
-  .about-vals-row{grid-template-columns:1fr;}
+  .about-vals-row{grid-template-columns:1fr!important;}
 }
 
 /* SERVICES */
@@ -386,6 +386,26 @@ nav{display:flex;}
 #f-err{display:none;margin-top:10px;font-size:13px;color:#E07070;text-align:center;}
 
 /* FOOTER */
+/* HERO TESTIMONIAL */
+.hero-testi{max-width:680px;margin:0 auto;padding:64px 52px;text-align:center;}
+.hero-testi-stars{color:var(--gold);font-size:18px;letter-spacing:4px;margin-bottom:28px;}
+.hero-testi-quote{font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,32px);font-weight:300;font-style:italic;color:var(--text);line-height:1.55;margin-bottom:36px;}
+.hero-testi-author{display:flex;align-items:center;justify-content:center;gap:14px;}
+.hero-testi-av{width:48px;height:48px;border-radius:50%;background:rgba(184,146,46,.2);border:1px solid rgba(184,146,46,.4);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;color:var(--gold2);flex-shrink:0;}
+.hero-testi-name{font-size:14px;color:var(--text);font-weight:500;letter-spacing:.04em;}
+.hero-testi-role{font-size:12px;color:var(--muted);margin-top:3px;font-weight:300;}
+@media(max-width:900px){.hero-testi{padding:48px 24px;}}
+/* WHO IT'S FOR */
+.wif-section{padding:80px 52px;max-width:1140px;margin:0 auto;}
+.wif-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:48px;}
+.wif-card{background:rgba(255,255,255,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;transition:all .3s;}
+.wif-card::after{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.2),transparent);}
+.wif-card:hover{background:rgba(255,255,255,.07);transform:translateY(-4px);border-color:rgba(196,154,42,.3);box-shadow:0 16px 40px rgba(0,0,0,.3),0 0 30px rgba(196,154,42,.06);}
+.wif-icon{font-size:26px;margin-bottom:14px;}
+.wif-name{font-size:13px;font-weight:500;color:var(--text);letter-spacing:.03em;margin-bottom:6px;}
+.wif-desc{font-size:12px;color:var(--muted);line-height:1.6;font-weight:300;}
+@media(max-width:900px){.wif-section{padding:52px 20px;}.wif-grid{grid-template-columns:1fr 1fr;gap:10px;}}
+@media(max-width:480px){.wif-grid{grid-template-columns:1fr;}}
 footer{background:var(--bg2);border-top:1px solid var(--line);}
 .ft-cta{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:64px 72px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
 .ft-cta::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,46,.07),transparent 70%);pointer-events:none;}
@@ -547,7 +567,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       <button class="lang-btn" onclick="setLang('de')">DE</button>
       <button class="lang-btn" onclick="setLang('pl')">PL</button>
     </div>
-    <button class="hdr-cta" onclick="go('contact')" id="hdr-cta-btn">Start a Project</button>
+    <button class="hdr-cta" onclick="go('contact')" id="hdr-cta-btn">Get Your Clients</button>
   </div>
   <button class="hbg" id="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </header>
@@ -567,15 +587,15 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     <button class="mob-lang-btn" onclick="setLang('de')">DE</button>
     <button class="mob-lang-btn" onclick="setLang('pl')">PL</button>
   </div>
-  <button class="mob-cta-btn" onclick="go('contact');closeMob()" id="mob-cta-btn">Start a Project</button>
+  <button class="mob-cta-btn" onclick="go('contact');closeMob()" id="mob-cta-btn">Get Your Clients</button>
 </div>
 
 <!-- ═══════════ HOME ═══════════ -->
 <div id="page-home" class="page active">
   <section class="hero">
     <div class="hero-bg"></div>
-    <h1 class="hero-h1" id="hero-h1">Landing pages<br>that bring you <em>more clients</em></h1>
-    <p class="hero-h2" id="hero-h2">Get a premium landing page in 8–10 days — clear, modern, and built to turn visitors into bookings.</p>
+    <h1 class="hero-h1" id="hero-h1">Premium landing pages<br>designed to <em>convert.</em></h1>
+    <p class="hero-h2" id="hero-h2">More bookings. Better clients. Stronger first impression.</p>
     <div class="hero-btns">
       <button class="btn-g" onclick="go('contact')" id="hero-btn1">Get Your Clients</button>
       <button class="btn-o" onclick="go('portfolio')" id="hero-btn2">See Our Work</button>
@@ -588,9 +608,57 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     <div class="stat ani d3"><div class="stat-n" id="sn3">8–10d</div><div class="stat-l" id="sl3">Delivery</div></div>
     <div class="stat ani d4"><div class="stat-n">EU</div><div class="stat-l" id="sl4">Remote studio</div></div>
   </div>
+  <div class="wif-section">
+    <p class="sec-label ani" style="text-align:center" id="wif-lbl">Perfect for</p>
+    <h2 class="sec-title ani d1" style="text-align:center" id="wif-title">Is this <em>for you?</em></h2>
+    <div class="wif-grid">
+      <div class="wif-card ani d1"><div class="wif-icon">💅</div><div class="wif-name" id="wif1n">Beauty Businesses</div><div class="wif-desc" id="wif1d">Salons, nail studios, lash artists — get clients to book online.</div></div>
+      <div class="wif-card ani d2"><div class="wif-icon">🏋️</div><div class="wif-name" id="wif2n">Fitness Brands</div><div class="wif-desc" id="wif2d">PTs, studios, coaches — turn followers into paying members.</div></div>
+      <div class="wif-card ani d3"><div class="wif-icon">📍</div><div class="wif-name" id="wif3n">Local Services</div><div class="wif-desc" id="wif3d">Clinics, photographers, consultants — stand out in your city.</div></div>
+      <div class="wif-card ani d4"><div class="wif-icon">✨</div><div class="wif-name" id="wif4n">Personal Brands</div><div class="wif-desc" id="wif4d">Speakers, creators, freelancers — build credibility fast.</div></div>
+      <div class="wif-card ani d5"><div class="wif-icon">🚀</div><div class="wif-name" id="wif5n">Startups</div><div class="wif-desc" id="wif5d">Validate your idea with a page that looks investor-ready from day one.</div></div>
+    </div>
+  </div>
+  <!-- WHY US -->
+  <div class="wif-section" style="padding-top:0">
+    <p class="sec-label ani" style="text-align:center" id="why-lbl">Why LumeraStudio</p>
+    <h2 class="sec-title ani d1" style="text-align:center" id="why-title">Why it's worth <em>choosing us</em></h2>
+    <div class="about-vals-row" style="grid-template-columns:repeat(4,1fr);margin-top:48px;">
+      <div class="val-block ani d1">
+        <div class="val-num">01</div>
+        <div class="val-title" id="why1t">More leads from your traffic</div>
+        <div class="val-desc" id="why1d">Your visitors won't just browse — they'll click, call, and book.</div>
+      </div>
+      <div class="val-block ani d2">
+        <div class="val-num">02</div>
+        <div class="val-title" id="why2t">Premium look that builds trust</div>
+        <div class="val-desc" id="why2d">First impressions decide everything. We make sure yours wins.</div>
+      </div>
+      <div class="val-block ani d3">
+        <div class="val-num">03</div>
+        <div class="val-title" id="why3t">Clear structure focused on conversion</div>
+        <div class="val-desc" id="why3d">Every section, every word placed to guide the visitor towards action.</div>
+      </div>
+      <div class="val-block ani d4">
+        <div class="val-num">04</div>
+        <div class="val-title" id="why4t">Fast delivery without agency chaos</div>
+        <div class="val-desc" id="why4d">8–10 days. Direct communication. No committees, no delays, no surprises.</div>
+      </div>
+    </div>
+  </div>
+  <!-- TESTIMONIAL AFTER WHY -->
+  <div class="hero-testi ani" style="border-top:1px solid var(--line);">
+    <div class="hero-testi-stars">★★★★★</div>
+    <p class="hero-testi-quote" id="htesti-q2">"Fast, simple, and very professional. After launching the new website, more clients started reaching out to book appointments."</p>
+    <div class="hero-testi-author">
+      <div class="hero-testi-av">N</div>
+      <div>
+        <div class="hero-testi-name">Nataliya</div>
+        <div class="hero-testi-role">Beauty Salon · Kraków — krembeauty.com</div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<!-- ═══════════ ABOUT ═══════════ -->
 <div id="page-about" class="page sec-glow sg-r">
   <div class="about-editorial">
     <div class="about-top">
@@ -602,23 +670,6 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         <p class="about-body-text ani d2" id="about-p1">LumeraStudio creates landing pages that do one thing — bring your business more clients. Not pretty pages that sit there doing nothing. Pages that work.</p>
         <p class="about-body-text ani d2" id="about-p2">Delivered in 8–10 days. Built for results. No fluff, no filler — just a page that makes people want to book you.</p>
         <div class="about-tag-inline ani d3" id="about-tag">Est. 2026 · Europe</div>
-      </div>
-    </div>
-    <div class="about-vals-row">
-      <div class="val-block ani d1">
-        <div class="val-num">01</div>
-        <div class="val-title" id="val1t">Obsessed with results</div>
-        <div class="val-desc" id="val1d">Every decision is made to get you more bookings. Not to win design awards.</div>
-      </div>
-      <div class="val-block ani d2">
-        <div class="val-num">02</div>
-        <div class="val-title" id="val2t">Fast and precise</div>
-        <div class="val-desc" id="val2d">8–10 days from first call to live page. No delays, no endless back-and-forth.</div>
-      </div>
-      <div class="val-block ani d3">
-        <div class="val-num">03</div>
-        <div class="val-title" id="val3t">Zero templates</div>
-        <div class="val-desc" id="val3d">Every page is built specifically for your business. Nothing recycled, nothing generic.</div>
       </div>
     </div>
   </div>
@@ -635,7 +686,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
         <div class="svc-n">01</div>
         <div class="svc-t" id="svc1t">Landing Pages</div>
         <p class="svc-d" id="svc1d">A single, focused page designed to do one thing — bring you more clients. Clear, fast, mobile-friendly and built to convert visitors into bookings. The smartest choice for most local businesses.</p>
-        <div style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-family:'Inter',sans-serif;font-weight:500;">Learn more →</div>
+        
       </div>
     </div>
   </div>
@@ -699,37 +750,37 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <div class="lp-card-icon">✦</div>
           <div class="lp-card-title">Clean design</div>
           <div class="lp-card-desc">A modern, premium look that reflects the quality of your work and makes the right first impression.</div>
-          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+          
         </div>
         <div class="lp-card">
           <div class="lp-card-icon">📱</div>
           <div class="lp-card-title">Mobile-friendly</div>
           <div class="lp-card-desc">Looks perfect on every phone, tablet and desktop — because 80% of your clients browse on mobile.</div>
-          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+          
         </div>
         <div class="lp-card">
           <div class="lp-card-icon">⚡</div>
           <div class="lp-card-title">Fast loading</div>
           <div class="lp-card-desc">Loads quickly on any connection — visitors don't wait, they book.</div>
-          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+          
         </div>
         <div class="lp-card">
           <div class="lp-card-icon">🎯</div>
           <div class="lp-card-title">Focused on bookings</div>
           <div class="lp-card-desc">Every section has one purpose — turning your visitor into a real client who contacts you.</div>
-          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+          
         </div>
         <div class="lp-card">
           <div class="lp-card-icon">🔒</div>
           <div class="lp-card-title">Yours forever</div>
           <div class="lp-card-desc">One-time payment. No monthly fees. Your page, your domain, full ownership.</div>
-          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+          
         </div>
         <div class="lp-card">
           <div class="lp-card-icon">🚀</div>
           <div class="lp-card-title">Ready in 8–10 days</div>
           <div class="lp-card-desc">From first call to live website in days — not weeks. Fast, simple, done.</div>
-          <button class="lp-card-btn" onclick="go('contact')">Learn more →</button>
+          
         </div>
       </div>
     </div>
@@ -790,7 +841,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       </div></div>
     </div>
     <div class="ani d4" style="margin-top:48px;max-width:600px;">
-      <button class="btn-g" onclick="go('contact')" id="proc-cta">Start Your Project</button>
+      <button class="btn-g" onclick="go('contact')" id="proc-cta">Get Your Clients</button>
     </div>
   </div>
 </div>
@@ -857,7 +908,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
     </div>
 
     <div style="text-align:center;margin-top:48px;" class="ani d2">
-      <button class="btn-g" onclick="go('contact')" id="rev-cta">Start Your Project</button>
+      <button class="btn-g" onclick="go('contact')" id="rev-cta">Get Your Clients</button>
     </div>
   </div>
 </div>
@@ -965,7 +1016,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
           <p id="f-ok-p">We'll get back to you within 24 hours.</p>
         </div>
         <div id="f-form">
-          <div class="cbox-title" id="f-title">Start a Project</div>
+          <div class="cbox-title" id="f-title">Get Your Clients</div>
           <div class="f2">
             <div class="fld"><label id="lbl-fn">First Name</label><input type="text" id="ff-fn" placeholder="Anna"></div>
             <div class="fld"><label id="lbl-ln">Last Name</label><input type="text" id="ff-ln" placeholder="Müller"></div>
@@ -1041,7 +1092,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
       <ul>
         <li><a href="mailto:lumerastudio111@gmail.com" class="ft-email-val">lumerastudio111@gmail.com</a></li>
         <li><a href="https://www.instagram.com/lumerastudio2026?igsh=bTBqa2g3MTFtanNp" target="_blank">@lumerastudio2026</a></li>
-        <li><button onclick="go('contact')" id="ft-start">Start a Project</button></li>
+        <li><button onclick="go('contact')" id="ft-start">Get Your Clients</button></li>
       </ul>
     </div>
 
@@ -1073,42 +1124,54 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 // ─── TRANSLATIONS ───────────────────────────────────────────────
 var T = {
   en: {
-    'hdr-cta-btn':'Start a Project','mob-cta-btn':'Start a Project',
+    'hdr-cta-btn':'Get Your Clients','mob-cta-btn':'Get Your Clients',
     'badge-txt':'Now taking new projects · 2026',
-    'hero-h1':'Landing pages<br>that bring you <em>more clients</em>',
-    'hero-h2':'Get a premium landing page in 8–10 days — clear, modern, and built to turn visitors into bookings.',
+    'hero-h1':'Premium landing pages<br>designed to <em>convert.</em>',
+    'hero-h2':'More bookings. Better clients. Stronger first impression.',
     'hero-p':'For brands that want to grow, stand out, and look premium online.',
     'hero-btn1':'Get Your Clients','hero-btn2':'See Our Work','scroll-lbl':'Scroll',
+    'wif-lbl':'Perfect for','wif-title':'Is this <em>for you?</em>',
+    'wif1n':'Beauty Businesses','wif1d':'Salons, nail studios, lash artists — get clients to book online.',
+    'wif2n':'Fitness Brands','wif2d':'PTs, studios, coaches — turn followers into paying members.',
+    'wif3n':'Local Services','wif3d':'Clinics, photographers, consultants — stand out in your city.',
+    'wif4n':'Personal Brands','wif4d':'Speakers, creators, freelancers — build credibility fast.',
+    'wif5n':'Startups','wif5d':'Validate your idea with a page that looks investor-ready from day one.',
+    'why-lbl':'Why LumeraStudio','why-title':'Why it\'s worth <em>choosing us</em>',
+    'why1t':'More leads from your traffic','why1d':'Your visitors won\'t just browse — they\'ll click, call, and book.',
+    'why2t':'Premium look that builds trust','why2d':'First impressions decide everything. We make sure yours wins.',
+    'why3t':'Clear structure focused on conversion','why3d':'Every section, every word placed to guide the visitor towards action.',
+    'why4t':'Fast delivery without agency chaos','why4d':'8–10 days. Direct communication. No committees, no delays, no surprises.',
     'sl1':'First concept','sl2':'Custom design','sl3':'Delivery','sl4':'Remote studio',
     'about-lbl':'Who We Are','about-title':'We don\'t build websites.<br>We build <em>client machines.</em>','about-tag':'Est. 2026 · Europe',
     'about-p1':'LumeraStudio creates landing pages that do one thing — bring your business more clients. Not pretty pages that sit there doing nothing. Pages that work.',
     'about-p2':'Delivered in 8–10 days. Built for results. No fluff, no filler — just a page that makes people want to book you.',
-    'val1t':'Obsessed with results','val1d':'Every decision is made to get you more bookings. Not to win design awards.',
-    'val2t':'Fast and precise','val2d':'8–10 days from first call to live page. No delays, no endless back-and-forth.',
-    'val3t':'Zero templates','val3d':'Every page is built specifically for your business. Nothing recycled, nothing generic.',
+    'val1t':'More leads from your traffic','val1d':'Your visitors won\'t just browse — they\'ll click, call, and book.',
+    'val2t':'Premium look that builds trust','val2d':'First impressions decide everything. We make sure yours wins.',
+    'val3t':'Clear structure focused on conversion','val3d':'Every section, every word placed to guide the visitor towards action.',
+    'val4t':'Fast delivery without agency chaos','val4d':'8–10 days. Direct communication. No committees, no delays, no surprises.',
     'svc-lbl':'What We Do','svc-title':'We build <em>landing pages</em>','svc-sub':'One focused page. One goal. More clients for your business.',
     'svc1t':'Landing Pages','svc1d':'A single, focused page designed to do one thing — bring you more clients. Clear, fast, mobile-friendly and built to convert visitors into bookings.',
     'proc-lbl':'How We Work','proc-title':'Simple. Fast. <em>Done.</em>','proc-sub':'From first contact to live website in 8–10 days.',
     'proc1t':'Discovery','proc1d':'A quick call to understand your business and what you need. That\'s all we need to get started.',
     'proc2t':'Design & Build','proc2d':'We create your landing page — clean, modern, and focused on getting you bookings. Ready in 48 hours to 3 days.',
     'proc3t':'Launch','proc3d':'Your website goes live. Clients can find you, see your work, and book — starting from day one.',
-    'proc-cta':'Start Your Project',
+    'proc-cta':'Get Your Clients',
     'port-lbl':'Selected Work','port-title':'Recent <em>projects</em>','port-sub':'A selection of landing pages crafted for clients across Europe.',
     'port5n':'Lumera — Psychology Learning Platform',
     'port-krem-tag':'Beauty Salon · Landing Page',
     'port-krem-name':'Krem — Hair & Beauty Salon, Kraków',
-    'rev-lbl':'Real result','rev-cta':'Start Your Project',
+    'rev-lbl':'Real result','rev-cta':'Get Your Clients',
     'pr-lbl':'Investment','pr-title':'Two packages.<br><em>One clear goal.</em>','pr-sub':'Fixed prices. No hidden fees. Delivered in 8–10 days.',
     'pt1':'Basic','pf1':'one-time payment','pd1':'Simple landing page to get you online and start attracting clients.',
     'pi1a':'1 high-converting landing page','pi1b':'Clean and modern design','pi1c':'Mobile optimized',
     'pi1d':'Services + contact structure','pi1e':'Contact / booking section','pi1f':'Delivery in 8–10 days',
-    'pp1':'Perfect if you want a simple, professional online presence.','pb1':'Get Your Website',
+    'pp1':'Perfect if you want a simple, professional online presence.','pb1':'Get Your Clients',
     'p-bdg':'Best Choice','pt2':'Premium','pf2':'one-time payment','pd2':'Designed to maximize bookings and bring you more clients.',
     'pi2a':'High-converting landing page','pi2b':'Premium custom design','pi2c':'Strategic layout for results',
     'pi2d':'Mobile optimized','pi2e':'Fast loading','pi2f':'Contact & booking integration',
     'pi2g':'Unlimited revisions','pi2h':'Priority delivery (8–10 days)',
-    'pp2':'Best choice for most businesses.','pb2':'Get More Clients',
-    'faq-lbl':'Got Questions?','faq-title':'Frequently <em>asked</em>','faq-sub':'Everything you need to know before getting started.','faq-cta':'Ask Us Anything',
+    'pp2':'Best choice for most businesses.','pb2':'Get Your Clients',
+    'faq-lbl':'Got Questions?','faq-title':'Frequently <em>asked</em>','faq-sub':'Everything you need to know before getting started.','faq-cta':'Get Your Clients',
     'fq1':'How long does it take?','fa1':'Most landing pages are delivered in 8–10 days.',
     'fq2':'What do you need from me?','fa2':'Just tell us about your business — what you offer, who your clients are, and any photos or text you have. We take care of everything else.',
     'fq3':'How does payment work?','fa3':'20% upfront, 80% when your page is ready. We accept bank transfer and all major cards.',
@@ -1122,46 +1185,58 @@ var T = {
     'ck-txt':'We use cookies to improve your experience. By continuing, you agree to our use of cookies in accordance with EU law.','ck-ok':'Accept','ck-no':'Decline',
     'ft-desc':'Boutique web design studio crafting digital presence that brings clients — not just looks good.',
     'ft-nav-lbl':'Navigation','ft-n1':'Home','ft-n2':'About','ft-n3':'Services','ft-n4':'Portfolio','ft-n5':'Pricing','ft-n6':'FAQ',
-    'ft-ct-lbl':'Contact','ft-start':'Start a Project','ft-copy':'© 2026 LumeraStudio. All rights reserved.',
+    'ft-ct-lbl':'Contact','ft-start':'Get Your Clients','ft-copy':'© 2026 LumeraStudio. All rights reserved.',
     'tab-home':'Home','tab-about':'About','tab-services':'Services','tab-landing':'Landing Page','tab-process':'Process','tab-portfolio':'Portfolio','tab-reviews':'Reviews','tab-pricing':'Pricing','tab-faq':'FAQ'
   },
   de: {
-    'hdr-cta-btn':'Projekt starten','mob-cta-btn':'Projekt starten',
+    'hdr-cta-btn':'Get Your Clients','mob-cta-btn':'Get Your Clients',
     'badge-txt':'Jetzt neue Projekte · 2026',
-    'hero-h1':'Landingpages,<br>die Ihnen <em>mehr Kunden</em> bringen',
-    'hero-h2':'Ihre premium Landingpage in 8–10 Tagen — klar, modern und darauf ausgerichtet, Besucher in Buchungen zu verwandeln.',
+    'hero-h1':'Premium Landingpages,<br>die <em>konvertieren.</em>',
+    'hero-h2':'Mehr Buchungen. Bessere Kunden. Stärkerer erster Eindruck.',
     'hero-p':'Für Marken, die wachsen, herausstechen und online premium wirken wollen.',
     'hero-btn1':'Kunden gewinnen','hero-btn2':'Unsere Arbeiten','scroll-lbl':'Scrollen',
+    'wif-lbl':'Perfekt für','wif-title':'Ist das <em>für Sie?</em>',
+    'wif1n':'Beauty-Unternehmen','wif1d':'Salons, Nagelstudios, Wimpernkünstler — mehr Online-Buchungen.',
+    'wif2n':'Fitnessmarken','wif2d':'Personal Trainer, Studios, Coaches — aus Followern zahlende Mitglieder machen.',
+    'wif3n':'Lokale Dienstleistungen','wif3d':'Kliniken, Fotografen, Berater — in Ihrer Stadt herausstechen.',
+    'wif4n':'Personal Brands','wif4d':'Speaker, Creator, Freelancer — schnell Glaubwürdigkeit aufbauen.',
+    'wif5n':'Startups','wif5d':'Validieren Sie Ihre Idee mit einer Seite, die von Tag 1 investor-ready aussieht.',
+    'why-lbl':'Warum LumeraStudio','why-title':'Warum es sich lohnt, <em>uns zu wählen</em>',
+    'why1t':'Mehr Leads aus Ihrem Traffic','why1d':'Ihre Besucher surfen nicht nur — sie klicken, rufen an und buchen.',
+    'why2t':'Premium-Look der Vertrauen schafft','why2d':'Der erste Eindruck entscheidet alles. Wir sorgen dafür, dass Ihrer gewinnt.',
+    'why3t':'Klare Struktur für Conversion','why3d':'Jeder Abschnitt, jedes Wort platziert, um den Besucher zur Handlung zu führen.',
+    'why4t':'Schnelle Lieferung ohne Agentur-Chaos','why4d':'8–10 Tage. Direkte Kommunikation. Keine Komitees, keine Verzögerungen.',
     'sl1':'Erster Konzept','sl2':'Individuelles Design','sl3':'Lieferung','sl4':'Remote-Studio',
     'about-lbl':'Wer wir sind','about-title':'Wir bauen keine Websites.<br>Wir bauen <em>Kundenmaschinen.</em>','about-tag':'Gegr. 2026 · Europa',
     'about-p1':'LumeraStudio erstellt Landingpages, die eines tun — Ihrem Unternehmen mehr Kunden bringen. Keine hübschen Seiten, die nichts bewirken. Seiten, die funktionieren.',
     'about-p2':'Geliefert in 8–10 Tagen. Auf Ergebnisse ausgerichtet. Kein Schnickschnack — nur eine Seite, die Menschen dazu bringt, Sie zu buchen.',
-    'val1t':'Ergebnisse im Fokus','val1d':'Jede Entscheidung zielt darauf ab, Ihnen mehr Buchungen zu bringen. Nicht auf Designpreise.',
-    'val2t':'Schnell und präzise','val2d':'8–10 Tage vom ersten Gespräch bis zur fertigen Seite. Keine Verzögerungen.',
-    'val3t':'Null Templates','val3d':'Jede Seite wird speziell für Ihr Unternehmen gebaut. Nichts wiederverwendet, nichts generisch.',
+    'val1t':'Mehr Leads aus Ihrem Traffic','val1d':'Ihre Besucher surfen nicht nur — sie klicken, rufen an und buchen.',
+    'val2t':'Premium-Look der Vertrauen schafft','val2d':'Der erste Eindruck entscheidet alles. Wir sorgen dafür, dass Ihrer gewinnt.',
+    'val3t':'Klare Struktur für Conversion','val3d':'Jeder Abschnitt, jedes Wort platziert, um den Besucher zur Handlung zu führen.',
+    'val4t':'Schnelle Lieferung ohne Agentur-Chaos','val4d':'8–10 Tage. Direkte Kommunikation. Keine Komitees, keine Verzögerungen.',
     'svc-lbl':'Was wir tun','svc-title':'Wir erstellen <em>Landingpages</em>','svc-sub':'Eine fokussierte Seite. Ein Ziel. Mehr Kunden für Ihr Unternehmen.',
     'svc1t':'Landingpage','svc1d':'Eine einzelne, fokussierte Seite mit einem einzigen Ziel — mehr Kunden für Sie. Klar, schnell, mobilfreundlich und auf Buchungen ausgerichtet.',
     'proc-lbl':'Wie wir arbeiten','proc-title':'Einfach. Schnell. <em>Fertig.</em>','proc-sub':'Vom ersten Kontakt bis zur fertigen Website in 8–10 Tagen.',
     'proc1t':'Erstkontakt','proc1d':'Ein kurzes Gespräch, um Ihr Business zu verstehen. Das ist alles, was wir brauchen.',
     'proc2t':'Design &amp; Umsetzung','proc2d':'Wir erstellen Ihre Landingpage — klar, modern und auf Buchungen ausgerichtet. Fertig in 48 Stunden bis 3 Tagen.',
     'proc3t':'Launch','proc3d':'Ihre Website geht live. Kunden können Sie finden, Ihre Arbeit sehen und buchen — ab dem ersten Tag.',
-    'proc-cta':'Projekt starten',
+    'proc-cta':'Get Your Clients',
     'port-lbl':'Ausgewählte Projekte','port-title':'Aktuelle <em>Projekte</em>','port-sub':'Eine Auswahl von Landingpages für Kunden in ganz Europa.',
     'port5n':'Lumera — Psychologie-Lernplattform',
     'port-krem-tag':'Beauty-Salon · Landingpage',
     'port-krem-name':'Krem — Friseursalon & Beauty, Krakau',
-    'rev-lbl':'Echtes Ergebnis','rev-cta':'Ihr Projekt starten',
+    'rev-lbl':'Echtes Ergebnis','rev-cta':'Get Your Clients',
     'pr-lbl':'Investition','pr-title':'Zwei Pakete.<br><em>Ein klares Ziel.</em>','pr-sub':'Festpreise. Keine versteckten Kosten. Lieferung in 8–10 Tagen.',
     'pt1':'Basic','pf1':'einmalige Zahlung','pd1':'Einfache Landingpage, um online zu gehen und Kunden zu gewinnen.',
     'pi1a':'1 hochkonvertierende Landingpage','pi1b':'Klares, modernes Design','pi1c':'Mobiloptimiert',
     'pi1d':'Struktur: Leistungen + Kontakt','pi1e':'Kontakt- / Buchungsbereich','pi1f':'Lieferung in 8–10 Tagen',
-    'pp1':'Ideal für einen einfachen, professionellen Internetauftritt.','pb1':'Website erhalten',
+    'pp1':'Ideal für einen einfachen, professionellen Internetauftritt.','pb1':'Get Your Clients',
     'p-bdg':'Beste Wahl','pt2':'Premium','pf2':'einmalige Zahlung','pd2':'Entwickelt, um Buchungen zu maximieren und mehr Kunden zu gewinnen.',
     'pi2a':'Hochkonvertierende Landingpage','pi2b':'Premium-Individualdesign','pi2c':'Strategisches Layout für Ergebnisse',
     'pi2d':'Mobiloptimiert','pi2e':'Schnelle Ladezeiten','pi2f':'Kontakt- & Buchungsintegration',
     'pi2g':'Unbegrenzte Überarbeitungen','pi2h':'Prioritätslieferung (8–10 Tage)',
-    'pp2':'Die beste Wahl für die meisten Unternehmen.','pb2':'Mehr Kunden gewinnen',
-    'faq-lbl':'Haben Sie Fragen?','faq-title':'Häufig <em>gefragt</em>','faq-sub':'Alles, was Sie wissen müssen, bevor Sie starten.','faq-cta':'Fragen Sie uns',
+    'pp2':'Die beste Wahl für die meisten Unternehmen.','pb2':'Get Your Clients',
+    'faq-lbl':'Haben Sie Fragen?','faq-title':'Häufig <em>gefragt</em>','faq-sub':'Alles, was Sie wissen müssen, bevor Sie starten.','faq-cta':'Get Your Clients',
     'fq1':'Wie lange dauert es?','fa1':'Die meisten Landingpages werden in 8–10 Tagen geliefert.',
     'fq2':'Was brauchen Sie von mir?','fa2':'Erzählen Sie uns von Ihrem Unternehmen — was Sie anbieten, wer Ihre Kunden sind, und Fotos oder Texte, die Sie haben. Den Rest übernehmen wir.',
     'fq3':'Wie funktioniert die Bezahlung?','fa3':'20% im Voraus, 80% wenn Ihre Seite fertig ist. Wir akzeptieren Überweisung und alle gängigen Karten.',
@@ -1175,46 +1250,58 @@ var T = {
     'ck-txt':'Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Durch die weitere Nutzung stimmen Sie zu.','ck-ok':'Akzeptieren','ck-no':'Ablehnen',
     'ft-desc':'Boutique-Webdesign-Studio, das digitale Präsenz schafft, die Kunden bringt.',
     'ft-nav-lbl':'Navigation','ft-n1':'Start','ft-n2':'Über uns','ft-n3':'Leistungen','ft-n4':'Portfolio','ft-n5':'Preise','ft-n6':'FAQ',
-    'ft-ct-lbl':'Kontakt','ft-start':'Projekt starten','ft-copy':'© 2026 LumeraStudio. Alle Rechte vorbehalten.',
+    'ft-ct-lbl':'Kontakt','ft-start':'Get Your Clients','ft-copy':'© 2026 LumeraStudio. Alle Rechte vorbehalten.',
     'tab-home':'Start','tab-about':'Über uns','tab-services':'Leistungen','tab-landing':'Landingpage','tab-process':'Prozess','tab-portfolio':'Portfolio','tab-reviews':'Bewertungen','tab-pricing':'Preise','tab-faq':'FAQ'
   },
   pl: {
-    'hdr-cta-btn':'Rozpocznij projekt','mob-cta-btn':'Rozpocznij projekt',
+    'hdr-cta-btn':'Get Your Clients','mob-cta-btn':'Get Your Clients',
     'badge-txt':'Przyjmujemy nowe projekty · 2026',
-    'hero-h1':'Landing page\'y,<br>które przyciągają <em>więcej klientów</em>',
-    'hero-h2':'Otrzymaj premium landing page w 8–10 dni — przejrzystą, nowoczesną i nastawioną na zamianę odwiedzających w rezerwacje.',
+    'hero-h1':'Premium landing page\'y<br>zaprojektowane pod <em>konwersję.</em>',
+    'hero-h2':'Więcej rezerwacji. Lepsi klienci. Silniejsze pierwsze wrażenie.',
     'hero-p':'Dla marek, które chcą rosnąć, wyróżniać się i wyglądać premium online.',
     'hero-btn1':'Zdobądź klientów','hero-btn2':'Zobacz nasze prace','scroll-lbl':'Przewiń',
+    'wif-lbl':'Idealne dla','wif-title':'Czy to jest <em>dla Ciebie?</em>',
+    'wif1n':'Salony beauty','wif1d':'Salony, studia paznokci, stylistki rzęs — więcej rezerwacji online.',
+    'wif2n':'Branża fitness','wif2d':'Trenerzy, studia, coachowie — zamień obserwujących w płacących klientów.',
+    'wif3n':'Usługi lokalne','wif3d':'Kliniki, fotografowie, konsultanci — wyróżnij się w swoim mieście.',
+    'wif4n':'Personal branding','wif4d':'Mówcy, twórcy, freelancerzy — zbuduj wiarygodność szybko.',
+    'wif5n':'Startupy','wif5d':'Zwaliduj swój pomysł stroną, która od pierwszego dnia wygląda profesjonalnie.',
+    'why-lbl':'Dlaczego LumeraStudio','why-title':'Dlaczego warto <em>nas wybrać</em>',
+    'why1t':'Więcej leadów z Twojego ruchu','why1d':'Twoi odwiedzający nie tylko przeglądają — klikają, dzwonią i rezerwują.',
+    'why2t':'Premium wygląd który buduje zaufanie','why2d':'Pierwsze wrażenie decyduje o wszystkim. Zadbamy o to, żeby Twoje wygrywało.',
+    'why3t':'Czysta struktura nakierowana na konwersję','why3d':'Każda sekcja, każde słowo ustawione tak, żeby prowadzić odwiedzającego do działania.',
+    'why4t':'Szybka realizacja bez agencyjnego chaosu','why4d':'8–10 dni. Bezpośrednia komunikacja. Bez komitetów, bez opóźnień, bez niespodzianek.',
     'sl1':'Pierwszy koncept','sl2':'Indywidualny design','sl3':'Realizacja','sl4':'Studio zdalne',
     'about-lbl':'Kim jesteśmy','about-title':'Pomagamy firmom<br>zdobywać <em>więcej klientów</em>','about-tag':'Zał. 2026 · Europa',
     'about-p1':'LumeraStudio tworzy landing page\'y dla salonów beauty i lokalnych firm w całej Europie. Skupiamy się na jednym — prostej, pięknej stronie, która przynosi Ci prawdziwe rezerwacje.',
     'about-p2':'Bez skomplikowanych procesów. Bez zbędnych dodatków. Tylko przejrzysta strona, dostarczona w 8–10 dni, która sprawia że Twoja firma wygląda profesjonalnie i zamienia odwiedzających w klientów.',
-    'val1t':'Wyniki przede wszystkim','val1d':'Każda strona jest zaprojektowana tak, żeby przynosić Ci więcej rezerwacji — nie tylko ładnie wyglądać.',
-    'val2t':'Prosto i szybko','val2d':'Od pierwszej rozmowy do gotowej strony w 8–10 dni. Bez skomplikowanego procesu.',
-    'val3t':'100% indywidualnie','val3d':'Bez szablonów. Każda strona tworzona specjalnie dla Twojej firmy.',
+    'val1t':'Więcej leadów z Twojego ruchu','val1d':'Twoi odwiedzający nie tylko przeglądają — klikają, dzwonią i rezerwują.',
+    'val2t':'Premium wygląd który buduje zaufanie','val2d':'Pierwsze wrażenie decyduje o wszystkim. Zadbamy o to, żeby Twoje wygrywało.',
+    'val3t':'Czysta struktura nakierowana na konwersję','val3d':'Każda sekcja, każde słowo ustawione tak, żeby prowadzić odwiedzającego do działania.',
+    'val4t':'Szybka realizacja bez agencyjnego chaosu','val4d':'8–10 dni. Bezpośrednia komunikacja. Bez komitetów, bez opóźnień, bez niespodzianek.',
     'svc-lbl':'Co robimy','svc-title':'Tworzymy <em>landing page\'y</em>','svc-sub':'Jedna strona. Jeden cel. Więcej klientów dla Twojej firmy.',
     'svc1t':'Landing Page','svc1d':'Jedna, skupiona strona z jednym celem — więcej klientów dla Ciebie. Prosta, szybka, mobilna i nastawiona na rezerwacje.',
     'proc-lbl':'Jak pracujemy','proc-title':'Prosto. Szybko. <em>Gotowe.</em>','proc-sub':'Od pierwszego kontaktu do gotowej strony w 8–10 dni.',
     'proc1t':'Poznanie','proc1d':'Krótka rozmowa, żeby zrozumieć Twój biznes i czego potrzebujesz. To wszystko, czego nam trzeba.',
     'proc2t':'Projekt i realizacja','proc2d':'Tworzymy Twoją stronę — czystą, nowoczesną i nastawioną na pozyskiwanie klientów. Gotowa w 48h do 3 dni.',
     'proc3t':'Start','proc3d':'Twoja strona jest live. Klienci mogą Cię znaleźć, zobaczyć Twoją pracę i rezerwować — od pierwszego dnia.',
-    'proc-cta':'Rozpocznij projekt',
+    'proc-cta':'Get Your Clients',
     'port-lbl':'Wybrane projekty','port-title':'Ostatnie <em>projekty</em>','port-sub':'Wybór landing page\'y stworzonych dla klientów z całej Europy.',
     'port5n':'Lumera — Platforma do nauki psychologii',
     'port-krem-tag':'Salon Beauty · Landing Page',
     'port-krem-name':'Krem — Salon Fryzjerski & Beauty, Kraków',
-    'rev-lbl':'Prawdziwy efekt','rev-cta':'Rozpocznij swój projekt',
+    'rev-lbl':'Prawdziwy efekt','rev-cta':'Get Your Clients',
     'pr-lbl':'Inwestycja','pr-title':'Dwa pakiety.<br><em>Jeden jasny cel.</em>','pr-sub':'Stałe ceny. Zero ukrytych opłat. Realizacja w 8–10 dni.',
     'pt1':'Basic','pf1':'jednorazowa płatność','pd1':'Prosta landing page, żeby zaistnieć w sieci i zacząć przyciągać klientów.',
     'pi1a':'1 landing page nastawiona na konwersję','pi1b':'Czysty, nowoczesny design','pi1c':'Dostosowana do telefonu',
     'pi1d':'Struktura: usługi + kontakt','pi1e':'Sekcja kontakt / rezerwacja','pi1f':'Realizacja w 8–10 dni',
-    'pp1':'Idealna, jeśli chcesz prostą, profesjonalną obecność w sieci.','pb1':'Zdobądź stronę',
+    'pp1':'Idealna, jeśli chcesz prostą, profesjonalną obecność w sieci.','pb1':'Get Your Clients',
     'p-bdg':'Najlepszy wybór','pt2':'Premium','pf2':'jednorazowa płatność','pd2':'Zaprojektowana, żeby zmaksymalizować rezerwacje i przyciągnąć więcej klientów.',
     'pi2a':'Landing page z wysoką konwersją','pi2b':'Premium design na zamówienie','pi2c':'Strategiczny układ nastawiony na efekty',
     'pi2d':'Dostosowana do telefonu','pi2e':'Szybkie ładowanie','pi2f':'Integracja kontaktu i rezerwacji',
     'pi2g':'Nieograniczone poprawki','pi2h':'Priorytetowa realizacja (8–10 dni)',
-    'pp2':'Najlepszy wybór dla większości firm.','pb2':'Zdobądź więcej klientów',
-    'faq-lbl':'Masz pytania?','faq-title':'Często <em>zadawane</em>','faq-sub':'Wszystko, co musisz wiedzieć przed startem.','faq-cta':'Zapytaj nas',
+    'pp2':'Najlepszy wybór dla większości firm.','pb2':'Get Your Clients',
+    'faq-lbl':'Masz pytania?','faq-title':'Często <em>zadawane</em>','faq-sub':'Wszystko, co musisz wiedzieć przed startem.','faq-cta':'Get Your Clients',
     'fq1':'Ile trwa realizacja?','fa1':'Większość landing page\'y dostarczamy w 8–10 dni.',
     'fq2':'Czego ode mnie potrzebujecie?','fa2':'Powiedz nam o swojej firmie — co oferujesz, kim są Twoi klienci i ewentualne zdjęcia lub teksty. Resztą zajmujemy się my.',
     'fq3':'Jak działa płatność?','fa3':'20% zaliczki, 80% gdy Twoja strona jest gotowa. Przyjmujemy przelew i wszystkie popularne karty.',
@@ -1228,7 +1315,7 @@ var T = {
     'ck-txt':'Używamy plików cookie, aby poprawić Twoje doświadczenie. Kontynuując, zgadzasz się na ich użycie zgodnie z prawem UE.','ck-ok':'Akceptuj','ck-no':'Odrzuć',
     'ft-desc':'Butikowe studio webdesignu tworzące obecność cyfrową, która przyciąga klientów.',
     'ft-nav-lbl':'Nawigacja','ft-n1':'Start','ft-n2':'O nas','ft-n3':'Usługi','ft-n4':'Portfolio','ft-n5':'Cennik','ft-n6':'FAQ',
-    'ft-ct-lbl':'Kontakt','ft-start':'Rozpocznij projekt','ft-copy':'© 2026 LumeraStudio. Wszelkie prawa zastrzeżone.',
+    'ft-ct-lbl':'Kontakt','ft-start':'Get Your Clients','ft-copy':'© 2026 LumeraStudio. Wszelkie prawa zastrzeżone.',
     'tab-home':'Start','tab-about':'O nas','tab-services':'Usługi','tab-landing':'Landing Page','tab-process':'Proces','tab-portfolio':'Portfolio','tab-reviews':'Opinie','tab-pricing':'Cennik','tab-faq':'FAQ'
   }
 };
