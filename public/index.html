@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LumeraStudio — Bespoke Web Design</title>
+<title>LumeraStudio — Premium Landing Pages That Convert</title>
+<meta name="description" content="We build premium landing pages for beauty salons, fitness brands, and local businesses across Europe. Custom design, delivered in 8–10 days. More bookings, better clients.">
+<meta name="keywords" content="landing page, web design, beauty salon website, premium landing page, conversion design, LumeraStudio">
+<meta name="author" content="LumeraStudio">
+<meta property="og:title" content="LumeraStudio — Premium Landing Pages That Convert">
+<meta property="og:description" content="Custom landing pages for beauty, fitness and local businesses. Delivered in 8–10 days. Built to convert visitors into clients.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lumerastudio.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LumeraStudio — Premium Landing Pages That Convert">
+<meta name="twitter:description" content="Custom landing pages delivered in 8–10 days. Built to convert visitors into clients.">
+<link rel="canonical" href="https://lumerastudio.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -1120,8 +1131,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);}
 
 </footer>
 
-<script>
-// ─── TRANSLATIONS ───────────────────────────────────────────────
+<script data-cfasync="false">
 var T = {
   en: {
     'hdr-cta-btn':'Get Your Clients','mob-cta-btn':'Get Your Clients',
@@ -1322,6 +1332,22 @@ var T = {
 
 // nav tab labels mapping: button index -> key
 var tabKeys = ['home','about','services','process','portfolio','reviews','pricing','faq'];
+var allPages = tabKeys.concat(['contact','404']);
+
+// Hash routing
+function handleHash() {
+  var hash = window.location.hash.replace('#','') || 'home';
+  if (allPages.indexOf(hash) !== -1) {
+    go(hash);
+  } else if (hash !== '') {
+    // Unknown page — show 404
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('page-404').style.display = 'block';
+    document.getElementById('page-404').classList.add('active');
+  }
+}
+window.addEventListener('hashchange', handleHash);
+window.addEventListener('load', function(){ if(window.location.hash) handleHash(); });
 var currentLang = 'en';
 
 function setLang(l) {
@@ -1356,14 +1382,17 @@ function setLang(l) {
 
 // ─── NAVIGATION ─────────────────────────────────────────────────
 function go(id) {
-  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); p.style.display=''; });
   var next = document.getElementById('page-' + id);
+  if (!next) return;
   next.classList.add('active');
   var tabs = document.querySelectorAll('.tab-btn');
   tabs.forEach(function(btn, i) { btn.classList.toggle('active', tabKeys[i] === id); });
   var mobTabs = document.querySelectorAll('.mob-tab');
   mobTabs.forEach(function(btn, i) { btn.classList.toggle('active', tabKeys[i] === id); });
   window.scrollTo({top:0, behavior:'instant'});
+  if (id !== 'home') { history.replaceState(null, '', '#' + id); }
+  else { history.replaceState(null, '', window.location.pathname); }
   if (id === 'home') setTimeout(runCounters, 600);
 }
 
@@ -1457,7 +1486,8 @@ function toggleFaq(btn) {
 })();
 
 // ─── CONTACT FORM ───────────────────────────────────────────────
-document.getElementById('f-send').addEventListener('click', async function() {
+document.getElementById('f-send').addEventListener('click', function() {
+  var btn = this;
   var fn = document.getElementById('ff-fn').value.trim();
   var ln = document.getElementById('ff-ln').value.trim();
   var em = document.getElementById('ff-em').value.trim();
@@ -1466,30 +1496,41 @@ document.getElementById('f-send').addEventListener('click', async function() {
   var errEl = document.getElementById('f-err');
   errEl.style.display = 'none';
 
-  var errMsgs = { en:'Please fill in your name, email, and project description.', de:'Bitte füllen Sie Name, E-Mail und Projektbeschreibung aus.', pl:'Proszę wypełnić imię, e-mail i opis projektu.' };
+  var errMsgs = { en:'Please fill in your name, email, and message.', de:'Bitte füllen Sie Name, E-Mail und Nachricht aus.', pl:'Proszę wypełnić imię, e-mail i wiadomość.' };
   if (!fn || !em || !ms) { errEl.textContent = errMsgs[currentLang]; errEl.style.display = 'block'; return; }
 
   var sendMsgs = { en:'Sending...', de:'Wird gesendet...', pl:'Wysyłanie...' };
-  this.textContent = sendMsgs[currentLang];
-  this.disabled = true;
+  btn.textContent = sendMsgs[currentLang];
+  btn.disabled = true;
 
-  try {
-    var res = await fetch('https://formspree.io/f/mrereqpn', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ name: fn+' '+ln, email: em, service: ty||'Not specified', message: ms, lang: currentLang })
-    });
+  fetch('https://formspree.io/f/mrereqpn', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ name: fn+' '+ln, email: em, service: ty||'Not specified', message: ms, lang: currentLang })
+  }).then(function(res) {
     if (res.ok) {
       document.getElementById('f-form').style.display = 'none';
       document.getElementById('f-ok').style.display = 'block';
-    } else { throw new Error(); }
-  } catch(e) {
-    var fb={en:'Something went wrong. Email us at lumerastudio111@gmail.com',de:'Etwas ist schiefgelaufen.',pl:'Coś poszło nie tak. Napisz na lumerastudio111@gmail.com'};
-    errEl.textContent=fb[currentLang];errEl.style.display='block';
-    var bm={en:'Send Message',de:'Nachricht senden',pl:'Wyślij wiadomość'};
-    this.textContent=bm[currentLang];this.disabled=false;
-  }
+    } else {
+      throw new Error();
+    }
+  }).catch(function() {
+    var fb = { en:'Something went wrong. Email us at lumerastudio111&#64;gmail&#46;com', de:'Etwas ist schiefgelaufen. Schreiben Sie uns.', pl:'Coś poszło nie tak. Napisz do nas.' };
+    errEl.textContent = fb[currentLang]; errEl.style.display = 'block';
+    var bm = { en:'Send Message', de:'Nachricht senden', pl:'Wyślij wiadomość' };
+    btn.textContent = bm[currentLang]; btn.disabled = false;
+  });
 });
 </script>
+<!-- 404 PAGE -->
+<div id="page-404" class="page" style="display:none;">
+  <div style="min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;">
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(80px,15vw,160px);font-weight:300;color:rgba(196,154,42,.15);line-height:1;margin-bottom:0;">404</div>
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:var(--text);margin-bottom:16px;margin-top:-20px;">Page not <em style="color:var(--gold2);font-style:italic;">found</em></div>
+    <p style="font-size:15px;color:var(--muted);max-width:400px;line-height:1.7;margin-bottom:40px;">The page you're looking for doesn't exist. Let's get you back on track.</p>
+    <button class="btn-g" onclick="go('home')">Back to Home</button>
+  </div>
+</div>
+
 </body>
 </html>
